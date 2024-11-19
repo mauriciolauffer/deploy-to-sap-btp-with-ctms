@@ -1,0 +1,61 @@
+{
+  "name": "ctms",
+  "version": "0.0.1",
+  "description": "cTMS",
+  "private": false,
+  "author": "Mauricio Lauffer",
+  "license": "MIT",
+  "homepage": "https://github.com/mauriciolauffer/ctms#readme",
+  "main": "index.js",
+  "type": "commonjs",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "sap",
+    "btp",
+    "cicd",
+    "cd",
+    "ctms",
+    "tms",
+    "tr",
+    "transport",
+    "cloud-transport-management",
+    "transport-request"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mauriciolauffer/ctms.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mauriciolauffer/ctms/issues"
+  },
+  "scripts": {
+    "start": "node dist/ctms.js",
+    "build": "tsc",
+    "lint": "eslint --cache",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "@actions/github": "^6.0.0",
+    "@sap-cloud-sdk/connectivity": "^3.22.2",
+    "@sap-cloud-sdk/openapi": "^3.22.2"
+  },
+  "devDependencies": {
+    "@sap-cloud-sdk/openapi-generator": "^3.22.2",
+    "@sap-cloud-sdk/test-util": "^3.22.2",
+    "@types/node": "^22.9.0",
+    "dotenv": "^16.4.5",
+    "eslint": "^9.14.0",
+    "eslint-config-mlauffer-nodejs": "^3.0.0",
+    "typescript-eslint": "^8.14.0",
+    "vitest": "^2.1.4"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

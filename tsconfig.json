@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+      "module": "NodeNext",
+      "target": "ES2023",
+      "lib": ["ES2023"],
+      "allowJs": true,
+      "checkJs": true,
+      "strict": true,
+      "noImplicitAny": true,
+      "moduleResolution": "NodeNext",
+      "esModuleInterop": true,
+      "isolatedModules": true,
+      "resolveJsonModule": true,
+      "outDir": "dist",
+      "sourceMap": true,
+      "declaration": true,
+      "emitDeclarationOnly": false,
+      "skipLibCheck": true,
+      "types": ["node"],
+    },
+    "include": ["src"],
+    "exclude": ["node_modules", "test"]
+  }
+  
