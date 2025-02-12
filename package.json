@@ -39,21 +39,19 @@
   "dependencies": {
     "@actions/core": "^1.11.1",
     "@actions/github": "^6.0.0",
-    "@sap-cloud-sdk/connectivity": "^3.22.2",
-    "@sap-cloud-sdk/openapi": "^3.22.2"
+    "@sap-cloud-sdk/connectivity": "^3.26.0",
+    "@sap-cloud-sdk/openapi": "^3.26.0"
   },
   "devDependencies": {
-    "@sap-cloud-sdk/openapi-generator": "^3.22.2",
-    "@sap-cloud-sdk/test-util": "^3.22.2",
-    "@types/node": "^22.9.0",
-    "dotenv": "^16.4.5",
-    "eslint": "^9.14.0",
-    "eslint-config-mlauffer-nodejs": "^3.0.0",
-    "typescript-eslint": "^8.14.0",
-    "vitest": "^2.1.4"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
+    "@sap-cloud-sdk/openapi-generator": "^3.26.0",
+    "@sap-cloud-sdk/test-util": "^3.26.0",
+    "@types/node": "^22.13.1",
+    "dotenv": "^16.4.7",
+    "eslint": "^9.20.1",
+    "eslint-config-mlauffer-nodejs": "^3.0.1",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.24.0",
+    "vitest": "^3.0.5"
   },
   "engines": {
     "node": ">=22"
