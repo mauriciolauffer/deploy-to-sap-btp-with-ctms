@@ -1,0 +1,81 @@
+{
+  "name": "voca",
+  "version": "1.4.1",
+  "description": "The ultimate JavaScript string library",
+  "homepage": "https://vocajs.pages.dev",
+  "author": {
+    "name": "Dmitri Pavlutin",
+    "email": "dmitripavlutin@gmail.com",
+    "url": "https://dmitripavlutin.com/about-me/"
+  },
+  "license": "MIT",
+  "keywords": [
+    "string",
+    "sprintf",
+    "trim",
+    "truncate",
+    "pad",
+    "slugify",
+    "latinise",
+    "escape",
+    "word",
+    "wrap",
+    "case",
+    "strip"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/panzerdp/voca.git"
+  },
+  "bugs": {
+    "url": "https://github.com/panzerdp/voca/issues",
+    "email": "dmitripavlutin@gmail.com"
+  },
+  "main": "index.js",
+  "module": "es/index.js",
+  "scripts": {
+    "eslint": "eslint ./src --ext .js --fix",
+    "build": "npm run build-universal && npm run build-module",
+    "build-universal": "rollup -c config/rollup/dist/umd-min.js && rollup -c config/rollup/dist/umd.js",
+    "build-module": "rollup -c config/rollup/module/cjs-all.js && rollup -c config/rollup/module/umd.js && rollup -c config/rollup/module/es.js && rollup -c config/rollup/module/es-all.js",
+    "prepare-npm-package": "rm -rf dist_mod && mkdir dist_mod && cp package.json README.md LICENSE.md ./dist_mod && npm run build",
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "verify": "npm run eslint && npm run coverage",
+    "jsdoc": "jsdoc --configure .jsdoc.json",
+    "deploy": "rollup -c config/rollup_dist.js && cp dist/voca.js docs/scripts && scp -r docs/* rainishere:/home/rainishere/webapps/voca_docs",
+    "precommit": "lint-staged && jest --onlyChanged"
+  },
+  "devDependencies": {
+    "@babel/core": "7.7.7",
+    "@babel/plugin-transform-block-scoping": "7.7.4",
+    "@babel/plugin-transform-destructuring": "7.7.4",
+    "@babel/plugin-transform-modules-commonjs": "7.7.5",
+    "@babel/plugin-transform-object-assign": "7.7.4",
+    "@babel/plugin-transform-parameters": "7.7.7",
+    "@babel/plugin-transform-shorthand-properties": "7.7.4",
+    "@babel/plugin-transform-spread": "7.7.4",
+    "@rollup/plugin-multi-entry": "3.0.0",
+    "babel-eslint": "10.0.3",
+    "babel-plugin-module-resolver": "4.0.0",
+    "eslint": "6.8.0",
+    "glob": "7.1.6",
+    "husky": "3.1.0",
+    "jest": "24.9.0",
+    "jsdoc": "3.6.3",
+    "lint-staged": "9.5.0",
+    "prettier": "1.19.1",
+    "rollup": "1.27.14",
+    "rollup-plugin-babel": "4.3.3",
+    "rollup-plugin-uglify": "6.0.4",
+    "source-map-support": "0.5.16"
+  },
+  "dependencies": {},
+  "lint-staged": {
+    "*.{js}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  }
+}
