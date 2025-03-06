@@ -1,5 +1,6 @@
 name: 'cTMS'
 description: 'GH Action for SAP BTP Cloud Transport Managemente (cTMS) - CD tooling for the SAP Ecosystem'
+author: 'Mauricio Lauffer'
 inputs:
   TOKEN_SERVICE_URL:
     description: 'Value of URL(UAA section) from the service key of your SAP Cloud Transport Management service instance.'
@@ -26,5 +27,3 @@ inputs:
 runs:
   using: 'node20'
   main: 'dist/index.js'
-
-author: 'Mauricio Lauffer'
