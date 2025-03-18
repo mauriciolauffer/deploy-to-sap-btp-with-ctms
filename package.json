@@ -35,7 +35,6 @@
     "start": "node dist/ctms.js",
     "build": "tsc",
     "lint": "eslint --cache",
-    "test-x1": "node test/ctms.test.js",
     "test": "vitest run"
   },
   "dependencies": {

@@ -74,6 +74,7 @@ web_modules/
 
 # dotenv environment variable files
 .env
+.env*
 .env.development.local
 .env.test.local
 .env.production.local
@@ -129,3 +130,4 @@ out
 .pnp.*
 
 sample-project
+gen/
