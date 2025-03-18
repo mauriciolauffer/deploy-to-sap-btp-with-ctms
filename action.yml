@@ -1,28 +1,38 @@
 name: 'cTMS'
-description: 'GH Action for SAP BTP Cloud Transport Managemente (cTMS) - CD tooling for the SAP Ecosystem'
+description: 'GitHub Action for SAP BTP Cloud Transport Managemente (cTMS), a deployment service for the SAP Ecosystem'
 author: 'Mauricio Lauffer'
 inputs:
-  TOKEN_SERVICE_URL:
+  CTMS_TOKEN_SERVICE_URL:
     description: 'Value of URL(UAA section) from the service key of your SAP Cloud Transport Management service instance.'
     required: true
-  CLIENT_ID:
+  CTMS_CLIENT_ID:
     description: 'Value of clientid from the service key of your SAP Cloud Transport Management service instance.'
     required: true
-  CLIENT_SECRET:
+  CTMS_CLIENT_SECRET:
     description: 'Value of clientsecret (uaa section) from the service key of your SAP Cloud Transport Management service instance.'
     required: true
-  CTMS_URL:
+  CTMS_API_URL:
     description: 'Value of uri from the service key of your SAP Cloud Transport Management service instance.'
     required: true
   CTMS_NODE_NAME:
     description: 'Name of node where content was put in'
     required: true
-  USER_NAME:
-    description: 'User displayed in Cloud Transport Management UI. If not given, the authentication user will be shown in Cloud Transport Management UI.'
-    required: true
-  FILE_PATH:
+  CTMS_FILE_PATH:
     description: 'File with application content'
     required: true
+  CTMS_TR_DESCRIPTION:
+    description: 'Description of the file upload process'
+    required: true
+  CTMS_TR_CONTENT_TYPE:
+    description: 'Content type (one of MTA, XSCDU, APP)'
+    required: true
+  CTMS_TR_STORAGE_TYPE:
+    description: 'Storage type (one of FILE, REFERENCE)'
+    required: true
+  CTMS_TR_USER_NAME:
+    description: 'User displayed in Cloud Transport Management UI. If not given, the authentication user will be shown in Cloud Transport Management UI.'
+    required: true
+
 
 runs:
   using: 'node20'
