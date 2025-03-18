@@ -35,24 +35,25 @@
     "start": "node dist/ctms.js",
     "build": "tsc",
     "lint": "eslint --cache",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test-x1": "node test/ctms.test.js",
+    "test": "vitest run"
   },
   "dependencies": {
     "@actions/core": "^1.11.1",
     "@actions/github": "^6.0.0",
-    "@sap-cloud-sdk/connectivity": "^3.26.3",
-    "@sap-cloud-sdk/openapi": "^3.26.3"
+    "@sap-cloud-sdk/connectivity": "^4.0.1",
+    "@sap-cloud-sdk/openapi": "^4.0.1"
   },
   "devDependencies": {
-    "@sap-cloud-sdk/openapi-generator": "^3.26.3",
-    "@sap-cloud-sdk/test-util": "^3.26.3",
-    "@types/node": "^22.13.9",
+    "@sap-cloud-sdk/openapi-generator": "^4.0.1",
+    "@sap-cloud-sdk/test-util": "^4.0.1",
+    "@types/node": "^22.13.10",
     "dotenv": "^16.4.7",
-    "eslint": "^9.21.0",
-    "eslint-config-mlauffer-nodejs": "^3.0.1",
+    "eslint": "^9.22.0",
+    "eslint-config-mlauffer-nodejs": "^3.1.0",
     "typescript": "^5.8.2",
-    "typescript-eslint": "^8.26.0",
-    "vitest": "^3.0.7"
+    "typescript-eslint": "^8.26.1",
+    "vitest": "^3.0.9"
   },
   "engines": {
     "node": ">=20"

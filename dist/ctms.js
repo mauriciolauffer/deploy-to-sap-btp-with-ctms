@@ -39,14 +39,17 @@ const node_url_1 = require("node:url");
 const core = __importStar(require("@actions/core"));
 const index_1 = require("./generated/TMS_v2/index");
 const CTMS_NODE_NAME = process.env.CTMS_NODE_NAME || "";
-const USER_NAME = process.env.USER_NAME || undefined;
-const FILE_PATH = process.env.FILE_PATH || "";
-const FILENAME = (0, node_path_1.basename)(FILE_PATH);
+const CTMS_TR_DESCRIPTION = process.env.CTMS_TR_DESCRIPTION || "";
+const CTMS_TR_USER_NAME = process.env.CTMS_TR_USER_NAME || undefined;
+const CTMS_TR_CONTENT_TYPE = process.env.CTMS_TR_CONTENT_TYPE;
+const CTMS_TR_STORAGE_TYPE = process.env.CTMS_TR_STORAGE_TYPE;
+const CTMS_FILE_PATH = process.env.CTMS_FILE_PATH || "";
+const FILENAME = (0, node_path_1.basename)(CTMS_FILE_PATH);
 const DESTINATION = {
-    url: process.env.CTMS_URL || "",
-    tokenServiceUrl: process.env.TOKEN_SERVICE_URL || "",
-    clientId: process.env.CLIENT_ID || "",
-    clientSecret: process.env.CLIENT_SECRET || "",
+    url: process.env.CTMS_API_URL || "",
+    tokenServiceUrl: process.env.CTMS_TOKEN_SERVICE_URL || "",
+    clientId: process.env.CTMS_CLIENT_ID || "",
+    clientSecret: process.env.CTMS_CLIENT_SECRET || "",
     // authentication: "OAuth2ClientCredentials"
 };
 /**
@@ -66,15 +69,21 @@ async function processFetchResponse(response) {
  * Validate user/system input
  */
 async function validateInput() {
-    await (0, promises_1.access)(FILE_PATH);
+    await (0, promises_1.access)(CTMS_FILE_PATH);
     if (!DESTINATION.url) {
-        throw new Error("CTMS_URL cannot be empty");
+        throw new Error("CTMS_API_URL cannot be empty");
     }
     if (!DESTINATION.tokenServiceUrl) {
-        throw new Error("TOKEN_SERVICE_URL cannot be empty");
+        throw new Error("CTMS_TOKEN_SERVICE_URL cannot be empty");
     }
     if (!CTMS_NODE_NAME) {
         throw new Error("CTMS_NODE_NAME cannot be empty");
+    }
+    if (!CTMS_TR_CONTENT_TYPE) {
+        throw new Error("CTMS_TR_CONTENT_TYPE cannot be empty");
+    }
+    if (!CTMS_TR_STORAGE_TYPE) {
+        throw new Error("CTMS_TR_STORAGE_TYPE cannot be empty");
     }
     new node_url_1.URL(DESTINATION.url); // eslint-disable-line
     new node_url_1.URL(DESTINATION.tokenServiceUrl); // eslint-disable-line
@@ -108,10 +117,10 @@ async function getAuthToken() {
  * Upload MTA file to CTMS
  */
 async function uploadMtaFile(oauthToken) {
-    core.info(`Uploading file: ${FILE_PATH}`);
-    const blob = new Blob([await (0, promises_1.readFile)(FILE_PATH)]);
+    core.info(`Uploading file: ${CTMS_FILE_PATH}`);
+    const blob = new Blob([await (0, promises_1.readFile)(CTMS_FILE_PATH)]);
     const payload = new FormData();
-    payload.append("namedUser", USER_NAME);
+    payload.append("namedUser", CTMS_TR_USER_NAME);
     payload.append("file", blob, FILENAME);
     return index_1.FilesApi.fileUploadV2(payload)
         .skipCsrfTokenFetching()
@@ -127,15 +136,15 @@ async function addFileToTransportNodeQueue(fileId, fileName, oauthToken) {
     core.info(`Adding file to the Transport Node Queue: ${CTMS_NODE_NAME}`);
     const payload = {
         nodeName: CTMS_NODE_NAME,
-        contentType: "MTA",
-        storageType: "FILE",
+        contentType: CTMS_TR_CONTENT_TYPE,
+        storageType: CTMS_TR_STORAGE_TYPE,
         entries: [
             {
                 uri: fileId,
             },
         ],
-        description: `Upload via API - ${fileName}`,
-        namedUser: USER_NAME,
+        description: CTMS_TR_DESCRIPTION,
+        namedUser: CTMS_TR_USER_NAME,
     };
     return index_1.ExportUploadApi.nodeUploadByNameV2(payload)
         .skipCsrfTokenFetching()
