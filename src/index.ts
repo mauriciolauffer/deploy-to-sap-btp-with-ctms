@@ -17,9 +17,10 @@ async function run() {
     process.env.CTMS_TR_CONTENT_TYPE = core.getInput("CTMS_TR_CONTENT_TYPE");
     process.env.CTMS_TR_STORAGE_TYPE = core.getInput("CTMS_TR_STORAGE_TYPE");
     process.env.CTMS_TR_USER_NAME = core.getInput("CTMS_TR_USER_NAME");
-  
+
     core.setSecret("CTMS_CLIENT_ID");
     core.setSecret("CTMS_CLIENT_SECRET");
+    core.setSecret("CTMS_TR_USER_NAME");
   
     await ctmsDeploy();
   } catch (err) {

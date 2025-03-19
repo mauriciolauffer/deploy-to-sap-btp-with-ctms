@@ -56,6 +56,7 @@ async function run() {
         process.env.CTMS_TR_USER_NAME = core.getInput("CTMS_TR_USER_NAME");
         core.setSecret("CTMS_CLIENT_ID");
         core.setSecret("CTMS_CLIENT_SECRET");
+        core.setSecret("CTMS_TR_USER_NAME");
         await (0, ctms_1.default)();
     }
     catch (err) {
