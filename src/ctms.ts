@@ -11,16 +11,17 @@ import { URL, URLSearchParams } from "node:url";
 import * as core from "@actions/core";
 import { FilesApi, ExportUploadApi } from "./generated/TMS_v2/index";
 
-    console.log("CTMS_TOKEN_SERVICE_URL: ", process.env.CTMS_TOKEN_SERVICE_URL);
-    console.log("CTMS_CLIENT_ID: ", process.env.CTMS_CLIENT_ID);
-    console.log("CTMS_CLIENT_SECRET: ", process.env.CTMS_CLIENT_SECRET);
-    console.log("CTMS_API_URL: ", process.env.CTMS_API_URL);
-    console.log("CTMS_NODE_NAME: ", process.env.CTMS_NODE_NAME);
-    console.log("CTMS_FILE_PATH: ", process.env.CTMS_FILE_PATH);
-    console.log("CTMS_TR_DESCRIPTION: ", process.env.CTMS_TR_DESCRIPTION);
-    console.log("CTMS_TR_CONTENT_TYPE: ", process.env.CTMS_TR_CONTENT_TYPE);
-    console.log("CTMS_TR_STORAGE_TYPE: ", process.env.CTMS_TR_STORAGE_TYPE);
-    console.log("CTMS_TR_USER_NAME: ", process.env.CTMS_TR_USER_NAME);
+console.log("CTMS");
+console.log("CTMS_TOKEN_SERVICE_URL: ", process.env.CTMS_TOKEN_SERVICE_URL);
+console.log("CTMS_CLIENT_ID: ", process.env.CTMS_CLIENT_ID);
+console.log("CTMS_CLIENT_SECRET: ", process.env.CTMS_CLIENT_SECRET);
+console.log("CTMS_API_URL: ", process.env.CTMS_API_URL);
+console.log("CTMS_NODE_NAME: ", process.env.CTMS_NODE_NAME);
+console.log("CTMS_FILE_PATH: ", process.env.CTMS_FILE_PATH);
+console.log("CTMS_TR_DESCRIPTION: ", process.env.CTMS_TR_DESCRIPTION);
+console.log("CTMS_TR_CONTENT_TYPE: ", process.env.CTMS_TR_CONTENT_TYPE);
+console.log("CTMS_TR_STORAGE_TYPE: ", process.env.CTMS_TR_STORAGE_TYPE);
+console.log("CTMS_TR_USER_NAME: ", process.env.CTMS_TR_USER_NAME);
 
 
 const CTMS_NODE_NAME:NodeExportBodyEntityName["nodeName"] = process.env.CTMS_NODE_NAME || "";

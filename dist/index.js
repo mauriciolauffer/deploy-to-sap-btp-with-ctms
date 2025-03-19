@@ -57,6 +57,17 @@ async function run() {
         core.setSecret("CTMS_CLIENT_ID");
         core.setSecret("CTMS_CLIENT_SECRET");
         core.setSecret("CTMS_TR_USER_NAME");
+        console.log("INDEX");
+        console.log("CTMS_TOKEN_SERVICE_URL: ", core.getInput("CTMS_TOKEN_SERVICE_URL"));
+        console.log("CTMS_CLIENT_ID: ", core.getInput("CTMS_CLIENT_ID"));
+        console.log("CTMS_CLIENT_SECRET: ", core.getInput("CTMS_CLIENT_SECRET"));
+        console.log("CTMS_API_URL: ", core.getInput("CTMS_API_URL"));
+        console.log("CTMS_NODE_NAME: ", core.getInput("CTMS_NODE_NAME"));
+        console.log("CTMS_FILE_PATH: ", core.getInput("CTMS_FILE_PATH"));
+        console.log("CTMS_TR_DESCRIPTION: ", core.getInput("CTMS_TR_DESCRIPTION"));
+        console.log("CTMS_TR_CONTENT_TYPE: ", core.getInput("CTMS_TR_CONTENT_TYPE"));
+        console.log("CTMS_TR_STORAGE_TYPE: ", core.getInput("CTMS_TR_STORAGE_TYPE"));
+        console.log("CTMS_TR_USER_NAME: ", core.getInput("CTMS_TR_USER_NAME"));
         await (0, ctms_1.default)();
     }
     catch (err) {

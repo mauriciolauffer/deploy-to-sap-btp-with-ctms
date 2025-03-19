@@ -38,6 +38,7 @@ const node_path_1 = require("node:path");
 const node_url_1 = require("node:url");
 const core = __importStar(require("@actions/core"));
 const index_1 = require("./generated/TMS_v2/index");
+console.log("CTMS");
 console.log("CTMS_TOKEN_SERVICE_URL: ", process.env.CTMS_TOKEN_SERVICE_URL);
 console.log("CTMS_CLIENT_ID: ", process.env.CTMS_CLIENT_ID);
 console.log("CTMS_CLIENT_SECRET: ", process.env.CTMS_CLIENT_SECRET);
