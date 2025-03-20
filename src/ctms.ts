@@ -1,43 +1,69 @@
-import type {PathLike} from "node:fs";
-import type { ClientCredentialsResponse, HttpDestinationOrFetchOptions } from "@sap-cloud-sdk/connectivity";
+import type { PathLike } from "node:fs";
+import type {
+  ClientCredentialsResponse,
+  HttpDestinationOrFetchOptions,
+} from "@sap-cloud-sdk/connectivity";
 import type {
   NodeExportBodyEntityName,
   FileInfo,
   ExportEntity,
 } from "./generated/TMS_v2/index";
+import type {
+  CtmsAuth,
+  CtmsParams,
+  CtmsTransportRequest,
+} from "./types/index.ts";
 import { access, readFile } from "node:fs/promises";
 import { basename } from "node:path";
 import { URL, URLSearchParams } from "node:url";
-import * as core from "@actions/core";
 import { FilesApi, ExportUploadApi } from "./generated/TMS_v2/index";
 
-console.log("CTMS");
-console.log("CTMS_TOKEN_SERVICE_URL: ", process.env.CTMS_TOKEN_SERVICE_URL);
-console.log("CTMS_CLIENT_ID: ", process.env.CTMS_CLIENT_ID);
-console.log("CTMS_CLIENT_SECRET: ", process.env.CTMS_CLIENT_SECRET);
-console.log("CTMS_API_URL: ", process.env.CTMS_API_URL);
-console.log("CTMS_NODE_NAME: ", process.env.CTMS_NODE_NAME);
-console.log("CTMS_FILE_PATH: ", process.env.CTMS_FILE_PATH);
-console.log("CTMS_TR_DESCRIPTION: ", process.env.CTMS_TR_DESCRIPTION);
-console.log("CTMS_TR_CONTENT_TYPE: ", process.env.CTMS_TR_CONTENT_TYPE);
-console.log("CTMS_TR_STORAGE_TYPE: ", process.env.CTMS_TR_STORAGE_TYPE);
-console.log("CTMS_TR_USER_NAME: ", process.env.CTMS_TR_USER_NAME);
-
-
-const CTMS_NODE_NAME:NodeExportBodyEntityName["nodeName"] = process.env.CTMS_NODE_NAME || "";
-const CTMS_TR_DESCRIPTION:NodeExportBodyEntityName["description"] = process.env.CTMS_TR_DESCRIPTION || "";
-const CTMS_TR_USER_NAME:NodeExportBodyEntityName["namedUser"] = process.env.CTMS_TR_USER_NAME || undefined;
-const CTMS_TR_CONTENT_TYPE = process.env.CTMS_TR_CONTENT_TYPE as NodeExportBodyEntityName["contentType"];
-const CTMS_TR_STORAGE_TYPE = process.env.CTMS_TR_STORAGE_TYPE as NodeExportBodyEntityName["storageType"];
-const CTMS_FILE_PATH:PathLike = process.env.CTMS_FILE_PATH || "";
-const FILENAME = basename(CTMS_FILE_PATH);
-const DESTINATION = {
-  url: process.env.CTMS_API_URL || "",
-  tokenServiceUrl: process.env.CTMS_TOKEN_SERVICE_URL || "",
-  clientId: process.env.CTMS_CLIENT_ID || "",
-  clientSecret: process.env.CTMS_CLIENT_SECRET || "",
-  // authentication: "OAuth2ClientCredentials"
+let CTMS_NODE_NAME: NodeExportBodyEntityName["nodeName"];
+let CTMS_TR_DESCRIPTION: NodeExportBodyEntityName["description"];
+let CTMS_TR_USER_NAME: NodeExportBodyEntityName["namedUser"];
+let CTMS_TR_CONTENT_TYPE: NodeExportBodyEntityName["contentType"];
+let CTMS_TR_STORAGE_TYPE: NodeExportBodyEntityName["storageType"];
+let CTMS_FILE_PATH: PathLike = "";
+let DESTINATION = {
+  url: "",
+  tokenServiceUrl: "",
+  clientId: "",
+  clientSecret: "",
 } satisfies HttpDestinationOrFetchOptions;
+
+/**
+ * Set module variables
+ */
+function setModuleVariables(
+  params: CtmsParams,
+  auth: CtmsAuth,
+  transportRequest: CtmsTransportRequest
+) {
+  CTMS_NODE_NAME = params.nodeName;
+  CTMS_TR_DESCRIPTION = transportRequest.description;
+  CTMS_TR_USER_NAME = transportRequest.username;
+  CTMS_TR_CONTENT_TYPE = transportRequest.contentType;
+  CTMS_TR_STORAGE_TYPE = transportRequest.storageType;
+  CTMS_FILE_PATH = params.filePath;
+  DESTINATION = {
+    url: params.apiUrl || "",
+    tokenServiceUrl: auth.tokenServiceUrl || "",
+    clientId: auth.clientId || "",
+    clientSecret: auth.clientSecret || "",
+  };
+
+  console.log("CTMS");
+  console.log("CTMS_TOKEN_SERVICE_URL: ", DESTINATION.tokenServiceUrl);
+  console.log("CTMS_CLIENT_ID: ", DESTINATION.clientId);
+  console.log("CTMS_CLIENT_SECRET: ", DESTINATION.clientSecret);
+  console.log("CTMS_API_URL: ", DESTINATION.url);
+  console.log("CTMS_NODE_NAME: ", CTMS_NODE_NAME);
+  console.log("CTMS_FILE_PATH: ", CTMS_FILE_PATH);
+  console.log("CTMS_TR_DESCRIPTION: ", CTMS_TR_DESCRIPTION);
+  console.log("CTMS_TR_CONTENT_TYPE: ", CTMS_TR_CONTENT_TYPE);
+  console.log("CTMS_TR_STORAGE_TYPE: ", CTMS_TR_STORAGE_TYPE);
+  console.log("CTMS_TR_USER_NAME: ", CTMS_TR_USER_NAME);
+}
 
 /**
  * Handle fetch responses
@@ -58,22 +84,25 @@ async function processFetchResponse(
  * Validate user/system input
  */
 async function validateInput() {
-  await access(CTMS_FILE_PATH);
+  if (!CTMS_FILE_PATH) {
+    throw new Error("FILE PATH cannot be empty");
+  }
   if (!DESTINATION.url) {
-    throw new Error("CTMS_API_URL cannot be empty");
+    throw new Error("API URL cannot be empty");
   }
   if (!DESTINATION.tokenServiceUrl) {
-    throw new Error("CTMS_TOKEN_SERVICE_URL cannot be empty");
+    throw new Error("TOKEN SERVICE URL cannot be empty");
   }
   if (!CTMS_NODE_NAME) {
-    throw new Error("CTMS_NODE_NAME cannot be empty");
+    throw new Error("NODE NAME cannot be empty");
   }
   if (!CTMS_TR_CONTENT_TYPE) {
-    throw new Error("CTMS_TR_CONTENT_TYPE cannot be empty");
+    throw new Error("CONTENT TYPE cannot be empty");
   }
   if (!CTMS_TR_STORAGE_TYPE) {
-    throw new Error("CTMS_TR_STORAGE_TYPE cannot be empty");
+    throw new Error("STORAGE TYPE cannot be empty");
   }
+  await access(CTMS_FILE_PATH);
   new URL(DESTINATION.url); // eslint-disable-line
   new URL(DESTINATION.tokenServiceUrl); // eslint-disable-line
 }
@@ -83,7 +112,7 @@ async function validateInput() {
  */
 async function getAuthToken(): Promise<ClientCredentialsResponse> {
   const { tokenServiceUrl, clientId, clientSecret } = DESTINATION;
-  core.info(`Authenticating to: ${tokenServiceUrl}`);
+  console.info(`Authenticating to: ${tokenServiceUrl}`); // eslint-disable-line no-console
   const encodedAuth = Buffer.from(`${clientId}:${clientSecret}`).toString(
     "base64"
   );
@@ -109,12 +138,12 @@ async function getAuthToken(): Promise<ClientCredentialsResponse> {
  * Upload MTA file to CTMS
  */
 async function uploadMtaFile(oauthToken: string): Promise<FileInfo> {
-  core.info(`Uploading file: ${CTMS_FILE_PATH}`);
+  console.info(`Uploading file: ${CTMS_FILE_PATH}`); // eslint-disable-line no-console
   const blob = new Blob([await readFile(CTMS_FILE_PATH)]);
   const payload = new FormData();
+  const fileName = basename(CTMS_FILE_PATH as string);
   payload.append("namedUser", CTMS_TR_USER_NAME);
-  payload.append("file", blob, FILENAME);
-
+  payload.append("file", blob, fileName);
   return FilesApi.fileUploadV2(payload)
     .skipCsrfTokenFetching()
     .addCustomHeaders({
@@ -131,7 +160,7 @@ async function addFileToTransportNodeQueue(
   fileName: string,
   oauthToken: string
 ): Promise<ExportEntity> {
-  core.info(`Adding file to the Transport Node Queue: ${CTMS_NODE_NAME}`);
+  console.info(`Adding file to the Transport Node Queue: ${CTMS_NODE_NAME}`); // eslint-disable-line no-console
   const payload: NodeExportBodyEntityName = {
     nodeName: CTMS_NODE_NAME,
     contentType: CTMS_TR_CONTENT_TYPE,
@@ -168,16 +197,14 @@ async function createTransportRequest(): Promise<ExportEntity> {
 /**
  * Deploy to Cloud Transport Management Service (cTMS)
  */
-async function ctmsDeploy() {
+async function ctmsDeploy(
+  params: CtmsParams,
+  auth: CtmsAuth,
+  transportRequestParams: CtmsTransportRequest
+): Promise<ExportEntity> {
+  setModuleVariables(params, auth, transportRequestParams);
   await validateInput();
-  const transportRequest = await createTransportRequest();
-  const queue = transportRequest.queueEntries[0];
-  core.info(
-    `Transport Request created: ${transportRequest.transportRequestDescription} (ID ${transportRequest.transportRequestId})`
-  );
-  core.info(
-    `File ${FILENAME} uploaded to Queue ID ${queue.queueId}: ${queue.nodeName} (ID ${queue.nodeId})'`
-  );
+  return createTransportRequest();
 }
 
 export default ctmsDeploy;

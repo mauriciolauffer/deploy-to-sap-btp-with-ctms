@@ -31,7 +31,7 @@ inputs:
     required: true
   CTMS_TR_USER_NAME:
     description: 'User displayed in Cloud Transport Management UI. If not given, the authentication user will be shown in Cloud Transport Management UI.'
-    required: true
+    required: false
 
 
 runs:

@@ -1,3 +1,4 @@
+import type {CtmsTransportRequest} from "./types/index.ts"
 import * as core from '@actions/core';
 import ctmsDeploy from './ctms';
 
@@ -7,16 +8,22 @@ import ctmsDeploy from './ctms';
 async function run() {
   try {
     core.info("Starting SAP BTP cTMS deployment...");
-    process.env.CTMS_TOKEN_SERVICE_URL = core.getInput("CTMS_TOKEN_SERVICE_URL");
-    process.env.CTMS_CLIENT_ID = core.getInput("CTMS_CLIENT_ID");
-    process.env.CTMS_CLIENT_SECRET = core.getInput("CTMS_CLIENT_SECRET");
-    process.env.CTMS_API_URL = core.getInput("CTMS_API_URL");
-    process.env.CTMS_NODE_NAME = core.getInput("CTMS_NODE_NAME");
-    process.env.CTMS_FILE_PATH = core.getInput("CTMS_FILE_PATH");
-    process.env.CTMS_TR_DESCRIPTION = core.getInput("CTMS_TR_DESCRIPTION");
-    process.env.CTMS_TR_CONTENT_TYPE = core.getInput("CTMS_TR_CONTENT_TYPE");
-    process.env.CTMS_TR_STORAGE_TYPE = core.getInput("CTMS_TR_STORAGE_TYPE");
-    process.env.CTMS_TR_USER_NAME = core.getInput("CTMS_TR_USER_NAME");
+    const ctmsAuth = {
+      tokenServiceUrl: core.getInput("CTMS_TOKEN_SERVICE_URL"),
+      clientId: core.getInput("CTMS_CLIENT_ID"),
+      clientSecret: core.getInput("CTMS_CLIENT_SECRET"),
+    };
+    const ctmsParams = {
+      apiUrl: core.getInput("CTMS_API_URL"),
+      nodeName: core.getInput("CTMS_NODE_NAME"),
+      filePath: core.getInput("CTMS_FILE_PATH"),
+    };
+    const ctmsTransportRequest = {
+      description: core.getInput("CTMS_TR_DESCRIPTION"),
+      contentType: core.getInput("CTMS_TR_CONTENT_TYPE") as CtmsTransportRequest["contentType"],
+      storageType: core.getInput("CTMS_TR_STORAGE_TYPE") as CtmsTransportRequest["storageType"],
+      username: core.getInput("CTMS_TR_USER_NAME"),
+    };
 
     core.setSecret("CTMS_CLIENT_ID");
     core.setSecret("CTMS_CLIENT_SECRET");
@@ -34,7 +41,14 @@ async function run() {
     console.log("CTMS_TR_STORAGE_TYPE: ", core.getInput("CTMS_TR_STORAGE_TYPE"));
     console.log("CTMS_TR_USER_NAME: ", core.getInput("CTMS_TR_USER_NAME"));
 
-    await ctmsDeploy();
+    const transportRequest = await ctmsDeploy(ctmsParams, ctmsAuth, ctmsTransportRequest);
+    const queue = transportRequest.queueEntries[0];
+    core.info(
+      `Transport Request created: ${transportRequest.transportRequestDescription} (ID ${transportRequest.transportRequestId})`
+    );
+    core.info(
+      `File ${ctmsParams.filePath} uploaded to Queue ID ${queue.queueId}: ${queue.nodeName} (ID ${queue.nodeId})'`
+    );
   } catch (err) {
     core.setFailed(`Action failed with error - ${err}`);
   }

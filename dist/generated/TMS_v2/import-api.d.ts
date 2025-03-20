@@ -1,5 +1,4 @@
 import { OpenApiRequestBuilder } from '@sap-cloud-sdk/openapi';
-import type { TransportRequestsResponse2 } from './schema';
 /**
  * Representation of the 'ImportApi'.
  * This API is part of the 'TMS_v2' service.
@@ -18,7 +17,7 @@ export declare const ImportApi: {
         queuedAtFrom?: string;
         queuedAtTo?: string;
         owner?: string;
-    }) => OpenApiRequestBuilder<TransportRequestsResponse2>;
+    }) => OpenApiRequestBuilder<any>;
     /**
      * Imports transport requests specified in request body. Request body must contain valid for import transport request IDs. If one of the IDs is invalid, the operation will fail
      *

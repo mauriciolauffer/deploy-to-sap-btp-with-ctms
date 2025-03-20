@@ -1,68 +1,49 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || (function () {
-    var ownKeys = function(o) {
-        ownKeys = Object.getOwnPropertyNames || function (o) {
-            var ar = [];
-            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
-            return ar;
-        };
-        return ownKeys(o);
-    };
-    return function (mod) {
-        if (mod && mod.__esModule) return mod;
-        var result = {};
-        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
-        __setModuleDefault(result, mod);
-        return result;
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 const promises_1 = require("node:fs/promises");
 const node_path_1 = require("node:path");
 const node_url_1 = require("node:url");
-const core = __importStar(require("@actions/core"));
 const index_1 = require("./generated/TMS_v2/index");
-console.log("CTMS");
-console.log("CTMS_TOKEN_SERVICE_URL: ", process.env.CTMS_TOKEN_SERVICE_URL);
-console.log("CTMS_CLIENT_ID: ", process.env.CTMS_CLIENT_ID);
-console.log("CTMS_CLIENT_SECRET: ", process.env.CTMS_CLIENT_SECRET);
-console.log("CTMS_API_URL: ", process.env.CTMS_API_URL);
-console.log("CTMS_NODE_NAME: ", process.env.CTMS_NODE_NAME);
-console.log("CTMS_FILE_PATH: ", process.env.CTMS_FILE_PATH);
-console.log("CTMS_TR_DESCRIPTION: ", process.env.CTMS_TR_DESCRIPTION);
-console.log("CTMS_TR_CONTENT_TYPE: ", process.env.CTMS_TR_CONTENT_TYPE);
-console.log("CTMS_TR_STORAGE_TYPE: ", process.env.CTMS_TR_STORAGE_TYPE);
-console.log("CTMS_TR_USER_NAME: ", process.env.CTMS_TR_USER_NAME);
-const CTMS_NODE_NAME = process.env.CTMS_NODE_NAME || "";
-const CTMS_TR_DESCRIPTION = process.env.CTMS_TR_DESCRIPTION || "";
-const CTMS_TR_USER_NAME = process.env.CTMS_TR_USER_NAME || undefined;
-const CTMS_TR_CONTENT_TYPE = process.env.CTMS_TR_CONTENT_TYPE;
-const CTMS_TR_STORAGE_TYPE = process.env.CTMS_TR_STORAGE_TYPE;
-const CTMS_FILE_PATH = process.env.CTMS_FILE_PATH || "";
-const FILENAME = (0, node_path_1.basename)(CTMS_FILE_PATH);
-const DESTINATION = {
-    url: process.env.CTMS_API_URL || "",
-    tokenServiceUrl: process.env.CTMS_TOKEN_SERVICE_URL || "",
-    clientId: process.env.CTMS_CLIENT_ID || "",
-    clientSecret: process.env.CTMS_CLIENT_SECRET || "",
-    // authentication: "OAuth2ClientCredentials"
+let CTMS_NODE_NAME;
+let CTMS_TR_DESCRIPTION;
+let CTMS_TR_USER_NAME;
+let CTMS_TR_CONTENT_TYPE;
+let CTMS_TR_STORAGE_TYPE;
+let CTMS_FILE_PATH = "";
+let DESTINATION = {
+    url: "",
+    tokenServiceUrl: "",
+    clientId: "",
+    clientSecret: "",
 };
+/**
+ * Set module variables
+ */
+function setModuleVariables(params, auth, transportRequest) {
+    CTMS_NODE_NAME = params.nodeName;
+    CTMS_TR_DESCRIPTION = transportRequest.description;
+    CTMS_TR_USER_NAME = transportRequest.username;
+    CTMS_TR_CONTENT_TYPE = transportRequest.contentType;
+    CTMS_TR_STORAGE_TYPE = transportRequest.storageType;
+    CTMS_FILE_PATH = params.filePath;
+    DESTINATION = {
+        url: params.apiUrl || "",
+        tokenServiceUrl: auth.tokenServiceUrl || "",
+        clientId: auth.clientId || "",
+        clientSecret: auth.clientSecret || "",
+    };
+    console.log("CTMS");
+    console.log("CTMS_TOKEN_SERVICE_URL: ", DESTINATION.tokenServiceUrl);
+    console.log("CTMS_CLIENT_ID: ", DESTINATION.clientId);
+    console.log("CTMS_CLIENT_SECRET: ", DESTINATION.clientSecret);
+    console.log("CTMS_API_URL: ", DESTINATION.url);
+    console.log("CTMS_NODE_NAME: ", CTMS_NODE_NAME);
+    console.log("CTMS_FILE_PATH: ", CTMS_FILE_PATH);
+    console.log("CTMS_TR_DESCRIPTION: ", CTMS_TR_DESCRIPTION);
+    console.log("CTMS_TR_CONTENT_TYPE: ", CTMS_TR_CONTENT_TYPE);
+    console.log("CTMS_TR_STORAGE_TYPE: ", CTMS_TR_STORAGE_TYPE);
+    console.log("CTMS_TR_USER_NAME: ", CTMS_TR_USER_NAME);
+}
 /**
  * Handle fetch responses
  */
@@ -80,22 +61,25 @@ async function processFetchResponse(response) {
  * Validate user/system input
  */
 async function validateInput() {
-    await (0, promises_1.access)(CTMS_FILE_PATH);
+    if (!CTMS_FILE_PATH) {
+        throw new Error("FILE PATH cannot be empty");
+    }
     if (!DESTINATION.url) {
-        throw new Error("CTMS_API_URL cannot be empty");
+        throw new Error("API URL cannot be empty");
     }
     if (!DESTINATION.tokenServiceUrl) {
-        throw new Error("CTMS_TOKEN_SERVICE_URL cannot be empty");
+        throw new Error("TOKEN SERVICE URL cannot be empty");
     }
     if (!CTMS_NODE_NAME) {
-        throw new Error("CTMS_NODE_NAME cannot be empty");
+        throw new Error("NODE NAME cannot be empty");
     }
     if (!CTMS_TR_CONTENT_TYPE) {
-        throw new Error("CTMS_TR_CONTENT_TYPE cannot be empty");
+        throw new Error("CONTENT TYPE cannot be empty");
     }
     if (!CTMS_TR_STORAGE_TYPE) {
-        throw new Error("CTMS_TR_STORAGE_TYPE cannot be empty");
+        throw new Error("STORAGE TYPE cannot be empty");
     }
+    await (0, promises_1.access)(CTMS_FILE_PATH);
     new node_url_1.URL(DESTINATION.url); // eslint-disable-line
     new node_url_1.URL(DESTINATION.tokenServiceUrl); // eslint-disable-line
 }
@@ -104,7 +88,7 @@ async function validateInput() {
  */
 async function getAuthToken() {
     const { tokenServiceUrl, clientId, clientSecret } = DESTINATION;
-    core.info(`Authenticating to: ${tokenServiceUrl}`);
+    console.info(`Authenticating to: ${tokenServiceUrl}`); // eslint-disable-line no-console
     const encodedAuth = Buffer.from(`${clientId}:${clientSecret}`).toString("base64");
     const payload = new node_url_1.URLSearchParams();
     payload.append("grant_type", "client_credentials");
@@ -128,11 +112,12 @@ async function getAuthToken() {
  * Upload MTA file to CTMS
  */
 async function uploadMtaFile(oauthToken) {
-    core.info(`Uploading file: ${CTMS_FILE_PATH}`);
+    console.info(`Uploading file: ${CTMS_FILE_PATH}`); // eslint-disable-line no-console
     const blob = new Blob([await (0, promises_1.readFile)(CTMS_FILE_PATH)]);
     const payload = new FormData();
+    const fileName = (0, node_path_1.basename)(CTMS_FILE_PATH);
     payload.append("namedUser", CTMS_TR_USER_NAME);
-    payload.append("file", blob, FILENAME);
+    payload.append("file", blob, fileName);
     return index_1.FilesApi.fileUploadV2(payload)
         .skipCsrfTokenFetching()
         .addCustomHeaders({
@@ -144,7 +129,7 @@ async function uploadMtaFile(oauthToken) {
  * Add MTA file to cTMS Transport Node Queue
  */
 async function addFileToTransportNodeQueue(fileId, fileName, oauthToken) {
-    core.info(`Adding file to the Transport Node Queue: ${CTMS_NODE_NAME}`);
+    console.info(`Adding file to the Transport Node Queue: ${CTMS_NODE_NAME}`); // eslint-disable-line no-console
     const payload = {
         nodeName: CTMS_NODE_NAME,
         contentType: CTMS_TR_CONTENT_TYPE,
@@ -175,12 +160,10 @@ async function createTransportRequest() {
 /**
  * Deploy to Cloud Transport Management Service (cTMS)
  */
-async function ctmsDeploy() {
+async function ctmsDeploy(params, auth, transportRequestParams) {
+    setModuleVariables(params, auth, transportRequestParams);
     await validateInput();
-    const transportRequest = await createTransportRequest();
-    const queue = transportRequest.queueEntries[0];
-    core.info(`Transport Request created: ${transportRequest.transportRequestDescription} (ID ${transportRequest.transportRequestId})`);
-    core.info(`File ${FILENAME} uploaded to Queue ID ${queue.queueId}: ${queue.nodeName} (ID ${queue.nodeId})'`);
+    return createTransportRequest();
 }
 exports.default = ctmsDeploy;
 //# sourceMappingURL=ctms.js.map
