@@ -1,4 +1,4 @@
-import type { ActionStatus } from './action-status';
+import type { ActionStatus } from './action-status.js';
 /**
  * Representation of the 'ActionTREntityStatusResponse2' schema.
  */

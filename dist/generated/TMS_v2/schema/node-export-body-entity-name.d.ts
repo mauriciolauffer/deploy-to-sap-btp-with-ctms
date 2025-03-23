@@ -1,6 +1,6 @@
-import type { PostContentRef } from './post-content-ref';
-import type { ContentType } from './content-type';
-import type { StorageType } from './storage-type';
+import type { PostContentRef } from './post-content-ref.js';
+import type { ContentType } from './content-type.js';
+import type { StorageType } from './storage-type.js';
 /**
  * Node export request
  * @example {

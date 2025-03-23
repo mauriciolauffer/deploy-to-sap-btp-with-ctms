@@ -7,7 +7,7 @@
   "license": "MIT",
   "homepage": "https://github.com/mauriciolauffer/ctms#readme",
   "main": "dist/index.js",
-  "type": "commonjs",
+  "type": "module",
   "files": [
     "dist"
   ],
@@ -33,6 +33,7 @@
   },
   "scripts": {
     "start": "node dist/ctms.js",
+    "generate-client": "openapi-generator --input specs/TMS_v2.yaml --outputDir src/generated --generateESM --overwrite",
     "build": "tsc",
     "lint": "eslint --cache",
     "test": "vitest run"
@@ -46,9 +47,9 @@
   "devDependencies": {
     "@sap-cloud-sdk/openapi-generator": "^4.0.2",
     "@sap-cloud-sdk/test-util": "^4.0.2",
-    "@types/node": "^22.13.10",
+    "@types/node": "^22.13.11",
     "dotenv": "^16.4.7",
-    "eslint": "^9.22.0",
+    "eslint": "^9.23.0",
     "eslint-config-mlauffer-nodejs": "^3.1.0",
     "typescript": "^5.8.2",
     "typescript-eslint": "^8.27.0",

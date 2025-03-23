@@ -1,4 +1,4 @@
-import type { LogResponse2 } from './log-response-2';
+import type { LogResponse2 } from './log-response-2.js';
 /**
  * Representation of the 'LogsResponse2' schema.
  * @example {

@@ -1,5 +1,5 @@
-import type { ActionStatus } from './action-status';
-import type { LogMessageResponse2 } from './log-message-response-2';
+import type { ActionStatus } from './action-status.js';
+import type { LogMessageResponse2 } from './log-message-response-2.js';
 /**
  * Representation of the 'LogEntityResponse2' schema.
  */

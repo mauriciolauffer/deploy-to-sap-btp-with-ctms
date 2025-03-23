@@ -1,6 +1,6 @@
-import type { TransportActionType } from './transport-action-type';
-import type { ActionStatus } from './action-status';
-import type { ActionTRStatusResponse2 } from './action-tr-status-response-2';
+import type { TransportActionType } from './transport-action-type.js';
+import type { ActionStatus } from './action-status.js';
+import type { ActionTRStatusResponse2 } from './action-tr-status-response-2.js';
 /**
  * Representation of the 'ActionResponse2' schema.
  * @example {

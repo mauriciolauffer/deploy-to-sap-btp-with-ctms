@@ -1,3 +1,2 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+export {};
 //# sourceMappingURL=tr-log-response-2.js.map

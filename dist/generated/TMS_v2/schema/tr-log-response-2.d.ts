@@ -1,7 +1,7 @@
-import type { TransportActionType } from './transport-action-type';
-import type { LogEntityResponse2 } from './log-entity-response-2';
-import type { LogMessageResponse2 } from './log-message-response-2';
-import type { ActionStatus } from './action-status';
+import type { TransportActionType } from './transport-action-type.js';
+import type { LogEntityResponse2 } from './log-entity-response-2.js';
+import type { LogMessageResponse2 } from './log-message-response-2.js';
+import type { ActionStatus } from './action-status.js';
 /**
  * Representation of the 'TrLogResponse2' schema.
  */

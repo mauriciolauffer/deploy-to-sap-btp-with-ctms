@@ -4,6 +4,7 @@ import { OpenApiRequestBuilder } from '@sap-cloud-sdk/openapi';
  * This API is part of the 'TMS_v2' service.
  */
 export declare const FilesApi: {
+    _defaultBasePath: undefined;
     /**
      * Uploads a file (application or content archive) to Cloud Transport Management and returns a file ID. You can reference the file ID in Node Export and Node Upload requests.
      *

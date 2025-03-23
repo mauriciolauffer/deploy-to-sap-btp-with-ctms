@@ -1,5 +1,5 @@
-import type { ActionStatus } from './action-status';
-import type { ActionTREntityStatusResponse2 } from './action-tr-entity-status-response-2';
+import type { ActionStatus } from './action-status.js';
+import type { ActionTREntityStatusResponse2 } from './action-tr-entity-status-response-2.js';
 /**
  * Representation of the 'ActionTRStatusResponse2' schema.
  */

@@ -1,4 +1,4 @@
-import type { ExportEntity } from "./generated/TMS_v2/index";
+import type { ExportEntity } from "./generated/TMS_v2/index.js";
 import type { CtmsAuth, CtmsParams, CtmsTransportRequest } from "./types/index.ts";
 /**
  * Deploy to Cloud Transport Management Service (cTMS)

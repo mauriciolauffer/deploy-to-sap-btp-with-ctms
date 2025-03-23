@@ -1,13 +1,17 @@
-/* import 'dotenv/config';
-import ctmsDeploy from '../dist/ctms.js'; */
+import 'dotenv/config';
+import { describe, it, expect } from "vitest";
+import ctmsDeploy from '../src/ctms';
 
 
 try {
-  require('dotenv').config();
-const ctmsDeploy = require('../dist/index.js');
-//const ctmsDeploy = require('../dist/ctms.js').default;
-
-  //ctmsDeploy();
+  // await ctmsDeploy();
 } catch (err) {
   console.error(err);
 }
+
+describe('ctmsDeploy', () => {
+  it('should deploy', () => {
+    expect(true).toBe(true);
+    expect(ctmsDeploy).toBeTruthy();
+  });
+});

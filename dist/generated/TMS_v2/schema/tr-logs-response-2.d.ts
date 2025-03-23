@@ -1,4 +1,4 @@
-import type { TrLogResponse2 } from './tr-log-response-2';
+import type { TrLogResponse2 } from './tr-log-response-2.js';
 /**
  * Representation of the 'TrLogsResponse2' schema.
  * @example {

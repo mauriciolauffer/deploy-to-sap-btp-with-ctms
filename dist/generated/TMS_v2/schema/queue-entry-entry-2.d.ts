@@ -1,5 +1,5 @@
-import type { StorageType } from './storage-type';
-import type { ContentType } from './content-type';
+import type { StorageType } from './storage-type.js';
+import type { ContentType } from './content-type.js';
 /**
  * Representation of the 'QueueEntryEntry2' schema.
  */

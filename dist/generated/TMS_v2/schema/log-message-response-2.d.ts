@@ -1,4 +1,4 @@
-import type { LogSeverity } from './log-severity';
+import type { LogSeverity } from './log-severity.js';
 /**
  * Representation of the 'LogMessageResponse2' schema.
  */

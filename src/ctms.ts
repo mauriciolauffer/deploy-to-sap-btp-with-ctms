@@ -7,7 +7,7 @@ import type {
   NodeExportBodyEntityName,
   FileInfo,
   ExportEntity,
-} from "./generated/TMS_v2/index";
+} from "./generated/TMS_v2/index.js";
 import type {
   CtmsAuth,
   CtmsParams,
@@ -16,7 +16,7 @@ import type {
 import { access, readFile } from "node:fs/promises";
 import { basename } from "node:path";
 import { URL, URLSearchParams } from "node:url";
-import { FilesApi, ExportUploadApi } from "./generated/TMS_v2/index";
+import { FilesApi, ExportUploadApi } from "./generated/TMS_v2/index.js";
 
 let CTMS_NODE_NAME: NodeExportBodyEntityName["nodeName"];
 let CTMS_TR_DESCRIPTION: NodeExportBodyEntityName["description"];
@@ -102,6 +102,11 @@ async function validateInput() {
   if (!CTMS_TR_STORAGE_TYPE) {
     throw new Error("STORAGE TYPE cannot be empty");
   }
+  console.info(1111111111);
+  console.info(`Validating file: ${CTMS_FILE_PATH}`);
+  console.info(import.meta.url);
+  console.info(import.meta.dirname);
+  console.info(import.meta.filename);
   await access(CTMS_FILE_PATH);
   new URL(DESTINATION.url); // eslint-disable-line
   new URL(DESTINATION.tokenServiceUrl); // eslint-disable-line

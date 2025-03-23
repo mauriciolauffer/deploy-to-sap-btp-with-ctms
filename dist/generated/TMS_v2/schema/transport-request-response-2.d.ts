@@ -1,5 +1,5 @@
-import type { TRStatus } from './tr-status';
-import type { QueueEntryEntry2 } from './queue-entry-entry-2';
+import type { TRStatus } from './tr-status.js';
+import type { QueueEntryEntry2 } from './queue-entry-entry-2.js';
 /**
  * Representation of the 'TransportRequestResponse2' schema.
  */

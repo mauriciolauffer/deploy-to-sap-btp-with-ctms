@@ -1,4 +1,4 @@
-import type { TransportRequestResponse2 } from './transport-request-response-2';
+import type { TransportRequestResponse2 } from './transport-request-response-2.js';
 /**
  * Representation of the 'TransportRequestsResponse2' schema.
  */

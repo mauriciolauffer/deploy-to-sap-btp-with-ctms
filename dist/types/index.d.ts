@@ -1,6 +1,6 @@
 import type { PathLike } from "node:fs";
 import type { HttpDestinationOrFetchOptions } from "@sap-cloud-sdk/connectivity";
-import type { NodeExportBodyEntityName } from "../generated/TMS_v2/index";
+import type { NodeExportBodyEntityName } from "../generated/TMS_v2/index.js";
 export type CtmsAuth = {
     tokenServiceUrl: HttpDestinationOrFetchOptions["tokenServiceUrl"];
     clientId: HttpDestinationOrFetchOptions["clientId"];

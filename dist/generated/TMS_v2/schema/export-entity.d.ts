@@ -1,4 +1,4 @@
-import type { ExportQueueEntryInfo } from './export-queue-entry-info';
+import type { ExportQueueEntryInfo } from './export-queue-entry-info.js';
 /**
  * Representation of the 'ExportEntity' schema.
  * @example {

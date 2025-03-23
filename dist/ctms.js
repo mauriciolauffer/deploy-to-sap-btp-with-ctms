@@ -1,9 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const promises_1 = require("node:fs/promises");
-const node_path_1 = require("node:path");
-const node_url_1 = require("node:url");
-const index_1 = require("./generated/TMS_v2/index");
+import { access, readFile } from "node:fs/promises";
+import { basename } from "node:path";
+import { URL, URLSearchParams } from "node:url";
+import { FilesApi, ExportUploadApi } from "./generated/TMS_v2/index.js";
 let CTMS_NODE_NAME;
 let CTMS_TR_DESCRIPTION;
 let CTMS_TR_USER_NAME;
@@ -79,9 +77,14 @@ async function validateInput() {
     if (!CTMS_TR_STORAGE_TYPE) {
         throw new Error("STORAGE TYPE cannot be empty");
     }
-    await (0, promises_1.access)(CTMS_FILE_PATH);
-    new node_url_1.URL(DESTINATION.url); // eslint-disable-line
-    new node_url_1.URL(DESTINATION.tokenServiceUrl); // eslint-disable-line
+    console.info(1111111111);
+    console.info(`Validating file: ${CTMS_FILE_PATH}`);
+    console.info(import.meta.url);
+    console.info(import.meta.dirname);
+    console.info(import.meta.filename);
+    await access(CTMS_FILE_PATH);
+    new URL(DESTINATION.url); // eslint-disable-line
+    new URL(DESTINATION.tokenServiceUrl); // eslint-disable-line
 }
 /**
  * Get OAuth2 authentication token
@@ -90,7 +93,7 @@ async function getAuthToken() {
     const { tokenServiceUrl, clientId, clientSecret } = DESTINATION;
     console.info(`Authenticating to: ${tokenServiceUrl}`); // eslint-disable-line no-console
     const encodedAuth = Buffer.from(`${clientId}:${clientSecret}`).toString("base64");
-    const payload = new node_url_1.URLSearchParams();
+    const payload = new URLSearchParams();
     payload.append("grant_type", "client_credentials");
     payload.append("client_id", clientId);
     try {
@@ -113,12 +116,12 @@ async function getAuthToken() {
  */
 async function uploadMtaFile(oauthToken) {
     console.info(`Uploading file: ${CTMS_FILE_PATH}`); // eslint-disable-line no-console
-    const blob = new Blob([await (0, promises_1.readFile)(CTMS_FILE_PATH)]);
+    const blob = new Blob([await readFile(CTMS_FILE_PATH)]);
     const payload = new FormData();
-    const fileName = (0, node_path_1.basename)(CTMS_FILE_PATH);
+    const fileName = basename(CTMS_FILE_PATH);
     payload.append("namedUser", CTMS_TR_USER_NAME);
     payload.append("file", blob, fileName);
-    return index_1.FilesApi.fileUploadV2(payload)
+    return FilesApi.fileUploadV2(payload)
         .skipCsrfTokenFetching()
         .addCustomHeaders({
         Authorization: `Bearer ${oauthToken}`,
@@ -142,7 +145,7 @@ async function addFileToTransportNodeQueue(fileId, fileName, oauthToken) {
         description: CTMS_TR_DESCRIPTION,
         namedUser: CTMS_TR_USER_NAME,
     };
-    return index_1.ExportUploadApi.nodeUploadByNameV2(payload)
+    return ExportUploadApi.nodeUploadByNameV2(payload)
         .skipCsrfTokenFetching()
         .addCustomHeaders({
         Authorization: `Bearer ${oauthToken}`,
@@ -165,5 +168,5 @@ async function ctmsDeploy(params, auth, transportRequestParams) {
     await validateInput();
     return createTransportRequest();
 }
-exports.default = ctmsDeploy;
+export default ctmsDeploy;
 //# sourceMappingURL=ctms.js.map

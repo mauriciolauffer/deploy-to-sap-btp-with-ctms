@@ -1,6 +1,6 @@
 import type {CtmsTransportRequest} from "./types/index.ts"
 import * as core from '@actions/core';
-import ctmsDeploy from './ctms';
+import ctmsDeploy from './ctms.js';
 
 /**
  * Main function  to run the action
