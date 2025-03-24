@@ -1,5 +1,6 @@
+import process from 'node:process';
 import { access, readFile } from "node:fs/promises";
-import { basename } from "node:path";
+import { basename, join } from "node:path";
 import { URL, URLSearchParams } from "node:url";
 import { FilesApi, ExportUploadApi } from "./generated/TMS_v2/index.js";
 let CTMS_NODE_NAME;
@@ -8,6 +9,7 @@ let CTMS_TR_USER_NAME;
 let CTMS_TR_CONTENT_TYPE;
 let CTMS_TR_STORAGE_TYPE;
 let CTMS_FILE_PATH = "";
+let CTMS_ABSOLUTE_FILE_PATH = "";
 let DESTINATION = {
     url: "",
     tokenServiceUrl: "",
@@ -24,6 +26,7 @@ function setModuleVariables(params, auth, transportRequest) {
     CTMS_TR_CONTENT_TYPE = transportRequest.contentType;
     CTMS_TR_STORAGE_TYPE = transportRequest.storageType;
     CTMS_FILE_PATH = params.filePath;
+    CTMS_ABSOLUTE_FILE_PATH = join(process.env.GITHUB_WORKSPACE || "", params.filePath);
     DESTINATION = {
         url: params.apiUrl || "",
         tokenServiceUrl: auth.tokenServiceUrl || "",
@@ -79,10 +82,12 @@ async function validateInput() {
     }
     console.info(1111111111);
     console.info(`Validating file: ${CTMS_FILE_PATH}`);
+    console.info(process.env.GITHUB_WORKSPACE);
+    console.info(CTMS_ABSOLUTE_FILE_PATH);
     console.info(import.meta.url);
     console.info(import.meta.dirname);
     console.info(import.meta.filename);
-    await access(CTMS_FILE_PATH);
+    await access(CTMS_ABSOLUTE_FILE_PATH);
     new URL(DESTINATION.url); // eslint-disable-line
     new URL(DESTINATION.tokenServiceUrl); // eslint-disable-line
 }
@@ -115,10 +120,10 @@ async function getAuthToken() {
  * Upload MTA file to CTMS
  */
 async function uploadMtaFile(oauthToken) {
-    console.info(`Uploading file: ${CTMS_FILE_PATH}`); // eslint-disable-line no-console
-    const blob = new Blob([await readFile(CTMS_FILE_PATH)]);
+    console.info(`Uploading file: ${CTMS_ABSOLUTE_FILE_PATH}`); // eslint-disable-line no-console
+    const blob = new Blob([await readFile(CTMS_ABSOLUTE_FILE_PATH)]);
     const payload = new FormData();
-    const fileName = basename(CTMS_FILE_PATH);
+    const fileName = basename(CTMS_ABSOLUTE_FILE_PATH);
     payload.append("namedUser", CTMS_TR_USER_NAME);
     payload.append("file", blob, fileName);
     return FilesApi.fileUploadV2(payload)

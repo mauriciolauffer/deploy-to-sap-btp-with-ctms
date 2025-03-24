@@ -1,4 +1,3 @@
-import type { PathLike } from "node:fs";
 import type { HttpDestinationOrFetchOptions } from "@sap-cloud-sdk/connectivity";
 import type { NodeExportBodyEntityName } from "../generated/TMS_v2/index.js";
 export type CtmsAuth = {
@@ -9,7 +8,7 @@ export type CtmsAuth = {
 export type CtmsParams = {
     apiUrl: HttpDestinationOrFetchOptions["url"];
     nodeName: NodeExportBodyEntityName["nodeName"];
-    filePath: PathLike;
+    filePath: string;
 };
 export type CtmsTransportRequest = {
     description: NodeExportBodyEntityName["description"];
