@@ -12,5 +12,5 @@ export default tseslint.config(
       "jsdoc/require-param": "off",
       "jsdoc/require-returns": "off",
     },
-  }
+  },
 );

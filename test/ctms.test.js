@@ -1,7 +1,5 @@
-import 'dotenv/config';
 import { describe, it, expect } from "vitest";
-import ctmsDeploy from '../src/ctms';
-
+import ctmsDeploy from "../src/ctms";
 
 try {
   // await ctmsDeploy();
@@ -9,8 +7,8 @@ try {
   console.error(err);
 }
 
-describe('ctmsDeploy', () => {
-  it('should deploy', () => {
+describe("ctmsDeploy", () => {
+  it("should deploy", () => {
     expect(true).toBe(true);
     expect(ctmsDeploy).toBeTruthy();
   });

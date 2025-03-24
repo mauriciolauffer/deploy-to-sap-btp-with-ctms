@@ -1,39 +1,38 @@
-name: 'cTMS'
-description: 'GitHub Action for SAP BTP Cloud Transport Managemente (cTMS), a deployment service for the SAP Ecosystem'
-author: 'Mauricio Lauffer'
+name: "cTMS"
+description: "GitHub Action for SAP BTP Cloud Transport Managemente (cTMS), a deployment service for the SAP Ecosystem"
+author: "Mauricio Lauffer"
 inputs:
   CTMS_TOKEN_SERVICE_URL:
-    description: 'Value of URL(UAA section) from the service key of your SAP Cloud Transport Management service instance.'
+    description: "Value of URL(UAA section) from the service key of your SAP Cloud Transport Management service instance."
     required: true
   CTMS_CLIENT_ID:
-    description: 'Value of clientid from the service key of your SAP Cloud Transport Management service instance.'
+    description: "Value of clientid from the service key of your SAP Cloud Transport Management service instance."
     required: true
   CTMS_CLIENT_SECRET:
-    description: 'Value of clientsecret (uaa section) from the service key of your SAP Cloud Transport Management service instance.'
+    description: "Value of clientsecret (uaa section) from the service key of your SAP Cloud Transport Management service instance."
     required: true
   CTMS_API_URL:
-    description: 'Value of uri from the service key of your SAP Cloud Transport Management service instance.'
+    description: "Value of uri from the service key of your SAP Cloud Transport Management service instance."
     required: true
   CTMS_NODE_NAME:
-    description: 'Name of node where content was put in'
+    description: "Name of node where content was put in"
     required: true
   CTMS_FILE_PATH:
-    description: 'File with application content'
+    description: "File with application content"
     required: true
   CTMS_TR_DESCRIPTION:
-    description: 'Description of the file upload process'
+    description: "Description of the file upload process"
     required: true
   CTMS_TR_CONTENT_TYPE:
-    description: 'Content type (one of MTA, XSCDU, APP)'
+    description: "Content type (one of MTA, XSCDU, APP)"
     required: true
   CTMS_TR_STORAGE_TYPE:
-    description: 'Storage type (one of FILE, REFERENCE)'
+    description: "Storage type (one of FILE, REFERENCE)"
     required: true
   CTMS_TR_USER_NAME:
-    description: 'User displayed in Cloud Transport Management UI. If not given, the authentication user will be shown in Cloud Transport Management UI.'
+    description: "User displayed in Cloud Transport Management UI. If not given, the authentication user will be shown in Cloud Transport Management UI."
     required: false
 
-
 runs:
-  using: 'node20'
-  main: 'dist/index.js'
+  using: "node20"
+  main: "dist/index.js"

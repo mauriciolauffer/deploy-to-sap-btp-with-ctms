@@ -12,7 +12,7 @@ import type {
   CtmsParams,
   CtmsTransportRequest,
 } from "./types/index.ts";
-import process from 'node:process';
+import process from "node:process";
 import { access, readFile } from "node:fs/promises";
 import { basename, join } from "node:path";
 import { URL, URLSearchParams } from "node:url";
@@ -38,7 +38,7 @@ let DESTINATION = {
 function setModuleVariables(
   params: CtmsParams,
   auth: CtmsAuth,
-  transportRequest: CtmsTransportRequest
+  transportRequest: CtmsTransportRequest,
 ) {
   CTMS_NODE_NAME = params.nodeName;
   CTMS_TR_DESCRIPTION = transportRequest.description;
@@ -46,32 +46,23 @@ function setModuleVariables(
   CTMS_TR_CONTENT_TYPE = transportRequest.contentType;
   CTMS_TR_STORAGE_TYPE = transportRequest.storageType;
   CTMS_FILE_PATH = params.filePath;
-  CTMS_ABSOLUTE_FILE_PATH = join(process.env.GITHUB_WORKSPACE || "", params.filePath);
+  CTMS_ABSOLUTE_FILE_PATH = join(
+    process.env.GITHUB_WORKSPACE || "",
+    params.filePath,
+  );
   DESTINATION = {
     url: params.apiUrl || "",
     tokenServiceUrl: auth.tokenServiceUrl || "",
     clientId: auth.clientId || "",
     clientSecret: auth.clientSecret || "",
   };
-
-  console.log("CTMS");
-  console.log("CTMS_TOKEN_SERVICE_URL: ", DESTINATION.tokenServiceUrl);
-  console.log("CTMS_CLIENT_ID: ", DESTINATION.clientId);
-  console.log("CTMS_CLIENT_SECRET: ", DESTINATION.clientSecret);
-  console.log("CTMS_API_URL: ", DESTINATION.url);
-  console.log("CTMS_NODE_NAME: ", CTMS_NODE_NAME);
-  console.log("CTMS_FILE_PATH: ", CTMS_FILE_PATH);
-  console.log("CTMS_TR_DESCRIPTION: ", CTMS_TR_DESCRIPTION);
-  console.log("CTMS_TR_CONTENT_TYPE: ", CTMS_TR_CONTENT_TYPE);
-  console.log("CTMS_TR_STORAGE_TYPE: ", CTMS_TR_STORAGE_TYPE);
-  console.log("CTMS_TR_USER_NAME: ", CTMS_TR_USER_NAME);
 }
 
 /**
  * Handle fetch responses
  */
 async function processFetchResponse(
-  response: Response
+  response: Response,
 ): Promise<ClientCredentialsResponse> {
   if (response.ok) {
     return response.json() as Promise<ClientCredentialsResponse>;
@@ -104,14 +95,6 @@ async function validateInput() {
   if (!CTMS_TR_STORAGE_TYPE) {
     throw new Error("STORAGE TYPE cannot be empty");
   }
-  console.info(1111111111);
-  console.info(`Validating file: ${CTMS_FILE_PATH}`);
-  console.info(process.env.GITHUB_WORKSPACE);
-  console.info(CTMS_ABSOLUTE_FILE_PATH);
-  console.info(import.meta.url);
-  console.info(import.meta.dirname);
-  console.info(import.meta.filename);
-
   await access(CTMS_ABSOLUTE_FILE_PATH);
   new URL(DESTINATION.url); // eslint-disable-line
   new URL(DESTINATION.tokenServiceUrl); // eslint-disable-line
@@ -124,7 +107,7 @@ async function getAuthToken(): Promise<ClientCredentialsResponse> {
   const { tokenServiceUrl, clientId, clientSecret } = DESTINATION;
   console.info(`Authenticating to: ${tokenServiceUrl}`); // eslint-disable-line no-console
   const encodedAuth = Buffer.from(`${clientId}:${clientSecret}`).toString(
-    "base64"
+    "base64",
   );
   const payload = new URLSearchParams();
   payload.append("grant_type", "client_credentials");
@@ -168,7 +151,7 @@ async function uploadMtaFile(oauthToken: string): Promise<FileInfo> {
 async function addFileToTransportNodeQueue(
   fileId: string,
   fileName: string,
-  oauthToken: string
+  oauthToken: string,
 ): Promise<ExportEntity> {
   console.info(`Adding file to the Transport Node Queue: ${CTMS_NODE_NAME}`); // eslint-disable-line no-console
   const payload: NodeExportBodyEntityName = {
@@ -200,7 +183,7 @@ async function createTransportRequest(): Promise<ExportEntity> {
   return addFileToTransportNodeQueue(
     (fileInfo?.fileId || "").toString(),
     fileInfo?.fileName || "",
-    access_token
+    access_token,
   );
 }
 
@@ -210,7 +193,7 @@ async function createTransportRequest(): Promise<ExportEntity> {
 async function ctmsDeploy(
   params: CtmsParams,
   auth: CtmsAuth,
-  transportRequestParams: CtmsTransportRequest
+  transportRequestParams: CtmsTransportRequest,
 ): Promise<ExportEntity> {
   setModuleVariables(params, auth, transportRequestParams);
   await validateInput();
