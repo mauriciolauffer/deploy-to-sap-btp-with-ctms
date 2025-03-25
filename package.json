@@ -38,6 +38,7 @@
     "type:check": "tsc --noEmit",
     "bundle": "rolldown -c rolldown.config.ts",
     "lint": "prettier . --check --cache && eslint --cache",
+    "lint:ci": "eslint --quiet -f @microsoft/eslint-formatter-sarif -o eslint.sarif",
     "pretty": "prettier . --write --cache",
     "test": "vitest run",
     "test:cov": "vitest run --coverage"

@@ -1,0 +1,13 @@
+name: release
+on:
+  push:
+    branches: [main]
+
+jobs:
+  release:
+    permissions:
+      contents: write
+      pull-requests: write
+    uses: mauriciolauffer/.github/.github/workflows/release.yml@main
+    secrets:
+      GITHUB_PAT: ${{ secrets.GH_PAT }}
