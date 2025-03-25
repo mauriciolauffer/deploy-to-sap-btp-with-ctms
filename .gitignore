@@ -131,3 +131,5 @@ out
 
 sample-project
 gen/
+
+*.sarif
