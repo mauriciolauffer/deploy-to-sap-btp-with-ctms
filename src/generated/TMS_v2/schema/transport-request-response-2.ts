@@ -1,10 +1,10 @@
 /*
- * Copyright (c) 2024 SAP SE or an SAP affiliate company. All rights reserved.
+ * Copyright (c) 2025 SAP SE or an SAP affiliate company. All rights reserved.
  *
  * This is a generated file powered by the SAP Cloud SDK for JavaScript.
  */
-import type { TRStatus } from './tr-status';
-import type { QueueEntryEntry2 } from './queue-entry-entry-2';
+import type { TRStatus } from './tr-status.js';
+import type { QueueEntryEntry2 } from './queue-entry-entry-2.js';
 /**
  * Representation of the 'TransportRequestResponse2' schema.
  */

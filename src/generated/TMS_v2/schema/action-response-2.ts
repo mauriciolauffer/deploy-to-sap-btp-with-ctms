@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2024 SAP SE or an SAP affiliate company. All rights reserved.
+ * Copyright (c) 2025 SAP SE or an SAP affiliate company. All rights reserved.
  *
  * This is a generated file powered by the SAP Cloud SDK for JavaScript.
  */
-import type { TransportActionType } from './transport-action-type';
-import type { ActionStatus } from './action-status';
-import type { ActionTRStatusResponse2 } from './action-tr-status-response-2';
+import type { TransportActionType } from './transport-action-type.js';
+import type { ActionStatus } from './action-status.js';
+import type { ActionTRStatusResponse2 } from './action-tr-status-response-2.js';
 /**
  * Representation of the 'ActionResponse2' schema.
  * @example {

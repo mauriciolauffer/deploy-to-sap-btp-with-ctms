@@ -6,8 +6,9 @@
   "author": "Mauricio Lauffer",
   "license": "MIT",
   "homepage": "https://github.com/mauriciolauffer/ctms#readme",
-  "main": "index.js",
-  "type": "commonjs",
+  "main": "dist/index.js",
+  "type": "module",
+  "packageManager": "pnpm@9.15.4",
   "files": [
     "dist"
   ],
@@ -16,6 +17,7 @@
     "btp",
     "cicd",
     "cd",
+    "ctm",
     "ctms",
     "tms",
     "tr",
@@ -32,28 +34,35 @@
   },
   "scripts": {
     "start": "node dist/ctms.js",
-    "build": "tsc",
-    "lint": "eslint --cache",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "generate:client": "openapi-generator --input specs/TMS_v2.yaml --outputDir src/generated --generateESM --overwrite",
+    "type:check": "tsc --noEmit",
+    "bundle": "rolldown -c rolldown.config.ts",
+    "lint": "prettier . --check --cache && eslint --cache",
+    "pretty": "prettier . --write --cache",
+    "test": "vitest run",
+    "test:cov": "vitest run --coverage"
   },
   "dependencies": {
     "@actions/core": "^1.11.1",
     "@actions/github": "^6.0.0",
-    "@sap-cloud-sdk/connectivity": "^3.26.0",
-    "@sap-cloud-sdk/openapi": "^3.26.0"
+    "@sap-cloud-sdk/connectivity": "^4.0.2",
+    "@sap-cloud-sdk/openapi": "^4.0.2"
   },
   "devDependencies": {
-    "@sap-cloud-sdk/openapi-generator": "^3.26.0",
-    "@sap-cloud-sdk/test-util": "^3.26.0",
-    "@types/node": "^22.13.1",
-    "dotenv": "^16.4.7",
-    "eslint": "^9.20.1",
-    "eslint-config-mlauffer-nodejs": "^3.0.1",
-    "typescript": "^5.7.3",
-    "typescript-eslint": "^8.24.0",
-    "vitest": "^3.0.5"
+    "@sap-cloud-sdk/openapi-generator": "^4.0.2",
+    "@sap-cloud-sdk/test-util": "^4.0.2",
+    "@types/node": "^22.13.13",
+    "@vitest/coverage-v8": "^3.0.9",
+    "eslint": "^9.23.0",
+    "eslint-config-mlauffer-nodejs": "^3.1.0",
+    "prettier": "^3.5.3",
+    "rolldown": "1.0.0-beta.7",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.28.0",
+    "vitest": "^3.0.9"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=20",
+    "pnpm": ">=9"
   }
 }
