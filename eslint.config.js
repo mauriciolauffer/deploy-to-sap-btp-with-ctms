@@ -5,9 +5,8 @@ export default tseslint.config(
   {
     ignores: ["dist/", "src/generated", "**/coverage/", "**/test/"],
   },
-  ...config,
-  ...tseslint.configs.strict,
   {
+    extends: [config, tseslint.configs.strict],
     rules: {
       "jsdoc/require-param": "off",
       "jsdoc/require-returns": "off",

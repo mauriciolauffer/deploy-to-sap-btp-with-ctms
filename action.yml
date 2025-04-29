@@ -1,36 +1,36 @@
 name: "cTMS"
-description: "GitHub Action for SAP BTP Cloud Transport Managemente (cTMS), a deployment service for the SAP Ecosystem"
+description: "GitHub Action to automate the deployment of application archives (MTAR files) to SAP BTP subaccounts by leveraging the SAP Cloud Transport Management Service (CTMS)."
 author: "Mauricio Lauffer"
 inputs:
   CTMS_TOKEN_SERVICE_URL:
-    description: "Value of URL(UAA section) from the service key of your SAP Cloud Transport Management service instance."
+    description: "Value of url (within the uaa section) from the service key of your CTMS instance."
     required: true
   CTMS_CLIENT_ID:
-    description: "Value of clientid from the service key of your SAP Cloud Transport Management service instance."
+    description: "Value of clientid from the service key of your CTMS instance."
     required: true
   CTMS_CLIENT_SECRET:
-    description: "Value of clientsecret (uaa section) from the service key of your SAP Cloud Transport Management service instance."
+    description: "Value of clientsecret (within the uaa section) from the service key."
     required: true
   CTMS_API_URL:
-    description: "Value of uri from the service key of your SAP Cloud Transport Management service instance."
+    description: "Value of uri from the service key of your CTMS instance."
     required: true
   CTMS_NODE_NAME:
-    description: "Name of node where content was put in"
+    description: "The name of the target Transport Node in CTMS where the archive should be imported"
     required: true
   CTMS_FILE_PATH:
-    description: "File with application content"
+    description: "Path within the runner's workspace to the application archive file (e.g., app.mtar, my-app.zip)"
     required: true
   CTMS_TR_DESCRIPTION:
-    description: "Description of the file upload process"
+    description: "Description for the transport request created in CTMS"
     required: true
   CTMS_TR_CONTENT_TYPE:
-    description: "Content type (one of MTA, XSCDU, APP)"
+    description: "Content type of the archive. Must be one of: MTA, XSCDU, APP"
     required: true
   CTMS_TR_STORAGE_TYPE:
-    description: "Storage type (one of FILE, REFERENCE)"
+    description: "Storage type for the transport request. Must be one of: FILE, REFERENCE. Typically FILE for direct uploads"
     required: true
   CTMS_TR_USER_NAME:
-    description: "User displayed in Cloud Transport Management UI. If not given, the authentication user will be shown in Cloud Transport Management UI."
+    description: "Optional user name displayed in the Cloud Transport Management UI. If omitted, the authentication user may be shown."
     required: false
 
 runs:

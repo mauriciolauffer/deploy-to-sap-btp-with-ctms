@@ -254,8 +254,8 @@ var require_proxy = __commonJS({ "node_modules/.pnpm/@actions+http-client@2.2.3/
 		return hostLower === "localhost" || hostLower.startsWith("127.") || hostLower.startsWith("[::1]") || hostLower.startsWith("[0:0:0:0:0:0:0:1]");
 	}
 	var DecodedURL = class extends URL {
-		constructor(url$2, base) {
-			super(url$2, base);
+		constructor(url$3, base) {
+			super(url$3, base);
 			this._decodedUsername = decodeURIComponent(super.username);
 			this._decodedPassword = decodeURIComponent(super.password);
 		}
@@ -273,7 +273,7 @@ var require_proxy = __commonJS({ "node_modules/.pnpm/@actions+http-client@2.2.3/
 var require_tunnel$1 = __commonJS({ "node_modules/.pnpm/tunnel@0.0.6/node_modules/tunnel/lib/tunnel.js"(exports) {
 	var net$3 = __require("net");
 	var tls$1 = __require("tls");
-	var http$7 = __require("http");
+	var http$8 = __require("http");
 	var https$7 = __require("https");
 	var events$3 = __require("events");
 	var assert$27 = __require("assert");
@@ -284,12 +284,12 @@ var require_tunnel$1 = __commonJS({ "node_modules/.pnpm/tunnel@0.0.6/node_module
 	exports.httpsOverHttps = httpsOverHttps;
 	function httpOverHttp(options) {
 		var agent = new TunnelingAgent(options);
-		agent.request = http$7.request;
+		agent.request = http$8.request;
 		return agent;
 	}
 	function httpsOverHttp(options) {
 		var agent = new TunnelingAgent(options);
-		agent.request = http$7.request;
+		agent.request = http$8.request;
 		agent.createSocket = createSecureSocket;
 		agent.defaultPort = 443;
 		return agent;
@@ -310,7 +310,7 @@ var require_tunnel$1 = __commonJS({ "node_modules/.pnpm/tunnel@0.0.6/node_module
 		var self$1 = this;
 		self$1.options = options || {};
 		self$1.proxyOptions = self$1.options.proxy || {};
-		self$1.maxSockets = self$1.options.maxSockets || http$7.Agent.defaultMaxSockets;
+		self$1.maxSockets = self$1.options.maxSockets || http$8.Agent.defaultMaxSockets;
 		self$1.requests = [];
 		self$1.sockets = [];
 		self$1.on("free", function onFree(socket, host, port, localAddress) {
@@ -892,39 +892,39 @@ var require_util$9 = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 	function isBlobLike$7(object) {
 		return Blob$5 && object instanceof Blob$5 || object && typeof object === "object" && (typeof object.stream === "function" || typeof object.arrayBuffer === "function") && /^(Blob|File)$/.test(object[Symbol.toStringTag]);
 	}
-	function buildURL$3(url$2, queryParams) {
-		if (url$2.includes("?") || url$2.includes("#")) throw new Error("Query params cannot be passed when url already contains \"?\" or \"#\".");
+	function buildURL$3(url$3, queryParams) {
+		if (url$3.includes("?") || url$3.includes("#")) throw new Error("Query params cannot be passed when url already contains \"?\" or \"#\".");
 		const stringified = stringify$4(queryParams);
-		if (stringified) url$2 += "?" + stringified;
-		return url$2;
+		if (stringified) url$3 += "?" + stringified;
+		return url$3;
 	}
-	function parseURL(url$2) {
-		if (typeof url$2 === "string") {
-			url$2 = new URL(url$2);
-			if (!/^https?:/.test(url$2.origin || url$2.protocol)) throw new InvalidArgumentError$21("Invalid URL protocol: the URL must start with `http:` or `https:`.");
-			return url$2;
+	function parseURL(url$3) {
+		if (typeof url$3 === "string") {
+			url$3 = new URL(url$3);
+			if (!/^https?:/.test(url$3.origin || url$3.protocol)) throw new InvalidArgumentError$21("Invalid URL protocol: the URL must start with `http:` or `https:`.");
+			return url$3;
 		}
-		if (!url$2 || typeof url$2 !== "object") throw new InvalidArgumentError$21("Invalid URL: The URL argument must be a non-null object.");
-		if (!/^https?:/.test(url$2.origin || url$2.protocol)) throw new InvalidArgumentError$21("Invalid URL protocol: the URL must start with `http:` or `https:`.");
-		if (!(url$2 instanceof URL)) {
-			if (url$2.port != null && url$2.port !== "" && !Number.isFinite(parseInt(url$2.port))) throw new InvalidArgumentError$21("Invalid URL: port must be a valid integer or a string representation of an integer.");
-			if (url$2.path != null && typeof url$2.path !== "string") throw new InvalidArgumentError$21("Invalid URL path: the path must be a string or null/undefined.");
-			if (url$2.pathname != null && typeof url$2.pathname !== "string") throw new InvalidArgumentError$21("Invalid URL pathname: the pathname must be a string or null/undefined.");
-			if (url$2.hostname != null && typeof url$2.hostname !== "string") throw new InvalidArgumentError$21("Invalid URL hostname: the hostname must be a string or null/undefined.");
-			if (url$2.origin != null && typeof url$2.origin !== "string") throw new InvalidArgumentError$21("Invalid URL origin: the origin must be a string or null/undefined.");
-			const port = url$2.port != null ? url$2.port : url$2.protocol === "https:" ? 443 : 80;
-			let origin$1 = url$2.origin != null ? url$2.origin : `${url$2.protocol}//${url$2.hostname}:${port}`;
-			let path$10 = url$2.path != null ? url$2.path : `${url$2.pathname || ""}${url$2.search || ""}`;
+		if (!url$3 || typeof url$3 !== "object") throw new InvalidArgumentError$21("Invalid URL: The URL argument must be a non-null object.");
+		if (!/^https?:/.test(url$3.origin || url$3.protocol)) throw new InvalidArgumentError$21("Invalid URL protocol: the URL must start with `http:` or `https:`.");
+		if (!(url$3 instanceof URL)) {
+			if (url$3.port != null && url$3.port !== "" && !Number.isFinite(parseInt(url$3.port))) throw new InvalidArgumentError$21("Invalid URL: port must be a valid integer or a string representation of an integer.");
+			if (url$3.path != null && typeof url$3.path !== "string") throw new InvalidArgumentError$21("Invalid URL path: the path must be a string or null/undefined.");
+			if (url$3.pathname != null && typeof url$3.pathname !== "string") throw new InvalidArgumentError$21("Invalid URL pathname: the pathname must be a string or null/undefined.");
+			if (url$3.hostname != null && typeof url$3.hostname !== "string") throw new InvalidArgumentError$21("Invalid URL hostname: the hostname must be a string or null/undefined.");
+			if (url$3.origin != null && typeof url$3.origin !== "string") throw new InvalidArgumentError$21("Invalid URL origin: the origin must be a string or null/undefined.");
+			const port = url$3.port != null ? url$3.port : url$3.protocol === "https:" ? 443 : 80;
+			let origin$1 = url$3.origin != null ? url$3.origin : `${url$3.protocol}//${url$3.hostname}:${port}`;
+			let path$10 = url$3.path != null ? url$3.path : `${url$3.pathname || ""}${url$3.search || ""}`;
 			if (origin$1.endsWith("/")) origin$1 = origin$1.substring(0, origin$1.length - 1);
 			if (path$10 && !path$10.startsWith("/")) path$10 = `/${path$10}`;
-			url$2 = new URL(origin$1 + path$10);
+			url$3 = new URL(origin$1 + path$10);
 		}
-		return url$2;
+		return url$3;
 	}
-	function parseOrigin$1(url$2) {
-		url$2 = parseURL(url$2);
-		if (url$2.pathname !== "/" || url$2.search || url$2.hash) throw new InvalidArgumentError$21("invalid url");
-		return url$2;
+	function parseOrigin$1(url$3) {
+		url$3 = parseURL(url$3);
+		if (url$3.pathname !== "/" || url$3.search || url$3.hash) throw new InvalidArgumentError$21("invalid url");
+		return url$3;
 	}
 	function getHostname(host) {
 		if (host[0] === "[") {
@@ -949,7 +949,7 @@ var require_util$9 = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 	function isAsyncIterable$1(obj) {
 		return !!(obj != null && typeof obj[Symbol.asyncIterator] === "function");
 	}
-	function isIterable(obj) {
+	function isIterable$1(obj) {
 		return !!(obj != null && (typeof obj[Symbol.iterator] === "function" || typeof obj[Symbol.asyncIterator] === "function"));
 	}
 	function bodyLength(body) {
@@ -1069,13 +1069,13 @@ var require_util$9 = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 	function ReadableStreamFrom$3(iterable) {
 		if (!ReadableStream$6) ReadableStream$6 = __require("stream/web").ReadableStream;
 		if (ReadableStream$6.from) return ReadableStream$6.from(convertIterableToBuffer(iterable));
-		let iterator;
+		let iterator$1;
 		return new ReadableStream$6({
 			async start() {
-				iterator = iterable[Symbol.asyncIterator]();
+				iterator$1 = iterable[Symbol.asyncIterator]();
 			},
 			async pull(controller) {
-				const { done: done$1, value } = await iterator.next();
+				const { done: done$1, value } = await iterator$1.next();
 				if (done$1) queueMicrotask(() => {
 					controller.close();
 				});
@@ -1086,7 +1086,7 @@ var require_util$9 = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 				return controller.desiredSize > 0;
 			},
 			async cancel(reason) {
-				await iterator.return();
+				await iterator$1.return();
 			}
 		}, 0);
 	}
@@ -1147,7 +1147,7 @@ var require_util$9 = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 		parseURL,
 		getServerName,
 		isStream: isStream$4,
-		isIterable,
+		isIterable: isIterable$1,
 		isAsyncIterable: isAsyncIterable$1,
 		isDestroyed,
 		headerNameToString,
@@ -3213,8 +3213,8 @@ var require_util$8 = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 		return request$1.urlList[request$1.urlList.length - 1];
 	}
 	function requestBadPort$1(request$1) {
-		const url$2 = requestCurrentURL$1(request$1);
-		if (urlIsHttpHttpsScheme$2(url$2) && badPortsSet.has(url$2.port)) return "blocked";
+		const url$3 = requestCurrentURL$1(request$1);
+		if (urlIsHttpHttpsScheme$2(url$3) && badPortsSet.has(url$3.port)) return "blocked";
 		return "allowed";
 	}
 	function isErrorLike$2(object) {
@@ -3385,24 +3385,24 @@ var require_util$8 = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 	* @param {URL} url
 	* @param {boolean|undefined} originOnly
 	*/
-	function stripURLForReferrer(url$2, originOnly) {
-		assert$25(url$2 instanceof URL);
-		if (url$2.protocol === "file:" || url$2.protocol === "about:" || url$2.protocol === "blank:") return "no-referrer";
-		url$2.username = "";
-		url$2.password = "";
-		url$2.hash = "";
+	function stripURLForReferrer(url$3, originOnly) {
+		assert$25(url$3 instanceof URL);
+		if (url$3.protocol === "file:" || url$3.protocol === "about:" || url$3.protocol === "blank:") return "no-referrer";
+		url$3.username = "";
+		url$3.password = "";
+		url$3.hash = "";
 		if (originOnly) {
-			url$2.pathname = "";
-			url$2.search = "";
+			url$3.pathname = "";
+			url$3.search = "";
 		}
-		return url$2;
+		return url$3;
 	}
-	function isURLPotentiallyTrustworthy(url$2) {
-		if (!(url$2 instanceof URL)) return false;
-		if (url$2.href === "about:blank" || url$2.href === "about:srcdoc") return true;
-		if (url$2.protocol === "data:") return true;
-		if (url$2.protocol === "file:") return true;
-		return isOriginPotentiallyTrustworthy(url$2.origin);
+	function isURLPotentiallyTrustworthy(url$3) {
+		if (!(url$3 instanceof URL)) return false;
+		if (url$3.href === "about:blank" || url$3.href === "about:srcdoc") return true;
+		if (url$3.protocol === "data:") return true;
+		if (url$3.protocol === "file:") return true;
+		return isOriginPotentiallyTrustworthy(url$3.origin);
 		function isOriginPotentiallyTrustworthy(origin$1) {
 			if (origin$1 == null || origin$1 === "null") return false;
 			const originAsURL = new URL(origin$1);
@@ -3417,6 +3417,7 @@ var require_util$8 = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 	* @param {string} metadataList
 	*/
 	function bytesMatch$1(bytes, metadataList) {
+		/* istanbul ignore if: only if node is built with --without-ssl */
 		if (crypto$5 === void 0) return true;
 		const parsedMetadata = parseMetadata(metadataList);
 		if (parsedMetadata === "no metadata") return true;
@@ -3556,11 +3557,11 @@ var require_util$8 = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 	* @param {string} name name of the instance
 	* @param {'key'|'value'|'key+value'} kind
 	*/
-	function makeIterator$2(iterator, name$2, kind) {
+	function makeIterator$2(iterator$1, name$2, kind) {
 		const object = {
 			index: 0,
 			kind,
-			target: iterator
+			target: iterator$1
 		};
 		const i = {
 			next() {
@@ -3675,25 +3676,25 @@ var require_util$8 = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 	* @see https://fetch.spec.whatwg.org/#is-local
 	* @param {URL} url
 	*/
-	function urlIsLocal$1(url$2) {
-		assert$25("protocol" in url$2);
-		const protocol = url$2.protocol;
+	function urlIsLocal$1(url$3) {
+		assert$25("protocol" in url$3);
+		const protocol = url$3.protocol;
 		return protocol === "about:" || protocol === "blob:" || protocol === "data:";
 	}
 	/**
 	* @param {string|URL} url
 	*/
-	function urlHasHttpsScheme$1(url$2) {
-		if (typeof url$2 === "string") return url$2.startsWith("https:");
-		return url$2.protocol === "https:";
+	function urlHasHttpsScheme$1(url$3) {
+		if (typeof url$3 === "string") return url$3.startsWith("https:");
+		return url$3.protocol === "https:";
 	}
 	/**
 	* @see https://fetch.spec.whatwg.org/#http-scheme
 	* @param {URL} url
 	*/
-	function urlIsHttpHttpsScheme$2(url$2) {
-		assert$25("protocol" in url$2);
-		const protocol = url$2.protocol;
+	function urlIsHttpHttpsScheme$2(url$3) {
+		assert$25("protocol" in url$3);
+		const protocol = url$3.protocol;
 		return protocol === "http:" || protocol === "https:";
 	}
 	/**
@@ -4091,10 +4092,10 @@ var require_dataURL = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_module
 	* @param {URL} url
 	* @param {boolean} excludeFragment
 	*/
-	function URLSerializer$4(url$2, excludeFragment = false) {
-		if (!excludeFragment) return url$2.href;
-		const href = url$2.href;
-		const hashLength = url$2.hash.length;
+	function URLSerializer$4(url$3, excludeFragment = false) {
+		if (!excludeFragment) return url$3.href;
+		const href = url$3.href;
+		const hashLength = url$3.hash.length;
 		return hashLength === 0 ? href : href.substring(0, href.length - hashLength);
 	}
 	/**
@@ -4708,13 +4709,13 @@ Content-Type: ${value.type || "application/octet-stream"}\r\n\r\n`);
 		}
 		if (typeof source === "string" || util$32.isBuffer(source)) length = Buffer.byteLength(source);
 		if (action != null) {
-			let iterator;
+			let iterator$1;
 			stream$3 = new ReadableStream$3({
 				async start() {
-					iterator = action(object)[Symbol.asyncIterator]();
+					iterator$1 = action(object)[Symbol.asyncIterator]();
 				},
 				async pull(controller) {
-					const { value, done: done$1 } = await iterator.next();
+					const { value, done: done$1 } = await iterator$1.next();
 					if (done$1) queueMicrotask(() => {
 						controller.close();
 					});
@@ -4722,7 +4723,7 @@ Content-Type: ${value.type || "application/octet-stream"}\r\n\r\n`);
 					return controller.desiredSize > 0;
 				},
 				async cancel(reason) {
-					await iterator.return();
+					await iterator$1.return();
 				},
 				type: void 0
 			});
@@ -4735,9 +4736,13 @@ Content-Type: ${value.type || "application/octet-stream"}\r\n\r\n`);
 		return [body, type];
 	}
 	function safelyExtractBody$1(object, keepalive = false) {
-		if (!ReadableStream$3) ReadableStream$3 = __require("stream/web").ReadableStream;
+		if (!ReadableStream$3)
+ // istanbul ignore next
+		ReadableStream$3 = __require("stream/web").ReadableStream;
 		if (object instanceof ReadableStream$3) {
+			// istanbul ignore next
 			assert$23(!util$32.isDisturbed(object), "The body has already been consumed.");
+			// istanbul ignore next
 			assert$23(!object.locked, "The stream is locked.");
 		}
 		return extractBody$3(object, keepalive);
@@ -4850,6 +4855,7 @@ Content-Type: ${value.type || "application/octet-stream"}\r\n\r\n`);
 						text += streamingDecoder.decode();
 						entries = new URLSearchParams(text);
 					} catch (err) {
+						// istanbul ignore next: Unclear when new URLSearchParams can fail on a string.
 						throw Object.assign(new TypeError(), { cause: err });
 					}
 					const formData = new FormData$4();
@@ -5999,7 +6005,7 @@ var require_llhttp_simd_wasm = __commonJS({ "node_modules/.pnpm/undici@5.29.0/no
 var require_client = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules/undici/lib/client.js"(exports, module) {
 	const assert$19 = __require("assert");
 	const net = __require("net");
-	const http$6 = __require("http");
+	const http$7 = __require("http");
 	const { pipeline: pipeline$3 } = __require("stream");
 	const util$28 = require_util$9();
 	const timers = require_timers();
@@ -6032,13 +6038,16 @@ var require_client = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 		channels$3.connectError = { hasSubscribers: false };
 		channels$3.connected = { hasSubscribers: false };
 	}
+	/**
+	* @type {import('../types/client').default}
+	*/
 	var Client$4 = class extends DispatcherBase$3 {
 		/**
 		*
 		* @param {string|URL} url
 		* @param {import('../types/client').Client.Options} options
 		*/
-		constructor(url$2, { interceptors, maxHeaderSize, headersTimeout, socketTimeout, requestTimeout, connectTimeout, bodyTimeout, idleTimeout, keepAlive, keepAliveTimeout, maxKeepAliveTimeout, keepAliveMaxTimeout, keepAliveTimeoutThreshold, socketPath, pipelining, tls: tls$2, strictContentLength, maxCachedSessions, maxRedirections, connect: connect$2, maxRequestsPerClient, localAddress, maxResponseSize, autoSelectFamily, autoSelectFamilyAttemptTimeout, allowH2, maxConcurrentStreams } = {}) {
+		constructor(url$3, { interceptors, maxHeaderSize, headersTimeout, socketTimeout, requestTimeout, connectTimeout, bodyTimeout, idleTimeout, keepAlive, keepAliveTimeout, maxKeepAliveTimeout, keepAliveMaxTimeout, keepAliveTimeoutThreshold, socketPath, pipelining, tls: tls$2, strictContentLength, maxCachedSessions, maxRedirections, connect: connect$2, maxRequestsPerClient, localAddress, maxResponseSize, autoSelectFamily, autoSelectFamilyAttemptTimeout, allowH2, maxConcurrentStreams } = {}) {
 			super();
 			if (keepAlive !== void 0) throw new InvalidArgumentError$16("unsupported keepAlive, use pipelining=0 instead");
 			if (socketTimeout !== void 0) throw new InvalidArgumentError$16("unsupported socketTimeout, use headersTimeout & bodyTimeout instead");
@@ -6074,11 +6083,11 @@ var require_client = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 				...connect$2
 			});
 			this[kInterceptors$4] = interceptors && interceptors.Client && Array.isArray(interceptors.Client) ? interceptors.Client : [createRedirectInterceptor$2({ maxRedirections })];
-			this[kUrl$3] = util$28.parseOrigin(url$2);
+			this[kUrl$3] = util$28.parseOrigin(url$3);
 			this[kConnector] = connect$2;
 			this[kSocket] = null;
 			this[kPipelining] = pipelining != null ? pipelining : 1;
-			this[kMaxHeadersSize] = maxHeaderSize || http$6.maxHeaderSize;
+			this[kMaxHeadersSize] = maxHeaderSize || http$7.maxHeaderSize;
 			this[kKeepAliveDefaultTimeout] = keepAliveTimeout == null ? 4e3 : keepAliveTimeout;
 			this[kKeepAliveMaxTimeout] = keepAliveMaxTimeout == null ? 6e5 : keepAliveMaxTimeout;
 			this[kKeepAliveTimeoutThreshold] = keepAliveTimeoutThreshold == null ? 1e3 : keepAliveTimeoutThreshold;
@@ -6129,6 +6138,7 @@ var require_client = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 			const socket = this[kSocket];
 			return socket && (socket[kReset] || socket[kWriting] || socket[kBlocking]) || this[kSize$4] >= (this[kPipelining] || 1) || this[kPending$2] > 0;
 		}
+		/* istanbul ignore: only used for test */
 		[kConnect](cb) {
 			connect$1(this);
 			this.once("connect", cb);
@@ -6222,10 +6232,12 @@ var require_client = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 		try {
 			mod = await WebAssembly.compile(Buffer.from(require_llhttp_simd_wasm(), "base64"));
 		} catch (e) {
+			/* istanbul ignore next */
 			mod = await WebAssembly.compile(Buffer.from(llhttpWasmData || require_llhttp_wasm(), "base64"));
 		}
 		return await WebAssembly.instantiate(mod, { env: {
 			wasm_on_url: (p, at, len) => {
+				/* istanbul ignore next */
 				return 0;
 			},
 			wasm_on_status: (p, at, len) => {
@@ -6303,10 +6315,12 @@ var require_client = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 				timers.clearTimeout(this.timeout);
 				if (value) {
 					this.timeout = timers.setTimeout(onParserTimeout, value, this);
+					// istanbul ignore else: only for jest
 					if (this.timeout.unref) this.timeout.unref();
 				} else this.timeout = null;
 				this.timeoutValue = value;
 			} else if (this.timeout) {
+				// istanbul ignore else: only for jest
 				if (this.timeout.refresh) this.timeout.refresh();
 			}
 		}
@@ -6317,6 +6331,7 @@ var require_client = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 			this.llhttp.llhttp_resume(this.ptr);
 			assert$19(this.timeoutType === TIMEOUT_BODY);
 			if (this.timeout) {
+				// istanbul ignore else: only for jest
 				if (this.timeout.refresh) this.timeout.refresh();
 			}
 			this.paused = false;
@@ -6348,6 +6363,7 @@ var require_client = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 					currentParser = this;
 					ret = llhttp.llhttp_execute(this.ptr, currentBufferPtr, data.length);
 				} catch (err) {
+					/* istanbul ignore next: difficult to make a test case for */
 					throw err;
 				} finally {
 					currentParser = null;
@@ -6361,6 +6377,7 @@ var require_client = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 				} else if (ret !== constants$3.ERROR.OK) {
 					const ptr = llhttp.llhttp_get_error_reason(this.ptr);
 					let message = "";
+					/* istanbul ignore else: difficult to make a test case for */
 					if (ptr) {
 						const len = new Uint8Array(llhttp.memory.buffer, ptr).indexOf(0);
 						message = "Response does not match the HTTP/1.1 protocol (" + Buffer.from(llhttp.memory.buffer, ptr, len).toString() + ")";
@@ -6387,6 +6404,7 @@ var require_client = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 		}
 		onMessageBegin() {
 			const { socket, client } = this;
+			/* istanbul ignore next: difficult to make a test case for */
 			if (socket.destroyed) return -1;
 			const request$1 = client[kQueue$1][client[kRunningIdx]];
 			if (!request$1) return -1;
@@ -6446,8 +6464,10 @@ var require_client = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 		}
 		onHeadersComplete(statusCode, upgrade$1, shouldKeepAlive) {
 			const { client, socket, headers, statusText } = this;
+			/* istanbul ignore next: difficult to make a test case for */
 			if (socket.destroyed) return -1;
 			const request$1 = client[kQueue$1][client[kRunningIdx]];
+			/* istanbul ignore next: difficult to make a test case for */
 			if (!request$1) return -1;
 			assert$19(!this.upgrade);
 			assert$19(this.statusCode < 200);
@@ -6466,6 +6486,7 @@ var require_client = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 				const bodyTimeout = request$1.bodyTimeout != null ? request$1.bodyTimeout : client[kBodyTimeout];
 				this.setTimeout(bodyTimeout, TIMEOUT_BODY);
 			} else if (this.timeout) {
+				// istanbul ignore else: only for jest
 				if (this.timeout.refresh) this.timeout.refresh();
 			}
 			if (request$1.method === "CONNECT") {
@@ -6506,6 +6527,7 @@ var require_client = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 			assert$19(request$1);
 			assert$19.strictEqual(this.timeoutType, TIMEOUT_BODY);
 			if (this.timeout) {
+				// istanbul ignore else: only for jest
 				if (this.timeout.refresh) this.timeout.refresh();
 			}
 			assert$19(statusCode >= 200);
@@ -6533,6 +6555,7 @@ var require_client = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 			this.headers = [];
 			this.headersSize = 0;
 			if (statusCode < 200) return;
+			/* istanbul ignore next: should be handled by llhttp? */
 			if (request$1.method !== "HEAD" && contentLength && bytesRead !== parseInt(contentLength, 10)) {
 				util$28.destroy(socket, new ResponseContentLengthMismatchError());
 				return -1;
@@ -6555,6 +6578,7 @@ var require_client = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 	};
 	function onParserTimeout(parser) {
 		const { socket, timeoutType, client } = parser;
+		/* istanbul ignore else */
 		if (timeoutType === TIMEOUT_HEADERS) {
 			if (!socket[kWriting] || socket.writableNeedDrain || client[kRunning$3] > 1) {
 				assert$19(!parser.paused, "cannot be paused while waiting for headers");
@@ -6879,6 +6903,7 @@ var require_client = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 			headers: header,
 			socket
 		});
+		/* istanbul ignore else: assertion */
 		if (!body || bodyLength$1 === 0) {
 			if (contentLength === 0) socket.write(`${header}content-length: 0\r\n\r\n`, "latin1");
 			else {
@@ -7041,6 +7066,7 @@ var require_client = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 		});
 		return true;
 		function writeBodyH2() {
+			/* istanbul ignore else: assertion */
 			if (!body) request$1.onRequestSent();
 			else if (util$28.isBuffer(body)) {
 				assert$19(contentLength === body.byteLength, "buffer body must have content length");
@@ -7269,6 +7295,7 @@ var require_client = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 			request$1.onBodySent(chunk);
 			if (!ret) {
 				if (socket[kParser].timeout && socket[kParser].timeoutType === TIMEOUT_HEADERS) {
+					// istanbul ignore else: only for jest
 					if (socket[kParser].timeout.refresh) socket[kParser].timeout.refresh();
 				}
 			}
@@ -7286,6 +7313,7 @@ var require_client = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 			if (contentLength !== null && bytesWritten !== contentLength) if (client[kStrictContentLength]) throw new RequestContentLengthMismatchError();
 			else process.emitWarning(new RequestContentLengthMismatchError());
 			if (socket[kParser].timeout && socket[kParser].timeoutType === TIMEOUT_HEADERS) {
+				// istanbul ignore else: only for jest
 				if (socket[kParser].timeout.refresh) socket[kParser].timeout.refresh();
 			}
 			resume$1(client);
@@ -7691,6 +7719,7 @@ var require_balanced_pool = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_
 //#endregion
 //#region node_modules/.pnpm/undici@5.29.0/node_modules/undici/lib/compat/dispatcher-weakref.js
 var require_dispatcher_weakref = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules/undici/lib/compat/dispatcher-weakref.js"(exports, module) {
+	/* istanbul ignore file: only for Node 12 */
 	const { kConnected: kConnected$2, kSize } = require_symbols$4();
 	var CompatWeakRef = class {
 		constructor(value) {
@@ -7785,6 +7814,7 @@ var require_agent = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules/
 			let ret = 0;
 			for (const ref of this[kClients$1].values()) {
 				const client = ref.deref();
+				/* istanbul ignore next: gc is undeterministic */
 				if (client) ret += client[kRunning];
 			}
 			return ret;
@@ -7806,6 +7836,7 @@ var require_agent = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules/
 			const closePromises = [];
 			for (const ref of this[kClients$1].values()) {
 				const client = ref.deref();
+				/* istanbul ignore else: gc is undeterministic */
 				if (client) closePromises.push(client.close());
 			}
 			await Promise.all(closePromises);
@@ -7814,6 +7845,7 @@ var require_agent = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules/
 			const destroyPromises = [];
 			for (const ref of this[kClients$1].values()) {
 				const client = ref.deref();
+				/* istanbul ignore else: gc is undeterministic */
 				if (client) destroyPromises.push(client.destroy(err));
 			}
 			await Promise.all(destroyPromises);
@@ -8935,9 +8967,9 @@ var require_mock_utils = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_mod
 		};
 	}
 	function checkNetConnect(netConnect, origin$1) {
-		const url$2 = new URL(origin$1);
+		const url$3 = new URL(origin$1);
 		if (netConnect === true) return true;
-		else if (Array.isArray(netConnect) && netConnect.some((matcher) => matchValue$1(matcher, url$2.host))) return true;
+		else if (Array.isArray(netConnect) && netConnect.some((matcher) => matchValue$1(matcher, url$3.host))) return true;
 		return false;
 	}
 	function buildMockOptions$1(opts) {
@@ -8971,6 +9003,9 @@ var require_mock_interceptor = __commonJS({ "node_modules/.pnpm/undici@5.29.0/no
 	const { kDispatches: kDispatches$3, kDispatchKey, kDefaultHeaders, kDefaultTrailers, kContentLength, kMockDispatch } = require_mock_symbols();
 	const { InvalidArgumentError: InvalidArgumentError$6 } = require_errors$2();
 	const { buildURL: buildURL$1 } = require_util$9();
+	/**
+	* Defines the scope API for an interceptor reply
+	*/
 	var MockScope = class {
 		constructor(mockDispatch$1) {
 			this[kMockDispatch] = mockDispatch$1;
@@ -8999,6 +9034,9 @@ var require_mock_interceptor = __commonJS({ "node_modules/.pnpm/undici@5.29.0/no
 			return this;
 		}
 	};
+	/**
+	* Defines an interceptor for a Mock
+	*/
 	var MockInterceptor$2 = class {
 		constructor(opts, mockDispatches) {
 			if (typeof opts !== "object") throw new InvalidArgumentError$6("opts must be an object");
@@ -9107,6 +9145,9 @@ var require_mock_client = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_mo
 	const { MockInterceptor: MockInterceptor$1 } = require_mock_interceptor();
 	const Symbols$1 = require_symbols$4();
 	const { InvalidArgumentError: InvalidArgumentError$5 } = require_errors$2();
+	/**
+	* MockClient provides an API that extends the Client to influence the mockDispatches.
+	*/
 	var MockClient$2 = class extends Client$1 {
 		constructor(origin$1, opts) {
 			super(origin$1, opts);
@@ -9148,6 +9189,9 @@ var require_mock_pool = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modu
 	const { MockInterceptor } = require_mock_interceptor();
 	const Symbols = require_symbols$4();
 	const { InvalidArgumentError: InvalidArgumentError$4 } = require_errors$2();
+	/**
+	* MockPool provides an API that extends the Pool to influence the mockDispatches.
+	*/
 	var MockPool$2 = class extends Pool$2 {
 		constructor(origin$1, opts) {
 			super(origin$1, opts);
@@ -10123,16 +10167,16 @@ var require_response = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modul
 			});
 			return responseObject;
 		}
-		static redirect(url$2, status = 302) {
+		static redirect(url$3, status = 302) {
 			const relevantRealm = { settingsObject: {} };
 			webidl$9.argumentLengthCheck(arguments, 1, { header: "Response.redirect" });
-			url$2 = webidl$9.converters.USVString(url$2);
+			url$3 = webidl$9.converters.USVString(url$3);
 			status = webidl$9.converters["unsigned short"](status);
 			let parsedURL;
 			try {
-				parsedURL = new URL(url$2, getGlobalOrigin$2());
+				parsedURL = new URL(url$3, getGlobalOrigin$2());
 			} catch (err) {
-				throw Object.assign(new TypeError("Failed to parse URL from " + url$2), { cause: err });
+				throw Object.assign(new TypeError("Failed to parse URL from " + url$3), { cause: err });
 			}
 			if (!redirectStatusSet$1.has(status)) throw new RangeError("Invalid status code " + status);
 			const responseObject = new Response$4();
@@ -10170,9 +10214,9 @@ var require_response = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modul
 		get url() {
 			webidl$9.brandCheck(this, Response$4);
 			const urlList = this[kState$6].urlList;
-			const url$2 = urlList[urlList.length - 1] ?? null;
-			if (url$2 === null) return "";
-			return URLSerializer$3(url$2, true);
+			const url$3 = urlList[urlList.length - 1] ?? null;
+			if (url$3 === null) return "";
+			return URLSerializer$3(url$3, true);
 		}
 		get redirected() {
 			webidl$9.brandCheck(this, Response$4);
@@ -11319,8 +11363,8 @@ var require_fetch$1 = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_module
 				socket
 			});
 			else {
-				const iterator = body[Symbol.asyncIterator]();
-				fetchParams.controller.next = () => iterator.next();
+				const iterator$1 = body[Symbol.asyncIterator]();
+				fetchParams.controller.next = () => iterator$1.next();
 				response = makeResponse({
 					status,
 					statusText,
@@ -11401,12 +11445,12 @@ var require_fetch$1 = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_module
 		}
 		return response;
 		async function dispatch({ body }) {
-			const url$2 = requestCurrentURL(request$1);
+			const url$3 = requestCurrentURL(request$1);
 			/** @type {import('../..').Agent} */
 			const agent = fetchParams.controller.dispatcher;
 			return new Promise((resolve, reject) => agent.dispatch({
-				path: url$2.pathname + url$2.search,
-				origin: url$2.origin,
+				path: url$3.pathname + url$3.search,
+				origin: url$3.origin,
 				method: request$1.method,
 				body: fetchParams.controller.dispatcher.isMockActive ? request$1.body && (request$1.body.source || request$1.body.stream) : body,
 				headers: request$1.headersList.entries,
@@ -11527,6 +11571,9 @@ var require_symbols$2 = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modu
 var require_progressevent = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules/undici/lib/fileapi/progressevent.js"(exports, module) {
 	const { webidl: webidl$6 } = require_webidl();
 	const kState$3 = Symbol("ProgressEvent state");
+	/**
+	* @see https://xhr.spec.whatwg.org/#progressevent
+	*/
 	var ProgressEvent$1 = class ProgressEvent$1 extends Event {
 		constructor(type, eventInitDict = {}) {
 			type = webidl$6.converters.DOMString(type);
@@ -12286,6 +12333,18 @@ var require_cache$2 = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_module
 	const { urlIsHttpHttpsScheme, createDeferredPromise, readAllBytes } = require_util$8();
 	const assert$8 = __require("assert");
 	const { getGlobalDispatcher: getGlobalDispatcher$3 } = require_global();
+	/**
+	* @see https://w3c.github.io/ServiceWorker/#dfn-cache-batch-operation
+	* @typedef {Object} CacheBatchOperation
+	* @property {'delete' | 'put'} type
+	* @property {any} request
+	* @property {any} response
+	* @property {import('../../types/cache').CacheQueryOptions} options
+	*/
+	/**
+	* @see https://w3c.github.io/ServiceWorker/#dfn-request-response-list
+	* @typedef {[any, any][]} requestResponseList
+	*/
 	var Cache$2 = class Cache$2 {
 		/**
 		* @see https://w3c.github.io/ServiceWorker/#dfn-relevant-request-response-list
@@ -13335,6 +13394,9 @@ var require_events = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 	const { webidl: webidl$1 } = require_webidl();
 	const { kEnumerableProperty: kEnumerableProperty$1 } = require_util$9();
 	const { MessagePort } = __require("worker_threads");
+	/**
+	* @see https://html.spec.whatwg.org/multipage/comms.html#messageevent
+	*/
 	var MessageEvent$1 = class MessageEvent$1 extends Event {
 		#eventInit;
 		constructor(type, eventInitDict = {}) {
@@ -13379,6 +13441,9 @@ var require_events = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 			});
 		}
 	};
+	/**
+	* @see https://websockets.spec.whatwg.org/#the-closeevent-interface
+	*/
 	var CloseEvent$1 = class CloseEvent$1 extends Event {
 		#eventInit;
 		constructor(type, eventInitDict = {}) {
@@ -13694,9 +13759,9 @@ var require_connection = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_mod
 	* @param {(response: any) => void} onEstablish
 	* @param {Partial<import('../../types/websocket').WebSocketInit>} options
 	*/
-	function establishWebSocketConnection$1(url$2, protocols$1, ws, onEstablish, options) {
-		const requestURL = url$2;
-		requestURL.protocol = url$2.protocol === "ws:" ? "http:" : "https:";
+	function establishWebSocketConnection$1(url$3, protocols$1, ws, onEstablish, options) {
+		const requestURL = url$3;
+		requestURL.protocol = url$3.protocol === "ws:" ? "http:" : "https:";
 		const request$1 = makeRequest({
 			urlList: [requestURL],
 			serviceWorkers: "none",
@@ -14089,7 +14154,7 @@ var require_websocket = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modu
 		* @param {string} url
 		* @param {string|string[]} protocols
 		*/
-		constructor(url$2, protocols$1 = []) {
+		constructor(url$3, protocols$1 = []) {
 			super();
 			webidl.argumentLengthCheck(arguments, 1, { header: "WebSocket constructor" });
 			if (!experimentalWarned) {
@@ -14097,12 +14162,12 @@ var require_websocket = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modu
 				process.emitWarning("WebSockets are experimental, expect them to change at any time.", { code: "UNDICI-WS" });
 			}
 			const options = webidl.converters["DOMString or sequence<DOMString> or WebSocketInit"](protocols$1);
-			url$2 = webidl.converters.USVString(url$2);
+			url$3 = webidl.converters.USVString(url$3);
 			protocols$1 = options.protocols;
 			const baseURL = getGlobalOrigin();
 			let urlRecord;
 			try {
-				urlRecord = new URL(url$2, baseURL);
+				urlRecord = new URL(url$3, baseURL);
 			} catch (e) {
 				throw new DOMException$1(e, "SyntaxError");
 			}
@@ -14418,28 +14483,28 @@ var require_undici = __commonJS({ "node_modules/.pnpm/undici@5.29.0/node_modules
 	module.exports.buildConnector = buildConnector;
 	module.exports.errors = errors$3;
 	function makeDispatcher(fn) {
-		return (url$2, opts, handler) => {
+		return (url$3, opts, handler) => {
 			if (typeof opts === "function") {
 				handler = opts;
 				opts = null;
 			}
-			if (!url$2 || typeof url$2 !== "string" && typeof url$2 !== "object" && !(url$2 instanceof URL)) throw new InvalidArgumentError("invalid url");
+			if (!url$3 || typeof url$3 !== "string" && typeof url$3 !== "object" && !(url$3 instanceof URL)) throw new InvalidArgumentError("invalid url");
 			if (opts != null && typeof opts !== "object") throw new InvalidArgumentError("invalid opts");
 			if (opts && opts.path != null) {
 				if (typeof opts.path !== "string") throw new InvalidArgumentError("invalid opts.path");
 				let path$10 = opts.path;
 				if (!opts.path.startsWith("/")) path$10 = `/${path$10}`;
-				url$2 = new URL(util$16.parseOrigin(url$2).origin + path$10);
+				url$3 = new URL(util$16.parseOrigin(url$3).origin + path$10);
 			} else {
-				if (!opts) opts = typeof url$2 === "object" ? url$2 : {};
-				url$2 = util$16.parseURL(url$2);
+				if (!opts) opts = typeof url$3 === "object" ? url$3 : {};
+				url$3 = util$16.parseURL(url$3);
 			}
 			const { agent, dispatcher = getGlobalDispatcher() } = opts;
 			if (agent) throw new InvalidArgumentError("unsupported opts.agent. Did you mean opts.client?");
 			return fn.call(dispatcher, {
 				...opts,
-				origin: url$2.origin,
-				path: url$2.search ? `${url$2.pathname}${url$2.search}` : url$2.pathname,
+				origin: url$3.origin,
+				path: url$3.search ? `${url$3.pathname}${url$3.search}` : url$3.pathname,
 				method: opts.method || (opts.body ? "PUT" : "GET")
 			}, handler);
 		};
@@ -14558,7 +14623,7 @@ var require_lib$1 = __commonJS({ "node_modules/.pnpm/@actions+http-client@2.2.3/
 	};
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.HttpClient = exports.isHttps = exports.HttpClientResponse = exports.HttpClientError = exports.getProxyUrl = exports.MediaTypes = exports.Headers = exports.HttpCodes = void 0;
-	const http$5 = __importStar$10(__require("http"));
+	const http$6 = __importStar$10(__require("http"));
 	const https$6 = __importStar$10(__require("https"));
 	const pm = __importStar$10(require_proxy());
 	const tunnel = __importStar$10(require_tunnel());
@@ -14912,7 +14977,7 @@ var require_lib$1 = __commonJS({ "node_modules/.pnpm/@actions+http-client@2.2.3/
 			const info$1 = {};
 			info$1.parsedUrl = requestUrl;
 			const usingSsl = info$1.parsedUrl.protocol === "https:";
-			info$1.httpModule = usingSsl ? https$6 : http$5;
+			info$1.httpModule = usingSsl ? https$6 : http$6;
 			const defaultPort = usingSsl ? 443 : 80;
 			info$1.options = {};
 			info$1.options.host = info$1.parsedUrl.hostname;
@@ -14943,7 +15008,7 @@ var require_lib$1 = __commonJS({ "node_modules/.pnpm/@actions+http-client@2.2.3/
 			if (agent) return agent;
 			const usingSsl = parsedUrl.protocol === "https:";
 			let maxSockets = 100;
-			if (this.requestOptions) maxSockets = this.requestOptions.maxSockets || http$5.globalAgent.maxSockets;
+			if (this.requestOptions) maxSockets = this.requestOptions.maxSockets || http$6.globalAgent.maxSockets;
 			if (proxyUrl && proxyUrl.hostname) {
 				const agentOptions = {
 					maxSockets,
@@ -14965,7 +15030,7 @@ var require_lib$1 = __commonJS({ "node_modules/.pnpm/@actions+http-client@2.2.3/
 					keepAlive: this._keepAlive,
 					maxSockets
 				};
-				agent = usingSsl ? new https$6.Agent(options) : new http$5.Agent(options);
+				agent = usingSsl ? new https$6.Agent(options) : new http$6.Agent(options);
 				this._agent = agent;
 			}
 			if (usingSsl && this._ignoreSslError) agent.options = Object.assign(agent.options || {}, { rejectUnauthorized: false });
@@ -20378,6 +20443,7 @@ var require_voca = __commonJS({ "node_modules/.pnpm/voca@1.4.1/node_modules/voca
 		var globalObject = null;
 		function getGlobalObject() {
 			if (globalObject !== null) return globalObject;
+			/* istanbul ignore next */
 			if (typeof global === "object" && global.Object === Object) globalObject = global;
 			else if (typeof self === "object" && self.Object === Object) globalObject = self;
 			else globalObject = new Function("return this")();
@@ -21875,6 +21941,10 @@ var require_cli = __commonJS({ "node_modules/.pnpm/logform@2.7.0/node_modules/lo
 	const { Colorizer } = require_colorize();
 	const { Padder } = require_pad_levels();
 	const { configs: configs$1, MESSAGE: MESSAGE$9 } = require_triple_beam();
+	/**
+	* Cli format class that handles initial state for a a separate
+	* Colorizer and Padder instance.
+	*/
 	var CliFormat = class {
 		constructor(opts = {}) {
 			if (!opts.levels) opts.levels = configs$1.cli.levels;
@@ -23537,9 +23607,11 @@ var require_inherits_browser = __commonJS({ "node_modules/.pnpm/inherits@2.0.4/n
 var require_inherits = __commonJS({ "node_modules/.pnpm/inherits@2.0.4/node_modules/inherits/inherits.js"(exports, module) {
 	try {
 		var util$13 = __require("util");
+		/* istanbul ignore next */
 		if (typeof util$13.inherits !== "function") throw "";
 		module.exports = util$13.inherits;
 	} catch (e) {
+		/* istanbul ignore next */
 		module.exports = require_inherits_browser();
 	}
 } });
@@ -24245,7 +24317,7 @@ var require_async_iterator = __commonJS({ "node_modules/.pnpm/readable-stream@3.
 	}), _Object$setPrototypeO), AsyncIteratorPrototype);
 	var createReadableStreamAsyncIterator$1 = function createReadableStreamAsyncIterator$2(stream$3) {
 		var _Object$create;
-		var iterator = Object.create(ReadableStreamAsyncIteratorPrototype, (_Object$create = {}, _defineProperty$1(_Object$create, kStream, {
+		var iterator$1 = Object.create(ReadableStreamAsyncIteratorPrototype, (_Object$create = {}, _defineProperty$1(_Object$create, kStream, {
 			value: stream$3,
 			writable: true
 		}), _defineProperty$1(_Object$create, kLastResolve, {
@@ -24262,43 +24334,43 @@ var require_async_iterator = __commonJS({ "node_modules/.pnpm/readable-stream@3.
 			writable: true
 		}), _defineProperty$1(_Object$create, kHandlePromise, {
 			value: function value(resolve, reject) {
-				var data = iterator[kStream].read();
+				var data = iterator$1[kStream].read();
 				if (data) {
-					iterator[kLastPromise] = null;
-					iterator[kLastResolve] = null;
-					iterator[kLastReject] = null;
+					iterator$1[kLastPromise] = null;
+					iterator$1[kLastResolve] = null;
+					iterator$1[kLastReject] = null;
 					resolve(createIterResult(data, false));
 				} else {
-					iterator[kLastResolve] = resolve;
-					iterator[kLastReject] = reject;
+					iterator$1[kLastResolve] = resolve;
+					iterator$1[kLastReject] = reject;
 				}
 			},
 			writable: true
 		}), _Object$create));
-		iterator[kLastPromise] = null;
+		iterator$1[kLastPromise] = null;
 		finished(stream$3, function(err) {
 			if (err && err.code !== "ERR_STREAM_PREMATURE_CLOSE") {
-				var reject = iterator[kLastReject];
+				var reject = iterator$1[kLastReject];
 				if (reject !== null) {
-					iterator[kLastPromise] = null;
-					iterator[kLastResolve] = null;
-					iterator[kLastReject] = null;
+					iterator$1[kLastPromise] = null;
+					iterator$1[kLastResolve] = null;
+					iterator$1[kLastReject] = null;
 					reject(err);
 				}
-				iterator[kError] = err;
+				iterator$1[kError] = err;
 				return;
 			}
-			var resolve = iterator[kLastResolve];
+			var resolve = iterator$1[kLastResolve];
 			if (resolve !== null) {
-				iterator[kLastPromise] = null;
-				iterator[kLastResolve] = null;
-				iterator[kLastReject] = null;
+				iterator$1[kLastPromise] = null;
+				iterator$1[kLastResolve] = null;
+				iterator$1[kLastReject] = null;
 				resolve(createIterResult(void 0, true));
 			}
-			iterator[kEnded] = true;
+			iterator$1[kEnded] = true;
 		});
-		stream$3.on("readable", onReadable.bind(null, iterator));
-		return iterator;
+		stream$3.on("readable", onReadable.bind(null, iterator$1));
+		return iterator$1;
 	};
 	module.exports = createReadableStreamAsyncIterator$1;
 } });
@@ -24380,10 +24452,10 @@ var require_from = __commonJS({ "node_modules/.pnpm/readable-stream@3.6.2/node_m
 	}
 	var ERR_INVALID_ARG_TYPE$2 = require_errors().codes.ERR_INVALID_ARG_TYPE;
 	function from$1(Readable$7, iterable, opts) {
-		var iterator;
-		if (iterable && typeof iterable.next === "function") iterator = iterable;
-		else if (iterable && iterable[Symbol.asyncIterator]) iterator = iterable[Symbol.asyncIterator]();
-		else if (iterable && iterable[Symbol.iterator]) iterator = iterable[Symbol.iterator]();
+		var iterator$1;
+		if (iterable && typeof iterable.next === "function") iterator$1 = iterable;
+		else if (iterable && iterable[Symbol.asyncIterator]) iterator$1 = iterable[Symbol.asyncIterator]();
+		else if (iterable && iterable[Symbol.iterator]) iterator$1 = iterable[Symbol.iterator]();
 		else throw new ERR_INVALID_ARG_TYPE$2("iterable", ["Iterable"], iterable);
 		var readable = new Readable$7(_objectSpread({ objectMode: true }, opts));
 		var reading = false;
@@ -24399,7 +24471,7 @@ var require_from = __commonJS({ "node_modules/.pnpm/readable-stream@3.6.2/node_m
 		function _next2() {
 			_next2 = _asyncToGenerator(function* () {
 				try {
-					var _yield$iterator$next = yield iterator.next(), value = _yield$iterator$next.value, done$1 = _yield$iterator$next.done;
+					var _yield$iterator$next = yield iterator$1.next(), value = _yield$iterator$next.value, done$1 = _yield$iterator$next.done;
 					if (done$1) readable.push(null);
 					else if (readable.push(yield value)) next();
 					else reading = false;
@@ -25884,6 +25956,7 @@ var require_setImmediate = __commonJS({ "node_modules/.pnpm/async@3.2.6/node_mod
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.fallback = fallback$1;
 	exports.wrap = wrap$1;
+	/* istanbul ignore file */
 	var hasQueueMicrotask = exports.hasQueueMicrotask = typeof queueMicrotask === "function" && queueMicrotask;
 	var hasSetImmediate = exports.hasSetImmediate = typeof setImmediate === "function" && setImmediate;
 	var hasNextTick = exports.hasNextTick = typeof process === "object" && typeof process.nextTick === "function";
@@ -26134,10 +26207,10 @@ var require_iterator = __commonJS({ "node_modules/.pnpm/async@3.2.6/node_modules
 			} : null;
 		};
 	}
-	function createES2015Iterator(iterator) {
+	function createES2015Iterator(iterator$1) {
 		var i = -1;
 		return function next() {
-			var item = iterator.next();
+			var item = iterator$1.next();
 			if (item.done) return null;
 			i++;
 			return {
@@ -26161,8 +26234,8 @@ var require_iterator = __commonJS({ "node_modules/.pnpm/async@3.2.6/node_modules
 	}
 	function createIterator(coll) {
 		if ((0, _isArrayLike2$1.default)(coll)) return createArrayIterator(coll);
-		var iterator = (0, _getIterator2.default)(coll);
-		return iterator ? createES2015Iterator(iterator) : createObjectIterator(coll);
+		var iterator$1 = (0, _getIterator2.default)(coll);
+		return iterator$1 ? createES2015Iterator(iterator$1) : createObjectIterator(coll);
 	}
 	module.exports = exports.default;
 } });
@@ -30798,7 +30871,7 @@ var require_file = __commonJS({ "node_modules/.pnpm/winston@3.17.0/node_modules/
 //#endregion
 //#region node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/transports/http.js
 var require_http = __commonJS({ "node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/transports/http.js"(exports, module) {
-	const http$4 = __require("http");
+	const http$5 = __require("http");
 	const https$5 = __require("https");
 	const { Stream: Stream$8 } = require_readable();
 	const TransportStream$1 = require_winston_transport();
@@ -30971,7 +31044,7 @@ var require_http = __commonJS({ "node_modules/.pnpm/winston@3.17.0/node_modules/
 		_doRequest(options, callback, auth, path$10) {
 			const headers = Object.assign({}, this.headers);
 			if (auth && auth.bearer) headers.Authorization = `Bearer ${auth.bearer}`;
-			const req = (this.ssl ? https$5 : http$4).request({
+			const req = (this.ssl ? https$5 : http$5).request({
 				...this.options,
 				method: "POST",
 				host: this.host,
@@ -32021,6 +32094,11 @@ var require_rejection_handler = __commonJS({ "node_modules/.pnpm/winston@3.17.0/
 //#endregion
 //#region node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/profiler.js
 var require_profiler = __commonJS({ "node_modules/.pnpm/winston@3.17.0/node_modules/winston/lib/winston/profiler.js"(exports, module) {
+	/**
+	* TODO: add class description.
+	* @type {Profiler}
+	* @private
+	*/
 	var Profiler$1 = class {
 		/**
 		* Constructor function for the Profiler instance used by
@@ -32077,6 +32155,11 @@ var require_logger$1 = __commonJS({ "node_modules/.pnpm/winston@3.17.0/node_modu
 	* @type {RegExp}
 	*/
 	const formatRegExp = /%[scdjifoO%]/g;
+	/**
+	* TODO: add class description.
+	* @type {Logger}
+	* @extends {Transform}
+	*/
 	var Logger$3 = class extends Transform {
 		/**
 		* Constructor function for the Logger object responsible for persisting log
@@ -34743,6 +34826,9 @@ var require_error_with_cause = __commonJS({ "node_modules/.pnpm/@sap-cloud-sdk+u
 		package: "util",
 		messageContext: "error-with-cause"
 	});
+	/**
+	* Represents an error that was caused by another error.
+	*/
 	var ErrorWithCause = class extends Error {
 		/**
 		* Create an instance of ErrorWithCause.
@@ -35062,6 +35148,9 @@ var require_types = __commonJS({ "node_modules/.pnpm/@sap-cloud-sdk+util@4.0.2/n
 var require_unique_name_generator = __commonJS({ "node_modules/.pnpm/@sap-cloud-sdk+util@4.0.2/node_modules/@sap-cloud-sdk/util/dist/unique-name-generator.js"(exports) {
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.UniqueNameGenerator = void 0;
+	/**
+	* Holds state on already used names and provides new names if there are naming conflicts.
+	*/
 	var UniqueNameGenerator = class UniqueNameGenerator {
 		static getNameForComparison(name$2, caseSensitive) {
 			return caseSensitive ? name$2 : name$2.toLowerCase();
@@ -42663,9 +42752,9 @@ var require_iterate = __commonJS({ "node_modules/.pnpm/asynckit@0.4.0/node_modul
 	* @param {object} state - current job status
 	* @param {function} callback - invoked when all elements processed
 	*/
-	function iterate$2(list, iterator, state$1, callback) {
+	function iterate$2(list, iterator$1, state$1, callback) {
 		var key$1 = state$1["keyedList"] ? state$1["keyedList"][state$1.index] : state$1.index;
-		state$1.jobs[key$1] = runJob(iterator, key$1, list[key$1], function(error$1, output) {
+		state$1.jobs[key$1] = runJob(iterator$1, key$1, list[key$1], function(error$1, output) {
 			if (!(key$1 in state$1.jobs)) return;
 			delete state$1.jobs[key$1];
 			if (error$1) abort$1(state$1);
@@ -42682,10 +42771,10 @@ var require_iterate = __commonJS({ "node_modules/.pnpm/asynckit@0.4.0/node_modul
 	* @param   {function} callback - invoked after iterator is done with the job
 	* @returns {function|mixed} - job abort function or something else
 	*/
-	function runJob(iterator, key$1, item, callback) {
+	function runJob(iterator$1, key$1, item, callback) {
 		var aborter;
-		if (iterator.length == 2) aborter = iterator(item, async$1(callback));
-		else aborter = iterator(item, key$1, async$1(callback));
+		if (iterator$1.length == 2) aborter = iterator$1(item, async$1(callback));
+		else aborter = iterator$1(item, key$1, async$1(callback));
 		return aborter;
 	}
 } });
@@ -42750,10 +42839,10 @@ var require_parallel = __commonJS({ "node_modules/.pnpm/asynckit@0.4.0/node_modu
 	* @param   {function} callback - invoked when all elements processed
 	* @returns {function} - jobs terminator
 	*/
-	function parallel(list, iterator, callback) {
+	function parallel(list, iterator$1, callback) {
 		var state$1 = initState$1(list);
 		while (state$1.index < (state$1["keyedList"] || list).length) {
-			iterate$1(list, iterator, state$1, function(error$1, result) {
+			iterate$1(list, iterator$1, state$1, function(error$1, result) {
 				if (error$1) {
 					callback(error$1, result);
 					return;
@@ -42785,16 +42874,16 @@ var require_serialOrdered = __commonJS({ "node_modules/.pnpm/asynckit@0.4.0/node
 	* @param   {function} callback - invoked when all elements processed
 	* @returns {function} - jobs terminator
 	*/
-	function serialOrdered$1(list, iterator, sortMethod, callback) {
+	function serialOrdered$1(list, iterator$1, sortMethod, callback) {
 		var state$1 = initState(list, sortMethod);
-		iterate(list, iterator, state$1, function iteratorHandler(error$1, result) {
+		iterate(list, iterator$1, state$1, function iteratorHandler(error$1, result) {
 			if (error$1) {
 				callback(error$1, result);
 				return;
 			}
 			state$1.index++;
 			if (state$1.index < (state$1["keyedList"] || list).length) {
-				iterate(list, iterator, state$1, iteratorHandler);
+				iterate(list, iterator$1, state$1, iteratorHandler);
 				return;
 			}
 			callback(null, state$1.results);
@@ -42836,8 +42925,8 @@ var require_serial = __commonJS({ "node_modules/.pnpm/asynckit@0.4.0/node_module
 	* @param   {function} callback - invoked when all elements processed
 	* @returns {function} - jobs terminator
 	*/
-	function serial(list, iterator, callback) {
-		return serialOrdered(list, iterator, null, callback);
+	function serial(list, iterator$1, callback) {
+		return serialOrdered(list, iterator$1, null, callback);
 	}
 } });
 
@@ -43561,19 +43650,19 @@ var require_es_set_tostringtag = __commonJS({ "node_modules/.pnpm/es-set-tostrin
 	var hasToStringTag = require_shams()();
 	var hasOwn = require_hasown();
 	var $TypeError = require_type();
-	var toStringTag = hasToStringTag ? Symbol.toStringTag : null;
+	var toStringTag$1 = hasToStringTag ? Symbol.toStringTag : null;
 	/** @type {import('.')} */
 	module.exports = function setToStringTag$1(object, value) {
 		var overrideIfSet = arguments.length > 2 && !!arguments[2] && arguments[2].force;
 		var nonConfigurable = arguments.length > 2 && !!arguments[2] && arguments[2].nonConfigurable;
 		if (typeof overrideIfSet !== "undefined" && typeof overrideIfSet !== "boolean" || typeof nonConfigurable !== "undefined" && typeof nonConfigurable !== "boolean") throw new $TypeError("if provided, the `overrideIfSet` and `nonConfigurable` options must be booleans");
-		if (toStringTag && (overrideIfSet || !hasOwn(object, toStringTag))) if ($defineProperty) $defineProperty(object, toStringTag, {
+		if (toStringTag$1 && (overrideIfSet || !hasOwn(object, toStringTag$1))) if ($defineProperty) $defineProperty(object, toStringTag$1, {
 			configurable: !nonConfigurable,
 			enumerable: false,
 			value,
 			writable: false
 		});
-		else object[toStringTag] = value;
+		else object[toStringTag$1] = value;
 	};
 } });
 
@@ -43594,7 +43683,7 @@ var require_form_data = __commonJS({ "node_modules/.pnpm/form-data@4.0.2/node_mo
 	var CombinedStream = require_combined_stream();
 	var util$8 = __require("util");
 	var path$3 = __require("path");
-	var http$3 = __require("http");
+	var http$4 = __require("http");
 	var https$4 = __require("https");
 	var parseUrl$2 = __require("url").parse;
 	var fs$5 = __require("fs");
@@ -43790,7 +43879,7 @@ var require_form_data = __commonJS({ "node_modules/.pnpm/form-data@4.0.2/node_mo
 		}
 		options.headers = this.getHeaders(params.headers);
 		if (options.protocol == "https:") request$1 = https$4.request(options);
-		else request$1 = http$3.request(options);
+		else request$1 = http$4.request(options);
 		this.getLength(function(err, length) {
 			if (err && err !== "Unknown stream") {
 				this._error(err);
@@ -43845,8 +43934,8 @@ var require_proxy_from_env = __commonJS({ "node_modules/.pnpm/proxy-from-env@1.1
 	* @return {string} The URL of the proxy that should handle the request to the
 	*  given URL. If no proxy is set, this will be an empty string.
 	*/
-	function getProxyForUrl(url$2) {
-		var parsedUrl = typeof url$2 === "string" ? parseUrl$1(url$2) : url$2 || {};
+	function getProxyForUrl(url$3) {
+		var parsedUrl = typeof url$3 === "string" ? parseUrl$1(url$3) : url$3 || {};
 		var proto$2 = parsedUrl.protocol;
 		var hostname = parsedUrl.host;
 		var port = parsedUrl.port;
@@ -44534,13 +44623,14 @@ var require_debug$1 = __commonJS({ "node_modules/.pnpm/follow-redirects@1.15.9/n
 //#endregion
 //#region node_modules/.pnpm/follow-redirects@1.15.9/node_modules/follow-redirects/index.js
 var require_follow_redirects = __commonJS({ "node_modules/.pnpm/follow-redirects@1.15.9/node_modules/follow-redirects/index.js"(exports, module) {
-	var url$1 = __require("url");
-	var URL$2 = url$1.URL;
-	var http$2 = __require("http");
+	var url$2 = __require("url");
+	var URL$2 = url$2.URL;
+	var http$3 = __require("http");
 	var https$3 = __require("https");
 	var Writable = __require("stream").Writable;
 	var assert$6 = __require("assert");
 	var debug$12 = require_debug$1();
+	// istanbul ignore next
 	(function detectUnsupportedEnvironment() {
 		var looksLikeNode = typeof process !== "undefined";
 		var looksLikeBrowser = typeof window !== "undefined" && typeof document !== "undefined";
@@ -44585,6 +44675,7 @@ var require_follow_redirects = __commonJS({ "node_modules/.pnpm/follow-redirects
 	var TooManyRedirectsError = createErrorType("ERR_FR_TOO_MANY_REDIRECTS", "Maximum number of redirects exceeded", RedirectionError);
 	var MaxBodyLengthExceededError = createErrorType("ERR_FR_MAX_BODY_LENGTH_EXCEEDED", "Request body larger than maxBodyLength limit");
 	var WriteAfterEndError = createErrorType("ERR_STREAM_WRITE_AFTER_END", "write after end");
+	// istanbul ignore next
 	var destroy = Writable.prototype.destroy || noop$2;
 	function RedirectableRequest(options, responseCallback) {
 		Writable.call(this);
@@ -44752,16 +44843,19 @@ var require_follow_redirects = __commonJS({ "node_modules/.pnpm/follow-redirects
 		var request$1 = this._currentRequest = nativeProtocol.request(this._options, this._onNativeResponse);
 		request$1._redirectable = this;
 		for (var event of events$1) request$1.on(event, eventHandlers[event]);
-		this._currentUrl = /^\//.test(this._options.path) ? url$1.format(this._options) : this._options.path;
+		this._currentUrl = /^\//.test(this._options.path) ? url$2.format(this._options) : this._options.path;
 		if (this._isRedirect) {
 			var i = 0;
 			var self$1 = this;
 			var buffers = this._requestBodyBuffers;
 			(function writeNext(error$1) {
+				// istanbul ignore else
 				if (request$1 === self$1._currentRequest) {
+					// istanbul ignore if
 					if (error$1) self$1.emit("error", error$1);
 					else if (i < buffers.length) {
 						var buffer$1 = buffers[i++];
+						// istanbul ignore else
 						if (!request$1.finished) request$1.write(buffer$1.data, buffer$1.encoding, writeNext);
 					} else if (self$1._ended) request$1.end();
 				}
@@ -44798,7 +44892,7 @@ var require_follow_redirects = __commonJS({ "node_modules/.pnpm/follow-redirects
 		var currentHostHeader = removeMatchingHeaders(/^host$/i, this._options.headers);
 		var currentUrlParts = parseUrl(this._currentUrl);
 		var currentHost = currentHostHeader || currentUrlParts.host;
-		var currentUrl = /^\w+:/.test(location) ? this._currentUrl : url$1.format(Object.assign(currentUrlParts, { host: currentHost }));
+		var currentUrl = /^\w+:/.test(location) ? this._currentUrl : url$2.format(Object.assign(currentUrlParts, { host: currentHost }));
 		var redirectUrl = resolveUrl(location, currentUrl);
 		debug$12("redirecting to", redirectUrl.href);
 		this._isRedirect = true;
@@ -44876,15 +44970,17 @@ var require_follow_redirects = __commonJS({ "node_modules/.pnpm/follow-redirects
 	function noop$2() {}
 	function parseUrl(input) {
 		var parsed;
+		// istanbul ignore else
 		if (useNativeURL) parsed = new URL$2(input);
 		else {
-			parsed = validateUrl$1(url$1.parse(input));
+			parsed = validateUrl$1(url$2.parse(input));
 			if (!isString$5(parsed.protocol)) throw new InvalidUrlError({ input });
 		}
 		return parsed;
 	}
 	function resolveUrl(relative, base) {
-		return useNativeURL ? new URL$2(relative, base) : parseUrl(url$1.resolve(base, relative));
+		// istanbul ignore next
+		return useNativeURL ? new URL$2(relative, base) : parseUrl(url$2.resolve(base, relative));
 	}
 	function validateUrl$1(input) {
 		if (/^\[/.test(input.hostname) && !/^\[[:0-9a-f]+\]$/i.test(input.hostname)) throw new InvalidUrlError({ input: input.href || input });
@@ -44909,6 +45005,7 @@ var require_follow_redirects = __commonJS({ "node_modules/.pnpm/follow-redirects
 	}
 	function createErrorType(code, message, baseClass) {
 		function CustomError(properties) {
+			// istanbul ignore else
 			if (isFunction$3(Error.captureStackTrace)) Error.captureStackTrace(this, this.constructor);
 			Object.assign(this, properties || {});
 			this.code = code;
@@ -44950,20 +45047,20 @@ var require_follow_redirects = __commonJS({ "node_modules/.pnpm/follow-redirects
 		return URL$2 && value instanceof URL$2;
 	}
 	module.exports = wrap({
-		http: http$2,
+		http: http$3,
 		https: https$3
 	});
 	module.exports.wrap = wrap;
 } });
 
 //#endregion
-//#region node_modules/.pnpm/axios@1.8.4/node_modules/axios/dist/node/axios.cjs
-var require_axios = __commonJS({ "node_modules/.pnpm/axios@1.8.4/node_modules/axios/dist/node/axios.cjs"(exports, module) {
+//#region node_modules/.pnpm/axios@1.9.0/node_modules/axios/dist/node/axios.cjs
+var require_axios = __commonJS({ "node_modules/.pnpm/axios@1.9.0/node_modules/axios/dist/node/axios.cjs"(exports, module) {
 	const FormData$1 = require_form_data();
 	const crypto$2 = __require("crypto");
-	const url = __require("url");
+	const url$1 = __require("url");
 	const proxyFromEnv = require_proxy_from_env();
-	const http$1 = __require("http");
+	const http$2 = __require("http");
 	const https$2 = __require("https");
 	const util$6 = __require("util");
 	const followRedirects = require_follow_redirects();
@@ -44975,9 +45072,9 @@ var require_axios = __commonJS({ "node_modules/.pnpm/axios@1.8.4/node_modules/ax
 	}
 	const FormData__default = /* @__PURE__ */ _interopDefaultLegacy(FormData$1);
 	const crypto__default = /* @__PURE__ */ _interopDefaultLegacy(crypto$2);
-	const url__default = /* @__PURE__ */ _interopDefaultLegacy(url);
+	const url__default = /* @__PURE__ */ _interopDefaultLegacy(url$1);
 	const proxyFromEnv__default = /* @__PURE__ */ _interopDefaultLegacy(proxyFromEnv);
-	const http__default = /* @__PURE__ */ _interopDefaultLegacy(http$1);
+	const http__default = /* @__PURE__ */ _interopDefaultLegacy(http$2);
 	const https__default = /* @__PURE__ */ _interopDefaultLegacy(https$2);
 	const util__default = /* @__PURE__ */ _interopDefaultLegacy(util$6);
 	const followRedirects__default = /* @__PURE__ */ _interopDefaultLegacy(followRedirects);
@@ -44990,6 +45087,7 @@ var require_axios = __commonJS({ "node_modules/.pnpm/axios@1.8.4/node_modules/ax
 	}
 	const { toString: toString$2 } = Object.prototype;
 	const { getPrototypeOf } = Object;
+	const { iterator, toStringTag } = Symbol;
 	const kindOf = ((cache$1) => (thing) => {
 		const str = toString$2.call(thing);
 		return cache$1[str] || (cache$1[str] = str.slice(8, -1).toLowerCase());
@@ -45094,7 +45192,7 @@ var require_axios = __commonJS({ "node_modules/.pnpm/axios@1.8.4/node_modules/ax
 	const isPlainObject$2 = (val) => {
 		if (kindOf(val) !== "object") return false;
 		const prototype$2 = getPrototypeOf(val);
-		return (prototype$2 === null || prototype$2 === Object.prototype || Object.getPrototypeOf(prototype$2) === null) && !(Symbol.toStringTag in val) && !(Symbol.iterator in val);
+		return (prototype$2 === null || prototype$2 === Object.prototype || Object.getPrototypeOf(prototype$2) === null) && !(toStringTag in val) && !(iterator in val);
 	};
 	/**
 	* Determine if a value is a Date
@@ -45374,10 +45472,10 @@ var require_axios = __commonJS({ "node_modules/.pnpm/axios@1.8.4/node_modules/ax
 	* @returns {void}
 	*/
 	const forEachEntry = (obj, fn) => {
-		const generator = obj && obj[Symbol.iterator];
-		const iterator = generator.call(obj);
+		const generator = obj && obj[iterator];
+		const _iterator$1 = generator.call(obj);
 		let result;
-		while ((result = iterator.next()) && !result.done) {
+		while ((result = _iterator$1.next()) && !result.done) {
 			const pair = result.value;
 			fn.call(obj, pair[0], pair[1]);
 		}
@@ -45465,7 +45563,7 @@ var require_axios = __commonJS({ "node_modules/.pnpm/axios@1.8.4/node_modules/ax
 	* @returns {boolean}
 	*/
 	function isSpecCompliantForm(thing) {
-		return !!(thing && isFunction$2(thing.append) && thing[Symbol.toStringTag] === "FormData" && thing[Symbol.iterator]);
+		return !!(thing && isFunction$2(thing.append) && thing[toStringTag] === "FormData" && thing[iterator]);
 	}
 	const toJSONObject = (obj) => {
 		const stack = new Array(10);
@@ -45502,6 +45600,7 @@ var require_axios = __commonJS({ "node_modules/.pnpm/axios@1.8.4/node_modules/ax
 		})(`axios@${Math.random()}`, []) : (cb) => setTimeout(cb);
 	})(typeof setImmediate === "function", isFunction$2(_global.postMessage));
 	const asap = typeof queueMicrotask !== "undefined" ? queueMicrotask.bind(_global) : typeof process !== "undefined" && process.nextTick || _setImmediate;
+	const isIterable = (thing) => thing != null && isFunction$2(thing[iterator]);
 	const utils$1 = {
 		isArray: isArray$3,
 		isArrayBuffer,
@@ -45557,7 +45656,8 @@ var require_axios = __commonJS({ "node_modules/.pnpm/axios@1.8.4/node_modules/ax
 		isAsyncFn,
 		isThenable,
 		setImmediate: _setImmediate,
-		asap
+		asap,
+		isIterable
 	};
 	/**
 	* Create an Error with the specified message, config, error code, request and response.
@@ -45845,8 +45945,8 @@ var require_axios = __commonJS({ "node_modules/.pnpm/axios@1.8.4/node_modules/ax
 	*
 	* @returns {string} The formatted url
 	*/
-	function buildURL(url$2, params, options) {
-		if (!params) return url$2;
+	function buildURL(url$3, params, options) {
+		if (!params) return url$3;
 		const _encode = options && options.encode || encode;
 		if (utils$1.isFunction(options)) options = { serialize: options };
 		const serializeFn = options && options.serialize;
@@ -45854,11 +45954,11 @@ var require_axios = __commonJS({ "node_modules/.pnpm/axios@1.8.4/node_modules/ax
 		if (serializeFn) serializedParams = serializeFn(params, options);
 		else serializedParams = utils$1.isURLSearchParams(params) ? params.toString() : new AxiosURLSearchParams(params, options).toString(_encode);
 		if (serializedParams) {
-			const hashmarkIndex = url$2.indexOf("#");
-			if (hashmarkIndex !== -1) url$2 = url$2.slice(0, hashmarkIndex);
-			url$2 += (url$2.indexOf("?") === -1 ? "?" : "&") + serializedParams;
+			const hashmarkIndex = url$3.indexOf("#");
+			if (hashmarkIndex !== -1) url$3 = url$3.slice(0, hashmarkIndex);
+			url$3 += (url$3.indexOf("?") === -1 ? "?" : "&") + serializedParams;
 		}
-		return url$2;
+		return url$3;
 	}
 	var InterceptorManager = class {
 		constructor() {
@@ -46282,8 +46382,14 @@ var require_axios = __commonJS({ "node_modules/.pnpm/axios@1.8.4/node_modules/ax
 			const setHeaders = (headers, _rewrite) => utils$1.forEach(headers, (_value, _header) => setHeader(_value, _header, _rewrite));
 			if (utils$1.isPlainObject(header) || header instanceof this.constructor) setHeaders(header, valueOrRewrite);
 			else if (utils$1.isString(header) && (header = header.trim()) && !isValidHeaderName(header)) setHeaders(parseHeaders(header), valueOrRewrite);
-			else if (utils$1.isHeaders(header)) for (const [key$1, value] of header.entries()) setHeader(value, key$1, rewrite);
-			else header != null && setHeader(valueOrRewrite, header, rewrite);
+			else if (utils$1.isObject(header) && utils$1.isIterable(header)) {
+				let obj = {}, dest, key$1;
+				for (const entry of header) {
+					if (!utils$1.isArray(entry)) throw TypeError("Object iterator must return a key-value pair");
+					obj[key$1 = entry[0]] = (dest = obj[key$1]) ? utils$1.isArray(dest) ? [...dest, entry[1]] : [dest, entry[1]] : entry[1];
+				}
+				setHeaders(obj, valueOrRewrite);
+			} else header != null && setHeader(valueOrRewrite, header, rewrite);
 			return this;
 		}
 		get(header, parser) {
@@ -46370,6 +46476,9 @@ var require_axios = __commonJS({ "node_modules/.pnpm/axios@1.8.4/node_modules/ax
 		}
 		toString() {
 			return Object.entries(this.toJSON()).map(([header, value]) => header + ": " + value).join("\n");
+		}
+		getSetCookie() {
+			return this.get("set-cookie") || [];
 		}
 		get [Symbol.toStringTag]() {
 			return "AxiosHeaders";
@@ -46473,8 +46582,8 @@ var require_axios = __commonJS({ "node_modules/.pnpm/axios@1.8.4/node_modules/ax
 	*
 	* @returns {boolean} True if the specified URL is absolute, otherwise false
 	*/
-	function isAbsoluteURL(url$2) {
-		return /^([a-z][a-z\d+\-.]*:)?\/\//i.test(url$2);
+	function isAbsoluteURL(url$3) {
+		return /^([a-z][a-z\d+\-.]*:)?\/\//i.test(url$3);
 	}
 	/**
 	* Creates a new URL by combining the specified URLs
@@ -46502,9 +46611,9 @@ var require_axios = __commonJS({ "node_modules/.pnpm/axios@1.8.4/node_modules/ax
 		if (baseURL && (isRelativeUrl || allowAbsoluteUrls == false)) return combineURLs(baseURL, requestedURL);
 		return requestedURL;
 	}
-	const VERSION = "1.8.4";
-	function parseProtocol(url$2) {
-		const match = /^([-+\w]{1,25})(:?\/\/|:)/.exec(url$2);
+	const VERSION = "1.9.0";
+	function parseProtocol(url$3) {
+		const match = /^([-+\w]{1,25})(:?\/\/|:)/.exec(url$3);
 		return match && match[1] || "";
 	}
 	const DATA_URL_PATTERN = /^(?:([^;]+);)?(?:[^;]+;)?(base64|),([\s\S]*)$/;
@@ -46678,7 +46787,7 @@ var require_axios = __commonJS({ "node_modules/.pnpm/axios@1.8.4/node_modules/ax
 		if (!utils$1.isFormData(form)) throw TypeError("FormData instance required");
 		if (boundary.length < 1 || boundary.length > 70) throw Error("boundary must be 10-70 characters long");
 		const boundaryBytes = textEncoder.encode("--" + boundary + CRLF);
-		const footerBytes = textEncoder.encode("--" + boundary + "--" + CRLF + CRLF);
+		const footerBytes = textEncoder.encode("--" + boundary + "--" + CRLF);
 		let contentLength = footerBytes.byteLength;
 		const parts = Array.from(form.entries()).map(([name$2, value]) => {
 			const part = new FormDataPart(name$2, value);
@@ -47227,9 +47336,9 @@ var require_axios = __commonJS({ "node_modules/.pnpm/axios@1.8.4/node_modules/ax
 			} else req.end(data);
 		});
 	};
-	const isURLSameOrigin = platform.hasStandardBrowserEnv ? ((origin$1, isMSIE) => (url$2) => {
-		url$2 = new URL(url$2, platform.origin);
-		return origin$1.protocol === url$2.protocol && origin$1.host === url$2.host && (isMSIE || origin$1.port === url$2.port);
+	const isURLSameOrigin = platform.hasStandardBrowserEnv ? ((origin$1, isMSIE) => (url$3) => {
+		url$3 = new URL(url$3, platform.origin);
+		return origin$1.protocol === url$3.protocol && origin$1.host === url$3.host && (isMSIE || origin$1.port === url$3.port);
 	})(new URL(platform.origin), platform.navigator && /(msie|trident)/i.test(platform.navigator.userAgent)) : () => true;
 	const cookies = platform.hasStandardBrowserEnv ? {
 		write(name$2, value, expires, path$10, domain, secure) {
@@ -47512,7 +47621,7 @@ var require_axios = __commonJS({ "node_modules/.pnpm/axios@1.8.4/node_modules/ax
 		}
 	};
 	const trackStream = (stream$3, chunkSize, onProgress, onFinish) => {
-		const iterator = readBytes(stream$3, chunkSize);
+		const iterator$1 = readBytes(stream$3, chunkSize);
 		let bytes = 0;
 		let done$1;
 		let _onFinish = (e) => {
@@ -47524,7 +47633,7 @@ var require_axios = __commonJS({ "node_modules/.pnpm/axios@1.8.4/node_modules/ax
 		return new ReadableStream({
 			async pull(controller) {
 				try {
-					const { done: done$2, value } = await iterator.next();
+					const { done: done$2, value } = await iterator$1.next();
 					if (done$2) {
 						_onFinish();
 						controller.close();
@@ -47543,7 +47652,7 @@ var require_axios = __commonJS({ "node_modules/.pnpm/axios@1.8.4/node_modules/ax
 			},
 			cancel(reason) {
 				_onFinish(reason);
-				return iterator.return();
+				return iterator$1.return();
 			}
 		}, { highWaterMark: 2 });
 	};
@@ -47604,7 +47713,7 @@ var require_axios = __commonJS({ "node_modules/.pnpm/axios@1.8.4/node_modules/ax
 		return length == null ? getBodyLength(body) : length;
 	};
 	const fetchAdapter = isFetchSupported && (async (config$2) => {
-		let { url: url$2, method: method$1, data, signal, cancelToken, timeout: timeout$1, onDownloadProgress, onUploadProgress, responseType, headers, withCredentials = "same-origin", fetchOptions } = resolveConfig(config$2);
+		let { url: url$3, method: method$1, data, signal, cancelToken, timeout: timeout$1, onDownloadProgress, onUploadProgress, responseType, headers, withCredentials = "same-origin", fetchOptions } = resolveConfig(config$2);
 		responseType = responseType ? (responseType + "").toLowerCase() : "text";
 		let composedSignal = composeSignals$1([signal, cancelToken && cancelToken.toAbortSignal()], timeout$1);
 		let request$1;
@@ -47614,7 +47723,7 @@ var require_axios = __commonJS({ "node_modules/.pnpm/axios@1.8.4/node_modules/ax
 		let requestContentLength;
 		try {
 			if (onUploadProgress && supportsRequestStream && method$1 !== "get" && method$1 !== "head" && (requestContentLength = await resolveBodyLength(headers, data)) !== 0) {
-				let _request = new Request(url$2, {
+				let _request = new Request(url$3, {
 					method: "POST",
 					body: data,
 					duplex: "half"
@@ -47628,7 +47737,7 @@ var require_axios = __commonJS({ "node_modules/.pnpm/axios@1.8.4/node_modules/ax
 			}
 			if (!utils$1.isString(withCredentials)) withCredentials = withCredentials ? "include" : "omit";
 			const isCredentialsSupported = "credentials" in Request.prototype;
-			request$1 = new Request(url$2, {
+			request$1 = new Request(url$3, {
 				...fetchOptions,
 				signal: composedSignal,
 				method: method$1.toUpperCase(),
@@ -47670,7 +47779,7 @@ var require_axios = __commonJS({ "node_modules/.pnpm/axios@1.8.4/node_modules/ax
 			});
 		} catch (err) {
 			unsubscribe && unsubscribe();
-			if (err && err.name === "TypeError" && /fetch/i.test(err.message)) throw Object.assign(new AxiosError("Network Error", AxiosError.ERR_NETWORK, config$2, request$1), { cause: err.cause || err });
+			if (err && err.name === "TypeError" && /Load failed|fetch/i.test(err.message)) throw Object.assign(new AxiosError("Network Error", AxiosError.ERR_NETWORK, config$2, request$1), { cause: err.cause || err });
 			throw AxiosError.from(err, err && err.code, config$2, request$1);
 		}
 	});
@@ -47832,9 +47941,16 @@ var require_axios = __commonJS({ "node_modules/.pnpm/axios@1.8.4/node_modules/ax
 		validators: validators$1
 	};
 	const validators = validator.validators;
+	/**
+	* Create a new instance of Axios
+	*
+	* @param {Object} instanceConfig The default config for the instance
+	*
+	* @return {Axios} A new instance of Axios
+	*/
 	var Axios = class {
 		constructor(instanceConfig) {
-			this.defaults = instanceConfig;
+			this.defaults = instanceConfig || {};
 			this.interceptors = {
 				request: new InterceptorManager$1(),
 				response: new InterceptorManager$1()
@@ -47960,10 +48076,10 @@ var require_axios = __commonJS({ "node_modules/.pnpm/axios@1.8.4/node_modules/ax
 		"head",
 		"options"
 	], function forEachMethodNoData(method$1) {
-		Axios.prototype[method$1] = function(url$2, config$2) {
+		Axios.prototype[method$1] = function(url$3, config$2) {
 			return this.request(mergeConfig(config$2 || {}, {
 				method: method$1,
-				url: url$2,
+				url: url$3,
 				data: (config$2 || {}).data
 			}));
 		};
@@ -47974,11 +48090,11 @@ var require_axios = __commonJS({ "node_modules/.pnpm/axios@1.8.4/node_modules/ax
 		"patch"
 	], function forEachMethodWithData(method$1) {
 		function generateHTTPMethod(isForm) {
-			return function httpMethod(url$2, data, config$2) {
+			return function httpMethod(url$3, data, config$2) {
 				return this.request(mergeConfig(config$2 || {}, {
 					method: method$1,
 					headers: isForm ? { "Content-Type": "multipart/form-data" } : {},
-					url: url$2,
+					url: url$3,
 					data
 				}));
 			};
@@ -47987,6 +48103,13 @@ var require_axios = __commonJS({ "node_modules/.pnpm/axios@1.8.4/node_modules/ax
 		Axios.prototype[method$1 + "Form"] = generateHTTPMethod(true);
 	});
 	const Axios$1 = Axios;
+	/**
+	* A `CancelToken` is an object that can be used to request cancellation of an operation.
+	*
+	* @param {Function} executor The executor function.
+	*
+	* @returns {CancelToken}
+	*/
 	var CancelToken = class CancelToken {
 		constructor(executor) {
 			if (typeof executor !== "function") throw new TypeError("executor must be a function.");
@@ -48227,9 +48350,9 @@ var require_url = __commonJS({ "node_modules/.pnpm/@sap-cloud-sdk+util@4.0.2/nod
 	* @param url - URL to be checked.
 	* @returns Promise - resolves if the URL exists.
 	*/
-	async function checkUrlExists(url$2) {
+	async function checkUrlExists(url$3) {
 		return axios_1$3.default.request({
-			url: url$2,
+			url: url$3,
 			method: "HEAD"
 		}).then((response) => response.status);
 	}
@@ -50414,6 +50537,7 @@ var require_validateAsymmetricKey = __commonJS({ "node_modules/.pnpm/jsonwebtoke
 		const allowedAlgorithms = allowedAlgorithmsForKeys[keyType];
 		if (!allowedAlgorithms) throw new Error(`Unknown key type "${keyType}".`);
 		if (!allowedAlgorithms.includes(algorithm)) throw new Error(`"alg" parameter for "${keyType}" key type must be one of: ${allowedAlgorithms.join(", ")}.`);
+		/* istanbul ignore next */
 		if (ASYMMETRIC_KEY_DETAILS_SUPPORTED) switch (keyType) {
 			case "ec":
 				const keyCurve = key$1.asymmetricKeyDetails.namedCurve;
@@ -52345,6 +52469,11 @@ var require_jsonwebtoken = __commonJS({ "node_modules/.pnpm/jsonwebtoken@9.0.2/n
 var require_cache$1 = __commonJS({ "node_modules/.pnpm/@sap-cloud-sdk+connectivity@4.0.2/node_modules/@sap-cloud-sdk/connectivity/dist/scp-cf/cache.js"(exports) {
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.Cache = void 0;
+	/**
+	* Representation of a cache to transiently store objects locally for faster access.
+	* @typeParam T - Type of the cache entries.
+	* @internal
+	*/
 	var Cache = class {
 		/**
 		* Creates an instance of Cache.
@@ -52418,14 +52547,14 @@ var require_subdomain_replacer = __commonJS({ "node_modules/.pnpm/@sap-cloud-sdk
 			return getHost(new url_1.URL(iss)).split(".")[0];
 		}
 	}
-	function getHost(url$2) {
-		const { host } = url$2;
-		if (!host || host.indexOf(".") === -1) throw new Error(`Failed to determine sub-domain: invalid host in "${url$2}".`);
+	function getHost(url$3) {
+		const { host } = url$3;
+		if (!host || host.indexOf(".") === -1) throw new Error(`Failed to determine sub-domain: invalid host in "${url$3}".`);
 		return host;
 	}
-	function isValidUrl(url$2) {
+	function isValidUrl(url$3) {
 		try {
-			new url_1.URL(url$2);
+			new url_1.URL(url$3);
 			return true;
 		} catch {
 			return false;
@@ -54513,8 +54642,11 @@ var require_cjs = __commonJS({ "node_modules/.pnpm/jwt-decode@4.0.0/node_modules
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/XssecError.js
-var require_XssecError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/XssecError.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/XssecError.js
+var require_XssecError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/XssecError.js"(exports, module) {
+	/**
+	* Base class for XssecErrors.
+	*/
 	var XssecError$4 = class extends Error {
 		/** 
 		* @type {number} Suggested HTTP response code for consumer application catching this error
@@ -54536,9 +54668,12 @@ var require_XssecError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/ValidationError.js
-var require_ValidationError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/ValidationError.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/ValidationError.js
+var require_ValidationError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/ValidationError.js"(exports, module) {
 	const XssecError$3 = require_XssecError();
+	/**
+	* Base class for errors thrown when a token failed validation.
+	*/
 	var ValidationError$10 = class extends XssecError$3 {
 		constructor(message) {
 			super(message);
@@ -54550,8 +54685,8 @@ var require_ValidationError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/InvalidJwtError.js
-var require_InvalidJwtError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/InvalidJwtError.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/InvalidJwtError.js
+var require_InvalidJwtError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/InvalidJwtError.js"(exports, module) {
 	const ValidationError$9 = require_ValidationError();
 	var InvalidJwtError$2 = class extends ValidationError$9 {
 		/** @type {Error} Error encountered during parsing */
@@ -54567,8 +54702,8 @@ var require_InvalidJwtError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/util/constants.js
-var require_constants = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/util/constants.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/util/constants.js
+var require_constants = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/util/constants.js"(exports, module) {
 	module.exports = {
 		APP_TID_HEADER: "x-app_tid",
 		AZP_HEADER: "x-azp",
@@ -54607,11 +54742,15 @@ var require_constants = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_m
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/token/Token.js
-var require_Token = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/token/Token.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/token/Token.js
+var require_Token = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/token/Token.js"(exports, module) {
 	const { jwtDecode } = require_cjs();
 	const InvalidJwtError$1 = require_InvalidJwtError();
 	const { TOKEN_DATE_LEEWAY } = require_constants();
+	/**
+	* @typedef {import('../util/Types').JwtHeader} JwtHeader
+	* @typedef {import('../util/Types').JwtPayload} JwtPayload
+	*/
 	var Token$4 = class {
 		#jwt;
 		/** @type {JwtHeader} */
@@ -54771,8 +54910,8 @@ var require_Token = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modul
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/MissingJwtError.js
-var require_MissingJwtError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/MissingJwtError.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/MissingJwtError.js
+var require_MissingJwtError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/MissingJwtError.js"(exports, module) {
 	const ValidationError$8 = require_ValidationError();
 	var MissingJwtError$2 = class extends ValidationError$8 {
 		constructor(message = "Request contains no jwt bearer token and jwt was not explicitly passed to library.") {
@@ -54784,9 +54923,18 @@ var require_MissingJwtError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/context/SecurityContext.js
-var require_SecurityContext = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/context/SecurityContext.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/context/SecurityContext.js
+var require_SecurityContext = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/context/SecurityContext.js"(exports, module) {
 	const { CORRELATIONID_HEADERS, FORWARDED_CLIENTCERTIFICATE_HEADER } = require_constants();
+	/** 
+	* @typedef {import('../service/Service')} Service
+	* @typedef {import('../token/Token')} Token
+	* @typedef {import('../util/Types').SecurityContextConfig} SecurityContextConfig
+	*/
+	/**
+	* @template {Service} S - The type of the service.
+	* @template {Token} T - The type of the token.
+	*/
 	var SecurityContext$8 = class {
 		/** @type {S} */
 		#service;
@@ -54873,15 +55021,19 @@ var require_SecurityContext = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/
 			for (let i = 0; contextConfig.correlationId == null && i < CORRELATIONID_HEADERS.length; i++) contextConfig.correlationId = req?.headers?.[CORRELATIONID_HEADERS[i]];
 			contextConfig.clientCertificatePem ??= req?.headers?.[FORWARDED_CLIENTCERTIFICATE_HEADER];
 			contextConfig.jwt ??= req?.headers?.authorization?.split(" ")[1];
+			contextConfig.skipValidation ??= false;
 		}
 	};
 	module.exports = SecurityContext$8;
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/configuration/ConfigurationError.js
-var require_ConfigurationError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/configuration/ConfigurationError.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/configuration/ConfigurationError.js
+var require_ConfigurationError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/configuration/ConfigurationError.js"(exports, module) {
 	const XssecError$2 = require_XssecError();
+	/**
+	* Base class for errors thrown when the library was inappropriately configured.
+	*/
 	var ConfigurationError$8 = class extends XssecError$2 {
 		constructor(message) {
 			super(message);
@@ -54893,9 +55045,13 @@ var require_ConfigurationError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/TokenValidationError.js
-var require_TokenValidationError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/TokenValidationError.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/TokenValidationError.js
+var require_TokenValidationError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/TokenValidationError.js"(exports, module) {
 	const ValidationError$7 = require_ValidationError();
+	/** @typedef {import("../../token/Token")} Token */
+	/**
+	* Base class for errors thrown when a token fails validation.
+	*/
 	var TokenValidationError$10 = class extends ValidationError$7 {
 		/** @type {Token} */
 		token;
@@ -54909,8 +55065,8 @@ var require_TokenValidationError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/ExpiredTokenError.js
-var require_ExpiredTokenError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/ExpiredTokenError.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/ExpiredTokenError.js
+var require_ExpiredTokenError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/ExpiredTokenError.js"(exports, module) {
 	const TokenValidationError$9 = require_TokenValidationError();
 	var ExpiredTokenError$2 = class extends TokenValidationError$9 {
 		constructor(token, message = "Token is expired.") {
@@ -54922,8 +55078,8 @@ var require_ExpiredTokenError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/InvalidClientCertificateError.js
-var require_InvalidClientCertificateError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/InvalidClientCertificateError.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/InvalidClientCertificateError.js
+var require_InvalidClientCertificateError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/InvalidClientCertificateError.js"(exports, module) {
 	const ValidationError$6 = require_ValidationError();
 	var InvalidClientCertificateError$2 = class extends ValidationError$6 {
 		/** @type {Error} Error encountered during parsing */
@@ -54939,8 +55095,8 @@ var require_InvalidClientCertificateError = __commonJS({ "node_modules/.pnpm/@sa
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/configuration/InvalidCredentialsError.js
-var require_InvalidCredentialsError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/configuration/InvalidCredentialsError.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/configuration/InvalidCredentialsError.js
+var require_InvalidCredentialsError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/configuration/InvalidCredentialsError.js"(exports, module) {
 	const ConfigurationError$7 = require_ConfigurationError();
 	var InvalidCredentialsError$2 = class extends ConfigurationError$7 {
 		constructor(message = "The service credentials are missing mandatory properties.") {
@@ -54952,8 +55108,8 @@ var require_InvalidCredentialsError = __commonJS({ "node_modules/.pnpm/@sap+xsse
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/InvalidIssuerError.js
-var require_InvalidIssuerError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/InvalidIssuerError.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/InvalidIssuerError.js
+var require_InvalidIssuerError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/InvalidIssuerError.js"(exports, module) {
 	const TokenValidationError$8 = require_TokenValidationError();
 	var InvalidIssuerError$2 = class extends TokenValidationError$8 {
 		/** @type {Error} Error encountered during parsing */
@@ -54968,8 +55124,8 @@ var require_InvalidIssuerError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/InvalidTokenSignatureError.js
-var require_InvalidTokenSignatureError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/InvalidTokenSignatureError.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/InvalidTokenSignatureError.js
+var require_InvalidTokenSignatureError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/InvalidTokenSignatureError.js"(exports, module) {
 	const TokenValidationError$7 = require_TokenValidationError();
 	var InvalidTokenSignatureError$2 = class extends TokenValidationError$7 {
 		constructor(token, message = "Token signature is invalid.") {
@@ -54981,8 +55137,8 @@ var require_InvalidTokenSignatureError = __commonJS({ "node_modules/.pnpm/@sap+x
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/MissingClientCertificateError.js
-var require_MissingClientCertificateError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/MissingClientCertificateError.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/MissingClientCertificateError.js
+var require_MissingClientCertificateError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/MissingClientCertificateError.js"(exports, module) {
 	const ValidationError$5 = require_ValidationError();
 	var MissingClientCertificateError$2 = class extends ValidationError$5 {
 		constructor(message = "Request is missing a forwarded client certificate which is required to validate the token.") {
@@ -54994,8 +55150,8 @@ var require_MissingClientCertificateError = __commonJS({ "node_modules/.pnpm/@sa
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/MissingIssuerError.js
-var require_MissingIssuerError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/MissingIssuerError.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/MissingIssuerError.js
+var require_MissingIssuerError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/MissingIssuerError.js"(exports, module) {
 	const TokenValidationError$6 = require_TokenValidationError();
 	var MissingIssuerError$2 = class extends TokenValidationError$6 {
 		constructor(token, message = "Token is missing an issuer which is required to validate the signature.") {
@@ -55007,8 +55163,8 @@ var require_MissingIssuerError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/MissingKidError.js
-var require_MissingKidError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/MissingKidError.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/MissingKidError.js
+var require_MissingKidError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/MissingKidError.js"(exports, module) {
 	const ValidationError$4 = require_ValidationError();
 	var MissingKidError$4 = class extends ValidationError$4 {
 		/** @type {string} kid */
@@ -55023,8 +55179,8 @@ var require_MissingKidError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/MissingVerificationKeyError.js
-var require_MissingVerificationKeyError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/MissingVerificationKeyError.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/MissingVerificationKeyError.js
+var require_MissingVerificationKeyError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/MissingVerificationKeyError.js"(exports, module) {
 	const ValidationError$3 = require_ValidationError();
 	var MissingVerificationKeyError$2 = class extends ValidationError$3 {
 		constructor(message = "XSUAA service credentials are missing a verificationkey that would be required as JWKS fallback to validate the given token.") {
@@ -55036,9 +55192,12 @@ var require_MissingVerificationKeyError = __commonJS({ "node_modules/.pnpm/@sap+
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/network/NetworkError.js
-var require_NetworkError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/network/NetworkError.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/network/NetworkError.js
+var require_NetworkError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/network/NetworkError.js"(exports, module) {
 	const XssecError$1 = require_XssecError();
+	/**
+	* Base class for errors thrown when a network error occurs, such as a failed server request.
+	*/
 	var NetworkError$3 = class extends XssecError$1 {
 		/** @type {String} */
 		correlationId;
@@ -55052,8 +55211,8 @@ var require_NetworkError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/nod
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/NotYetValidTokenError.js
-var require_NotYetValidTokenError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/NotYetValidTokenError.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/NotYetValidTokenError.js
+var require_NotYetValidTokenError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/NotYetValidTokenError.js"(exports, module) {
 	const TokenValidationError$5 = require_TokenValidationError();
 	var NotYetValidTokenError$2 = class extends TokenValidationError$5 {
 		constructor(token, message = "The token is not yet valid because its 'nbf' (no use before) date lies in the future.") {
@@ -55065,34 +55224,37 @@ var require_NotYetValidTokenError = __commonJS({ "node_modules/.pnpm/@sap+xssec@
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/network/RequestError.js
-var require_RequestError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/network/RequestError.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/network/RequestError.js
+var require_RequestError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/network/RequestError.js"(exports, module) {
 	const NetworkError$2 = require_NetworkError();
-	var RequestError$3 = class extends NetworkError$2 {
+	/**
+	* An error that occurs while sending a request, e.g. when there is no network connection.
+	*/
+	var RequestError$4 = class extends NetworkError$2 {
 		/** @type {import("https").RequestOptions & {name: string}} */
 		request;
-		/** @type {Error} the original error of the HTTP client for debugging. Do not code against this property as the internal HTTP client implementation may change anytime. */
-		orignalError;
-		constructor(url$2, request$1, originalError, message = `HTTP request [${request$1.name}] to ${url$2} could not be sent due to: ${originalError.toString()}.`) {
+		/** @type {Error|Error[]} the original error(s) of the HTTP client for debugging. Do not code against this property as the internal HTTP client implementation may change anytime. */
+		originalError;
+		constructor(url$3, request$1, originalError, message = `HTTP request [${request$1.name}] to ${url$3} could not be sent due to: ${originalError.toString()}.`) {
 			super(message);
 			this.name = "RequestError";
-			this.url = url$2;
+			this.url = url$3;
 			this.request = request$1;
 			this.originalError = originalError;
 		}
 	};
-	module.exports = RequestError$3;
+	module.exports = RequestError$4;
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/network/ResponseError.js
-var require_ResponseError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/network/ResponseError.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/network/ResponseError.js
+var require_ResponseError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/network/ResponseError.js"(exports, module) {
 	const NetworkError$1 = require_NetworkError();
 	var ResponseError$4 = class extends NetworkError$1 {
-		constructor(url$2, request$1, responseCode, responseText, message = `HTTP response from ${url$2} was ${responseCode}: ${responseText}.`) {
+		constructor(url$3, request$1, responseCode, responseText, message = `HTTP response from ${url$3} was ${responseCode}: ${responseText}.`) {
 			super(message);
 			this.name = "ResponseError";
-			this.url = url$2;
+			this.url = url$3;
 			this.request = request$1;
 			this.responseCode = responseCode;
 			this.responseText = responseText;
@@ -55102,12 +55264,15 @@ var require_ResponseError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/no
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/network/TimeoutError.js
-var require_TimeoutError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/network/TimeoutError.js"(exports, module) {
-	const RequestError$2 = require_RequestError();
-	var TimeoutError$2 = class extends RequestError$2 {
-		constructor(url$2, request$1, originalError, message = `HTTP request [${request$1.name}] to ${url$2} timed out after ${request$1.timeout} ms.`) {
-			super(url$2, request$1, originalError, message);
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/network/TimeoutError.js
+var require_TimeoutError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/network/TimeoutError.js"(exports, module) {
+	const RequestError$3 = require_RequestError();
+	/**
+	* An error that occurs when a request times out because the server did not send a response within the specified timeout interval.
+	*/
+	var TimeoutError$2 = class extends RequestError$3 {
+		constructor(url$3, request$1, originalError, message = `HTTP request [${request$1.name}] to ${url$3} timed out after ${request$1.timeout} ms.`) {
+			super(url$3, request$1, originalError, message);
 			this.name = "TimeoutError";
 		}
 	};
@@ -55115,8 +55280,8 @@ var require_TimeoutError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/nod
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/UnsupportedAlgorithmError.js
-var require_UnsupportedAlgorithmError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/UnsupportedAlgorithmError.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/UnsupportedAlgorithmError.js
+var require_UnsupportedAlgorithmError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/UnsupportedAlgorithmError.js"(exports, module) {
 	const TokenValidationError$4 = require_TokenValidationError();
 	var UnsupportedAlgorithmError$2 = class extends TokenValidationError$4 {
 		constructor(token, alg, message = `Algorithm ${alg} specified in token header is not supported.`) {
@@ -55129,8 +55294,8 @@ var require_UnsupportedAlgorithmError = __commonJS({ "node_modules/.pnpm/@sap+xs
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/UntrustedIssuerError.js
-var require_UntrustedIssuerError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/UntrustedIssuerError.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/UntrustedIssuerError.js
+var require_UntrustedIssuerError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/UntrustedIssuerError.js"(exports, module) {
 	const TokenValidationError$3 = require_TokenValidationError();
 	var UntrustedIssuerError$2 = class extends TokenValidationError$3 {
 		constructor(token, message = "Token issuer is not trusted because it is not a (sub)domain contained in the domains property of the service credentials.") {
@@ -55142,9 +55307,12 @@ var require_UntrustedIssuerError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/WrongAudienceError.js
-var require_WrongAudienceError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/WrongAudienceError.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/WrongAudienceError.js
+var require_WrongAudienceError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/WrongAudienceError.js"(exports, module) {
 	const TokenValidationError$2 = require_TokenValidationError();
+	/**
+	* @typedef {import("../service/Service").Service} Service
+	*/
 	var WrongAudienceError$5 = class extends TokenValidationError$2 {
 		/** @type {string[]} token audiences */
 		audiences;
@@ -55161,8 +55329,8 @@ var require_WrongAudienceError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/X5tError.js
-var require_X5tError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/validation/X5tError.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/X5tError.js
+var require_X5tError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/validation/X5tError.js"(exports, module) {
 	const TokenValidationError$1 = require_TokenValidationError();
 	var X5tError$2 = class extends TokenValidationError$1 {
 		/** @type {String} client certificate used for x5t validation */
@@ -55177,8 +55345,8 @@ var require_X5tError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_mo
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/index.js
-var require_error = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/error/index.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/index.js
+var require_error = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/index.js"(exports, module) {
 	const ConfigurationError$6 = require_ConfigurationError();
 	const ExpiredTokenError$1 = require_ExpiredTokenError();
 	const InvalidClientCertificateError$1 = require_InvalidClientCertificateError();
@@ -55193,7 +55361,7 @@ var require_error = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modul
 	const MissingVerificationKeyError$1 = require_MissingVerificationKeyError();
 	const NetworkError = require_NetworkError();
 	const NotYetValidTokenError$1 = require_NotYetValidTokenError();
-	const RequestError$1 = require_RequestError();
+	const RequestError$2 = require_RequestError();
 	const ResponseError$3 = require_ResponseError();
 	const TimeoutError$1 = require_TimeoutError();
 	const TokenValidationError = require_TokenValidationError();
@@ -55218,7 +55386,7 @@ var require_error = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modul
 		MissingVerificationKeyError: MissingVerificationKeyError$1,
 		NetworkError,
 		NotYetValidTokenError: NotYetValidTokenError$1,
-		RequestError: RequestError$1,
+		RequestError: RequestError$2,
 		ResponseError: ResponseError$3,
 		TimeoutError: TimeoutError$1,
 		TokenValidationError,
@@ -55232,8 +55400,8 @@ var require_error = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modul
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/context/createSecurityContext.js
-var require_createSecurityContext = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/context/createSecurityContext.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/context/createSecurityContext.js
+var require_createSecurityContext = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/context/createSecurityContext.js"(exports, module) {
 	const Token$3 = require_Token();
 	const MissingJwtError = require_MissingJwtError();
 	const SecurityContext$7 = require_SecurityContext();
@@ -55275,10 +55443,15 @@ var require_createSecurityContext = __commonJS({ "node_modules/.pnpm/@sap+xssec@
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/context/IdentityServiceSecurityContext.js
-var require_IdentityServiceSecurityContext = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/context/IdentityServiceSecurityContext.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/context/IdentityServiceSecurityContext.js
+var require_IdentityServiceSecurityContext = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/context/IdentityServiceSecurityContext.js"(exports, module) {
 	const ConfigurationError$5 = require_ConfigurationError();
 	const SecurityContext$6 = require_SecurityContext();
+	/**
+	* @typedef {import('../service/IdentityService')} IdentityService
+	* @typedef {import('../token/IdentityServiceToken')} IdentityServiceToken
+	*/
+	/** @extends {SecurityContext<IdentityService, IdentityServiceToken>} */
 	var IdentityServiceSecurityContext$2 = class extends SecurityContext$6 {
 		/**
 		* Returns the service plans of the consumer application.
@@ -55309,8 +55482,8 @@ var require_IdentityServiceSecurityContext = __commonJS({ "node_modules/.pnpm/@s
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/util/Logger.js
-var require_Logger = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/util/Logger.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/util/Logger.js
+var require_Logger = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/util/Logger.js"(exports, module) {
 	var Logger$1 = class {
 		constructor(loggingConfig$1, prefix) {
 			this.loggingConfig = loggingConfig$1;
@@ -55341,8 +55514,8 @@ var require_Logger = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modu
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/util/logging.js
-var require_logging = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/util/logging.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/util/logging.js
+var require_logging = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/util/logging.js"(exports, module) {
 	const debug = require_src$1();
 	const Logger = require_Logger();
 	const debugLogger = debug("xssec");
@@ -55366,8 +55539,8 @@ var require_logging = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_mod
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/context/XsuaaSecurityContext.js
-var require_XsuaaSecurityContext = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/context/XsuaaSecurityContext.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/context/XsuaaSecurityContext.js
+var require_XsuaaSecurityContext = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/context/XsuaaSecurityContext.js"(exports, module) {
 	const SecurityContext$5 = require_SecurityContext();
 	const { getLogger: getLogger$6 } = require_logging();
 	const { GRANTTYPE_CLIENTCREDENTIALS: GRANTTYPE_CLIENTCREDENTIALS$1 } = require_constants();
@@ -55377,6 +55550,7 @@ var require_XsuaaSecurityContext = __commonJS({ "node_modules/.pnpm/@sap+xssec@4
 	* @typedef {import('../util/Types').SecurityContextConfig} SecurityContextConfig
 	*/
 	const LOG$6 = getLogger$6("XsuaaSecurityContext.js");
+	/** @extends {SecurityContext<XsuaaService, XsuaaToken>} */
 	var XsuaaSecurityContext$4 = class extends SecurityContext$5 {
 		/**
 		* @param {XsuaaService} service 
@@ -55506,9 +55680,15 @@ var require_XsuaaSecurityContext = __commonJS({ "node_modules/.pnpm/@sap+xssec@4
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/context/XsaSecurityContext.js
-var require_XsaSecurityContext = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/context/XsaSecurityContext.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/context/XsaSecurityContext.js
+var require_XsaSecurityContext = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/context/XsaSecurityContext.js"(exports, module) {
 	const XsuaaSecurityContext$3 = require_XsuaaSecurityContext();
+	/**
+	* @typedef {import("../context/SecurityContext")} SecurityContext
+	* @typedef {import("../service/XsaService")} XsaService
+	* @typedef {import("../token/XsaToken")} XsaToken
+	*/
+	/** @extends {XsuaaSecurityContext} */
 	var XsaSecurityContext$2 = class extends XsuaaSecurityContext$3 {
 		/**
 		* 
@@ -55552,9 +55732,15 @@ var require_XsaSecurityContext = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/context/UaaSecurityContext.js
-var require_UaaSecurityContext = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/context/UaaSecurityContext.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/context/UaaSecurityContext.js
+var require_UaaSecurityContext = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/context/UaaSecurityContext.js"(exports, module) {
 	const XsuaaSecurityContext$2 = require_XsuaaSecurityContext();
+	/**
+	* @typedef {import("../context/SecurityContext")} SecurityContext
+	* @typedef {import("../service/UaaService")} UaaService
+	* @typedef {import("../token/UaaToken")} UaaToken
+	*/
+	/** @extends {XsuaaSecurityContext} */
 	var UaaSecurityContext$2 = class extends XsuaaSecurityContext$2 {
 		/**
 		* 
@@ -55598,8 +55784,8 @@ var require_UaaSecurityContext = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/cache/ResponseReplica.js
-var require_ResponseReplica = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/cache/ResponseReplica.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/cache/ResponseReplica.js
+var require_ResponseReplica = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/cache/ResponseReplica.js"(exports, module) {
 	var ResponseReplica$1 = class {
 		cache;
 		key;
@@ -55664,12 +55850,16 @@ var require_ResponseReplica = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/cache/ResponseCache.js
-var require_ResponseCache = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/cache/ResponseCache.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/cache/ResponseCache.js
+var require_ResponseCache = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/cache/ResponseCache.js"(exports, module) {
 	const ResponseReplica = require_ResponseReplica();
 	const ConfigurationError$4 = require_ConfigurationError();
 	const { getLogger: getLogger$5 } = require_logging();
 	const LOG$5 = getLogger$5("ResponseCache.js");
+	/**
+	* Caches responses from an endpoint with different request parameters that are eagerly refreshed in the background
+	* when accessed shortly before expiration.
+	*/
 	var ResponseCache$1 = class ResponseCache$1 {
 		static get DEFAULT_EXPIRATION_TIME() {
 			return 30 * 60 * 1e3;
@@ -55718,10 +55908,24 @@ var require_ResponseCache = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/no
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/util/fetch.js
-var require_fetch = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/util/fetch.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/util/fetch.js
+var require_fetch = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/util/fetch.js"(exports, module) {
 	const https$1 = __require("https");
+	const http$1 = __require("http");
 	const zlib = __require("zlib");
+	const url = __require("url");
+	/**
+	* Select the appropriate request module based on protocol
+	* @param {string} protocol
+	* @returns {module}
+	*/
+	function selectRequestModule(protocol) {
+		switch (protocol) {
+			case "https:": return https$1;
+			case "http:": return http$1;
+			default: throw new Error(`Unsupported protocol: ${protocol}`);
+		}
+	}
 	var FetchError = class extends Error {
 		constructor(message, error$1) {
 			super(message);
@@ -55799,25 +56003,26 @@ var require_fetch = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modul
 	/**
 	* A simple fetch implementation with basic functionality using node's https module.
 	* This implementation has the same API as node-fetch but with limited functionality.
-	* @param {string|URL} url 
-	* @param {https.RequestOptions} options 
+	* @param {string|URL} inputUrl
+	* @param {https.RequestOptions} options
 	* @returns {Response}
 	* @throws {FetchError}
 	*/
-	async function xssec_fetch(url$2, options = {}) {
+	async function xssec_fetch(inputUrl, options = {}) {
 		importDefaultOptions(options);
 		importDefaultHeaders(options);
 		importBodyOptions(options);
+		const requestModule = selectRequestModule(new url.URL(inputUrl).protocol);
 		return new Promise(function(resolve, reject) {
-			const req = https$1.request(url$2, options, (response) => {
+			const req = requestModule.request(inputUrl, options, (response) => {
 				resolve(new Response$1(response, req));
 			});
 			req.on("error", (error$1) => {
-				reject(new FetchError(`request to ${url$2} failed, reason: ${error$1.message}`, error$1));
+				reject(new FetchError(`request to ${url} failed, reason: ${error$1.message}`, error$1));
 			});
 			req.on("timeout", () => {
 				req.destroy();
-				reject(new FetchError(`request to ${url$2} timed out.`, { code: "ETIMEDOUT" }));
+				reject(new FetchError(`request to ${url} timed out.`, { code: "ETIMEDOUT" }));
 			});
 			if (options.data) req.write(options.data);
 			req.end();
@@ -55851,8 +56056,27 @@ var require_fetch = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modul
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/util/util.js
-var require_util = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/util/util.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/network/RetryError.js
+var require_RetryError = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/error/network/RetryError.js"(exports, module) {
+	const RequestError$1 = require_RequestError();
+	/**
+	* An error that occurs when a request times out because the server did not send a response within the specified timeout interval.
+	*/
+	var RetryError$1 = class extends RequestError$1 {
+		constructor(url$3, request$1, originalError, message = `HTTP request [${request$1.name}] to ${url$3} was not successful after ${originalError.length} attempts.`) {
+			super(url$3, request$1, originalError, message);
+			this.name = "RetryError";
+		}
+		get retryErrors() {
+			return this.originalError;
+		}
+	};
+	module.exports = RetryError$1;
+} });
+
+//#endregion
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/util/util.js
+var require_util = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/util/util.js"(exports, module) {
 	const { X509Certificate } = __require("crypto");
 	const InvalidClientCertificateError = require_InvalidClientCertificateError();
 	const { PEM_HEADER, PEM_FOOTER, CLIENT_CERTIFICATE_HEADER: CLIENT_CERTIFICATE_HEADER$1 } = require_constants();
@@ -55884,49 +56108,100 @@ var require_util = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_module
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/util/jsonRequest.js
-var require_jsonRequest = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/util/jsonRequest.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/util/jsonRequest.js
+var require_jsonRequest = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/util/jsonRequest.js"(exports, module) {
 	const fetch$1 = require_fetch();
 	const { getLogger: getLogger$4 } = require_logging();
 	const RequestError = require_RequestError();
+	const RetryError = require_RetryError();
 	const ResponseError$2 = require_ResponseError();
 	const TimeoutError = require_TimeoutError();
 	const { CORRELATIONID_HEADER_VCAP, DEFAULT_TIMEOUT: DEFAULT_TIMEOUT$1, MAX_TIMEOUT: MAX_TIMEOUT$1, USER_AGENT } = require_constants();
 	const { shrinkRequestOptionsForLog } = require_util();
 	const LOG$4 = getLogger$4("request.js");
-	async function jsonRequest$3(url$2, request$1, { requestName, correlationId, extractHeaders } = {}) {
-		Object.assign(request$1, {
-			redirect: "error",
-			follow: 0,
-			timeout: Math.min(MAX_TIMEOUT$1, request$1.timeout ?? DEFAULT_TIMEOUT$1)
-		});
-		request$1.headers ??= {};
-		Object.assign(request$1.headers, {
-			Accept: "application/json",
-			"User-Agent": USER_AGENT
-		});
+	/**
+	* Sleep for the given number of milliseconds
+	* @param {number} ms - milliseconds to sleep
+	* @returns {Promise<void>}
+	*/
+	const sleep = (ms$2) => new Promise((resolve) => {
+		setTimeout(() => {
+			resolve();
+		}, ms$2);
+	});
+	/**
+	* Calculate delay for retry based on attempt number and retry configuration
+	* @param {number} attempt - the current attempt number (0-based)
+	* @param {Object} retryConfig - retry configuration
+	* @returns {number} - delay in milliseconds
+	*/
+	function calculateDelay(attempt, retryConfig) {
+		if (retryConfig.strategy === "exponential") {
+			const delay = retryConfig.initialDelay * Math.pow(retryConfig.factor, attempt);
+			return Math.min(delay, retryConfig.maxDelay);
+		}
+		return retryConfig.initialDelay;
+	}
+	function isRetryableError(e) {
+		if (e instanceof ResponseError$2) {
+			if (e.statusCode >= 500 && e.statusCode <= 600 || e.statusCode == 429 || e.statusCode == 408) return true;
+		} else if (e instanceof RequestError) return true;
+		return false;
+	}
+	/**
+	* Execute a fetch request with retry logic
+	* @param {string} url - the URL to fetch
+	* @param {Object} request - fetch request options
+	* @param {Object} options - additional options
+	* @param {string} options.requestName - name of the request for logging
+	* @param {string} options.correlationId - correlation ID for tracing
+	* @param {Object} retryConfig - retry configuration
+	* @returns {Promise<Response>} - fetch response
+	*/
+	async function fetchWithRetry(url$3, request$1, options) {
+		const { requestName, correlationId } = options;
+		const retryConfig = request$1.retry;
+		const retryErrors = [];
+		const requestWithName = {
+			...request$1,
+			name: requestName
+		};
+		for (let attempt = 0; attempt <= retryConfig.retries; attempt++) try {
+			if (attempt > 0) LOG$4.info(`Retry attempt ${attempt}/${retryConfig.retries} for [${requestName}] to ${url$3}`, { correlationId });
+			return await fetchWithoutRetry(url$3, request$1, options);
+		} catch (e) {
+			if (!isRetryableError(e)) throw e;
+			retryErrors.push(e);
+			if (attempt >= retryConfig.retries) break;
+			const delay = calculateDelay(attempt, retryConfig);
+			LOG$4.debug(`Waiting ${delay}ms before next retry`, { correlationId });
+			await sleep(delay);
+		}
+		const error$1 = new RetryError(url$3, requestWithName, retryErrors);
+		LOG$4.error(error$1.message, { correlationId });
+		throw error$1;
+	}
+	async function fetchWithoutRetry(url$3, request$1, { requestName, correlationId, extractHeaders }) {
 		if (correlationId) request$1.headers[CORRELATIONID_HEADER_VCAP] = correlationId;
-		LOG$4.debug(`HTTP request [${requestName}] to ${url$2} with options`, {
+		LOG$4.debug(`HTTP request [${requestName}] to ${url$3} with options`, {
 			correlationId,
 			...shrinkRequestOptionsForLog(request$1)
 		});
 		let response;
 		try {
-			response = await fetch$1(url$2, request$1);
+			response = await fetch$1(url$3, request$1);
 		} catch (e) {
-			const error$1 = e.code === "ETIMEDOUT" ? new TimeoutError(url$2, {
+			const requestWithName = {
 				...request$1,
 				name: requestName
-			}, e) : new RequestError(url$2, {
-				...request$1,
-				name: requestName
-			}, e);
+			};
+			const error$1 = e.code === "ETIMEDOUT" ? new TimeoutError(url$3, requestWithName, e) : new RequestError(url$3, requestWithName, e);
 			LOG$4.error(error$1.message, { correlationId });
 			throw error$1;
 		}
 		if (!response.ok) {
 			const responseText = await response.text();
-			const error$1 = new ResponseError$2(url$2, {
+			const error$1 = new ResponseError$2(url$3, {
 				...request$1,
 				name: requestName
 			}, response.status, responseText);
@@ -55941,29 +56216,62 @@ var require_jsonRequest = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node
 		if (extractHeaders != null) json$1[extractHeaders] = response.headers;
 		return json$1;
 	}
+	async function jsonRequest$3(url$3, request$1, options = {}) {
+		Object.assign(request$1, {
+			redirect: "error",
+			follow: 0,
+			timeout: Math.min(MAX_TIMEOUT$1, request$1.timeout ?? DEFAULT_TIMEOUT$1)
+		});
+		request$1.headers ??= {};
+		Object.assign(request$1.headers, {
+			Accept: "application/json",
+			"User-Agent": USER_AGENT
+		});
+		if (request$1.retry) return fetchWithRetry(url$3, request$1, options);
+		else return fetchWithoutRetry(url$3, request$1, options);
+	}
 	module.exports = { jsonRequest: jsonRequest$3 };
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/service/Service.js
-var require_Service = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/service/Service.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/service/Service.js
+var require_Service = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/service/Service.js"(exports, module) {
 	const { Agent } = __require("node:https");
 	const ResponseCache = require_ResponseCache();
 	const { ConfigurationError: ConfigurationError$3, ExpiredTokenError, InvalidCredentialsError, MissingKidError: MissingKidError$2, NotYetValidTokenError, WrongAudienceError: WrongAudienceError$2 } = require_error();
 	const { jsonRequest: jsonRequest$2 } = require_jsonRequest();
 	const { createCacheKey: createCacheKey$2 } = require_util();
 	const { DEFAULT_JWT_BEARER_FETCH_TIMEOUT, DEFAULT_TIMEOUT, GRANTTYPE_CLIENTCREDENTIALS, GRANTTYPE_JWTBEARER, GRANTTYPE_PASSWORD, MAX_TIMEOUT } = require_constants();
+	/**
+	* @typedef {import('../token/Token')} Token
+	* @typedef {import('../context/SecurityContext')} SecurityContext
+	* @typedef {import('../jwks/Jwks')} Jwks
+	* @typedef {import('../error/validation/ValidationError')} ValidationError
+	* @typedef {import('../util/Types').ServiceCredentials} ServiceCredentials
+	* @typedef {import('../util/Types').ServiceConfig} ServiceConfig
+	* @typedef {import('../util/Types').SecurityContextConfig} SecurityContextConfig
+	* @typedef {import('../util/Types').TokenFetchOptions} TokenFetchOptions
+	* @typedef {import('../util/Types').TokenFetchResponse} TokenFetchResponse
+	* @typedef {import('../util/Types').GrantType} GrantType
+	*/
 	var Service$3 = class Service$3 {
 		static #sharedJwksCaches = {};
 		static #oidcCache;
+		static DEFAULT_RETRY_CONFIG = {
+			strategy: "exponential",
+			retries: 3,
+			initialDelay: 500,
+			factor: 3,
+			maxDelay: 4e3
+		};
 		/** @type {ServiceCredentials} */
 		credentials;
 		/** @type {ServiceConfig} */
 		config;
 		endpoints;
 		/**
-		* 
-		* @param {ServiceCredentials} credentials 
+		*
+		* @param {ServiceCredentials} credentials
 		* @param {ServiceConfig} [serviceConfiguration={}]
 		*/
 		constructor(credentials, serviceConfiguration = {}) {
@@ -55983,7 +56291,7 @@ var require_Service = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_mod
 		/**
 		* @internal
 		* Gets the OIDC cache shared by all Service instances.
-		* 
+		*
 		* @returns {import("../cache/ResponseCache")} The OIDC cache.
 		*/
 		get oidcCache() {
@@ -56005,7 +56313,7 @@ var require_Service = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_mod
 		}
 		/**
 		* Checks if this service is the recipient of the given token.
-		* @param {Token} token 
+		* @param {Token} token
 		* @returns {Boolean}
 		*/
 		acceptsTokenAudience(token) {
@@ -56026,8 +56334,8 @@ var require_Service = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_mod
 		}
 		/**
 		* Checks if the given token is valid under the given contextConfig.
-		* @param {Token} token 
-		* @param {SecurityContextConfig} contextConfig 
+		* @param {Token} token
+		* @param {SecurityContextConfig} contextConfig
 		* @throws {ValidationError} if the token is not valid or could not be validated
 		*/
 		async validateToken(token, contextConfig) {
@@ -56038,8 +56346,8 @@ var require_Service = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_mod
 		}
 		/**
 		* Checks if the given token's signature is valid under the given contextConfig.
-		* @param {Token} token 
-		* @param {SecurityContextConfig} contextConfig 
+		* @param {Token} token
+		* @param {SecurityContextConfig} contextConfig
 		* @returns {Promise<void>} resolves when token signature is valid, otherwise error is thrown
 		* @throws {ValidationError} if the token signature is not valid or could not be validated
 		*/
@@ -56076,7 +56384,7 @@ var require_Service = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_mod
 		}
 		/**
 		* Fetches a token from this service with this service's client credentials.
-		* @param {TokenFetchOptions} options      
+		* @param {TokenFetchOptions} options
 		* @returns {Promise<TokenFetchResponse>} response
 		*/
 		async fetchClientCredentialsToken(options = {}) {
@@ -56092,7 +56400,7 @@ var require_Service = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_mod
 		* Fetches a user token from this service with the given username and password.
 		* @param {String} username
 		* @param {String} password
-		* @param {TokenFetchOptions} options      
+		* @param {TokenFetchOptions} options
 		* @returns {Promise<TokenFetchResponse>} response
 		*/
 		async fetchPasswordToken(username, password, options = {}) {
@@ -56125,21 +56433,22 @@ var require_Service = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_mod
 		/**
 		* Builds a request for this service based on the service configuration and the given request options.
 		* For example, the request will use the timeout value from the service configuration if not overridden in the request options.
-		* 
-		* @internal 
+		*
+		* @internal
 		* @param {import("node:https").RequestOptions} [requestOptions] - options for the request
 		*/
 		buildRequest(requestOptions) {
 			return {
 				timeout: this.config.requests.timeout,
+				retry: this.config.requests.retry,
 				...requestOptions
 			};
 		}
 		/**
 		* Builds a token request for this service with the given grant_type and options.
-		* 
-		* @param {String} grant_type 
-		* @param {TokenFetchOptions} options 
+		*
+		* @param {String} grant_type
+		* @param {TokenFetchOptions} options
 		*/
 		buildTokenRequest(grant_type, options) {
 			const request$1 = this.buildRequest({
@@ -56154,7 +56463,7 @@ var require_Service = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_mod
 		/**
 		* Prepares the given request to use this service's client credentials for authentication.
 		* Adds clientid and either clientsecret or an mTLS agent based on client certificate, depending on the type of credentials.
-		* @param {RequestInit} request 
+		* @param {RequestInit} request
 		* @param {URLSearchParams} request.body
 		* @param {TokenFetchOptions} options
 		*/
@@ -56180,7 +56489,7 @@ var require_Service = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_mod
 		}
 		/**
 		* Builds the configuration of this service based on the provided configuration and default values.
-		* @param {ServiceConfig} config 
+		* @param {ServiceConfig} config
 		*/
 		static buildServiceConfiguration(config$2) {
 			config$2.endpoints ??= {};
@@ -56192,6 +56501,11 @@ var require_Service = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_mod
 			config$2.validation.jwks.refreshPeriod ??= ResponseCache.DEFAULT_REFRESH_PERIOD;
 			config$2.requests ??= {};
 			config$2.requests.timeout = Math.min(MAX_TIMEOUT, config$2.requests.timeout ?? DEFAULT_TIMEOUT);
+			if (config$2.requests.retry) if (config$2.requests.retry === true) config$2.requests.retry = { ...Service$3.DEFAULT_RETRY_CONFIG };
+			else config$2.requests.retry = {
+				...Service$3.DEFAULT_RETRY_CONFIG,
+				...config$2.requests.retry
+			};
 			return config$2;
 		}
 		/**
@@ -56206,7 +56520,7 @@ var require_Service = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_mod
 		}
 		/**
 		* Retrieves the JWKS (JSON Web Key Set) for the given token and context configuration.
-		* 
+		*
 		* @param {string} token the token for which to retrieve the JWKS.
 		* @param {SecurityContextConfig} contextConfig the context configuration object.
 		* @returns {Promise<Jwks>} A promise that resolves to the JWKS (JSON Web Key Set) object.
@@ -56231,8 +56545,8 @@ var require_Service = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_mod
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/token/IdentityServiceToken.js
-var require_IdentityServiceToken = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/token/IdentityServiceToken.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/token/IdentityServiceToken.js
+var require_IdentityServiceToken = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/token/IdentityServiceToken.js"(exports, module) {
 	const Token$2 = require_Token();
 	var IdentityServiceToken$2 = class extends Token$2 {
 		get appTid() {
@@ -56272,8 +56586,8 @@ var require_IdentityServiceToken = __commonJS({ "node_modules/.pnpm/@sap+xssec@4
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/jwks/Jwk.js
-var require_Jwk = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/jwks/Jwk.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/jwks/Jwk.js
+var require_Jwk = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/jwks/Jwk.js"(exports, module) {
 	const crypto = __require("crypto");
 	const UnsupportedAlgorithmError = require_UnsupportedAlgorithmError();
 	const InvalidTokenSignatureError = require_InvalidTokenSignatureError();
@@ -56342,8 +56656,8 @@ var require_Jwk = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/jwks/Jwks.js
-var require_Jwks = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/jwks/Jwks.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/jwks/Jwks.js
+var require_Jwks = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/jwks/Jwks.js"(exports, module) {
 	const Jwk$1 = require_Jwk();
 	const MissingKidError$1 = require_MissingKidError();
 	var Jwks$2 = class {
@@ -56367,8 +56681,8 @@ var require_Jwks = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_module
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/service/IdentityService.js
-var require_IdentityService = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/service/IdentityService.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/service/IdentityService.js
+var require_IdentityService = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/service/IdentityService.js"(exports, module) {
 	/**
 	* @typedef {import("crypto").X509Certificate} X509Certificate
 	*/
@@ -56382,6 +56696,21 @@ var require_IdentityService = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/
 	const { createCacheKey: createCacheKey$1, escapeStringForRegex } = require_util();
 	const { jsonRequest: jsonRequest$1 } = require_jsonRequest();
 	const { APP_TID_HEADER, AZP_HEADER, CLIENT_CERTIFICATE_HEADER, CLIENTID_HEADER, HTTPS_SCHEME: HTTPS_SCHEME$1, SERVICE_PLAN_HEADER, X5T_CNF_CLAIM } = require_constants();
+	/**
+	* @typedef {import('../util/Types').ServiceCredentials} ServiceCredentials
+	* @typedef {import('../util/Types').IdentityServiceCredentials} IdentityServiceCredentials
+	* @typedef {import('../util/Types').ServiceConfig} ServiceConfig
+	* @typedef {import('../util/Types').IdentityServiceConfig} IdentityServiceConfig * 
+	* @typedef {import('../util/Types').SecurityContextConfig} SecurityContextConfig * 
+	* @typedef {import('../util/Types').TokenFetchOptions} TokenFetchOptions
+	* @typedef {import('../util/Types').IdentityServiceTokenFetchOptions} IdentityServiceTokenFetchOptions
+	* @typedef {import('../util/Types').TokenFetchResponse} TokenFetchResponse
+	* @typedef {import('../util/Types').IdTokenFetchResponse} IdTokenFetchResponse
+	* @typedef {import('../util/Types').RefreshableTokenFetchResponse} RefreshableTokenFetchResponse
+	*/
+	/**
+	* This {@link Service} class is constructed from SAP Identity Service credentials to provide an API with selected functionality against that service instance, e.g. token validation and token fetches.
+	*/
 	var IdentityService$4 = class IdentityService$4 extends Service$2 {
 		/**
 		* @param {ServiceCredentials & IdentityServiceCredentials} credentials 
@@ -56399,13 +56728,15 @@ var require_IdentityService = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/
 		async createSecurityContext(token, contextConfig = {}) {
 			if (typeof token === "string") token = new IdentityServiceToken$1(token);
 			SecurityContext$4.buildContextConfig(contextConfig);
-			if (this.#proofTokenCheckRequired(token) || this.hasX5tEnabled()) if (contextConfig.clientCertificatePem == null) throw new MissingClientCertificateError();
-			else contextConfig.clientCertificate = util.parsePemCertificate(contextConfig.clientCertificatePem);
 			const iasToken = new IdentityServiceToken$1(token.jwt, {
 				header: token.header,
 				payload: token.payload
 			});
-			await this.validateToken(iasToken, contextConfig);
+			if (contextConfig.skipValidation !== true) {
+				if (this.#proofTokenCheckRequired(token) || this.hasX5tEnabled()) if (contextConfig.clientCertificatePem == null) throw new MissingClientCertificateError();
+				else contextConfig.clientCertificate = util.parsePemCertificate(contextConfig.clientCertificatePem);
+				await this.validateToken(iasToken, contextConfig);
+			}
 			const ctx = new IdentityServiceSecurityContext$1(this, iasToken, contextConfig);
 			for (let extension$1 of this.config.context?.extensions || []) await extension$1.extendSecurityContext(ctx);
 			return ctx;
@@ -56621,8 +56952,8 @@ var require_IdentityService = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/token/XsuaaToken.js
-var require_XsuaaToken = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/token/XsuaaToken.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/token/XsuaaToken.js
+var require_XsuaaToken = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/token/XsuaaToken.js"(exports, module) {
 	const Token$1 = require_Token();
 	var XsuaaToken$4 = class extends Token$1 {
 		get azAttributes() {
@@ -56672,8 +57003,8 @@ var require_XsuaaToken = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/service/XsuaaService.js
-var require_XsuaaService = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/service/XsuaaService.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/service/XsuaaService.js
+var require_XsuaaService = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/service/XsuaaService.js"(exports, module) {
 	const Service$1 = require_Service();
 	const SecurityContext$3 = require_SecurityContext();
 	const XsuaaSecurityContext$1 = require_XsuaaSecurityContext();
@@ -56683,6 +57014,21 @@ var require_XsuaaService = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/nod
 	const { HTTPS_SCHEME, ZID_QUERY_PARAMETER, ZID_HEADER } = require_constants();
 	const { createCacheKey } = require_util();
 	const { ResponseError, WrongAudienceError } = require_error();
+	/**
+	* @typedef {import('../util/Types').ServiceCredentials} ServiceCredentials
+	* @typedef {import('../util/Types').XsuaaServiceCredentials} XsuaaServiceCredentials
+	* @typedef {import('../util/Types').ServiceConfig} ServiceConfig
+	* @typedef {import('../util/Types').SecurityContextConfig} SecurityContextConfig
+	* @typedef {import('../util/Types').TokenFetchOptions} TokenFetchOptions
+	* @typedef {import('../util/Types').XsuaaTokenFetchOptions} XsuaaTokenFetchOptions
+	* @typedef {import('../util/Types').TokenFetchResponse} TokenFetchResponse
+	* @typedef {import('../util/Types').RefreshableTokenFetchResponse} RefreshableTokenFetchResponse
+	* @typedef {import('../util/Types').GrantType} GrantType
+	*/
+	/**
+	* New SAP BTP applications should start with SAP Identity Services instead of XSUAA! See README for details.\
+	* This {@link Service} class is constructed from XSUAA credentials to provide an API with selected functionality against that XSUAA service instance, e.g. token validation and token fetches.
+	*/
 	var XsuaaService$6 = class extends Service$1 {
 		#jwksBaseUrl;
 		/**
@@ -56707,9 +57053,12 @@ var require_XsuaaService = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/nod
 				header: token.header,
 				payload: token.payload
 			});
-			const tokenAudiences = token.audiences?.length > 0 ? token.audiences : token.scopes ?? [];
-			if (token.payload.cid) tokenAudiences.push(token.payload.cid);
-			return tokenAudiences.some((a) => a === this.credentials.clientid || a.startsWith(`${this.credentials.clientid}.`)) || tokenAudiences.some((a) => a === this.credentials.xsappname || a.startsWith(`${this.credentials.xsappname}.`)) || this.credentials.clientid.includes("!b") && tokenAudiences.some((a) => a.endsWith(`|${this.credentials.xsappname}`));
+			let audiencesToConsider;
+			if (token.audiences?.length > 0) audiencesToConsider = [...token.audiences];
+			else if (token.scopes) audiencesToConsider = [...token.scopes];
+			else audiencesToConsider = [];
+			if (token.payload.cid) audiencesToConsider.push(token.payload.cid);
+			return audiencesToConsider.some((a) => a === this.credentials.clientid || a.startsWith(`${this.credentials.clientid}.`)) || audiencesToConsider.some((a) => a === this.credentials.xsappname || a.startsWith(`${this.credentials.xsappname}.`)) || this.credentials.clientid.includes("!b") && audiencesToConsider.some((a) => a.endsWith(`|${this.credentials.xsappname}`));
 		}
 		/**
 		* @override
@@ -56724,7 +57073,7 @@ var require_XsuaaService = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/nod
 				header: token.header,
 				payload: token.payload
 			});
-			await this.validateToken(xsuaaToken, contextConfig);
+			if (contextConfig.skipValidation !== true) await this.validateToken(xsuaaToken, contextConfig);
 			const ctx = new XsuaaSecurityContext$1(this, xsuaaToken, contextConfig);
 			for (let extension$1 of this.config.context?.extensions || []) await extension$1.extendSecurityContext(ctx);
 			return ctx;
@@ -56848,16 +57197,16 @@ var require_XsuaaService = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/nod
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/token/XsaToken.js
-var require_XsaToken = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/token/XsaToken.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/token/XsaToken.js
+var require_XsaToken = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/token/XsaToken.js"(exports, module) {
 	const XsuaaToken$2 = require_XsuaaToken();
 	var XsaToken$2 = class extends XsuaaToken$2 {};
 	module.exports = XsaToken$2;
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/service/XsaService.js
-var require_XsaService = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/service/XsaService.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/service/XsaService.js
+var require_XsaService = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/service/XsaService.js"(exports, module) {
 	const SecurityContext$2 = require_SecurityContext();
 	const XsaSecurityContext$1 = require_XsaSecurityContext();
 	const XsaToken$1 = require_XsaToken();
@@ -56867,6 +57216,20 @@ var require_XsaService = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_
 	const { getLogger: getLogger$3 } = require_logging();
 	const XsuaaService$5 = require_XsuaaService();
 	const LOG$3 = getLogger$3("XsaService.js");
+	/**
+	* @typedef {import('../util/Types').ServiceCredentials} ServiceCredentials
+	* @typedef {import('../util/Types').XsaServiceCredentials} XsaServiceCredentials
+	* @typedef {import('../util/Types').ServiceConfig} ServiceConfig
+	* @typedef {import('../util/Types').SecurityContextConfig} SecurityContextConfig
+	* @typedef {import('../util/Types').TokenFetchOptions} TokenFetchOptions
+	* @typedef {import('../util/Types').TokenFetchResponse} TokenFetchResponse
+	* @typedef {import('../util/Types').RefreshableTokenFetchResponse} RefreshableTokenFetchResponse
+	* @typedef {import('../util/Types').GrantType} GrantType
+	*/
+	/**
+	* New SAP BTP applications should start with SAP Identity Services instead of XSA! See README for details.\
+	* This {@link Service} class is constructed from XSA credentials to provide an API with selected functionality against that XSA service instance, e.g. token validation and token fetches.
+	*/
 	var XsaService$3 = class extends XsuaaService$5 {
 		/**
 		* @param {ServiceCredentials & XsaServiceCredentials} credentials 
@@ -56888,7 +57251,7 @@ var require_XsaService = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_
 				header: token.header,
 				payload: token.payload
 			});
-			await this.validateToken(xsaToken, contextConfig);
+			if (contextConfig.skipValidation !== true) await this.validateToken(xsaToken, contextConfig);
 			const ctx = new XsaSecurityContext$1(this, xsaToken, contextConfig);
 			for (let extension$1 of this.config.context?.extensions || []) await extension$1.extendSecurityContext(ctx);
 			return ctx;
@@ -56970,20 +57333,30 @@ var require_XsaService = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/token/UaaToken.js
-var require_UaaToken = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/token/UaaToken.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/token/UaaToken.js
+var require_UaaToken = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/token/UaaToken.js"(exports, module) {
 	const XsuaaToken$1 = require_XsuaaToken();
 	var UaaToken$2 = class extends XsuaaToken$1 {};
 	module.exports = UaaToken$2;
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/service/UaaService.js
-var require_UaaService = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/service/UaaService.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/service/UaaService.js
+var require_UaaService = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/service/UaaService.js"(exports, module) {
 	const SecurityContext$1 = require_SecurityContext();
 	const UaaSecurityContext$1 = require_UaaSecurityContext();
 	const UaaToken$1 = require_UaaToken();
 	const XsuaaService$4 = require_XsuaaService();
+	/**
+	* @typedef {import('../util/Types').ServiceCredentials} ServiceCredentials
+	* @typedef {import('../util/Types').UaaServiceCredentials} UaaServiceCredentials
+	* @typedef {import('../util/Types').ServiceConfig} ServiceConfig
+	* @typedef {import('../util/Types').SecurityContextConfig} SecurityContextConfig
+	*/
+	/**
+	* New SAP BTP applications should start with SAP Identity Services instead of CF UAA! See README for details.\
+	* This {@link Service} class is constructed from CF UAA credentials to provide an API with selected functionality against that UAA service instance, e.g. token validation and token fetches.
+	*/
 	var UaaService$3 = class extends XsuaaService$4 {
 		/**
 		* @param {ServiceCredentials | UaaServiceCredentials} credentials 
@@ -57005,7 +57378,7 @@ var require_UaaService = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_
 				header: token.header,
 				payload: token.payload
 			});
-			await this.validateToken(uaaToken, contextConfig);
+			if (contextConfig.skipValidation !== true) await this.validateToken(uaaToken, contextConfig);
 			const ctx = new UaaSecurityContext$1(this, uaaToken, contextConfig);
 			for (let extension$1 of this.config.context?.extensions || []) await extension$1.extendSecurityContext(ctx);
 			return ctx;
@@ -57029,8 +57402,8 @@ var require_UaaService = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/passport/XssecPassportStrategy.js
-var require_XssecPassportStrategy = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/passport/XssecPassportStrategy.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/passport/XssecPassportStrategy.js
+var require_XssecPassportStrategy = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/passport/XssecPassportStrategy.js"(exports, module) {
 	const createSecurityContext$4 = require_createSecurityContext();
 	const ConfigurationError$1 = require_ConfigurationError();
 	const ValidationError$1 = require_ValidationError();
@@ -57043,13 +57416,17 @@ var require_XssecPassportStrategy = __commonJS({ "node_modules/.pnpm/@sap+xssec@
 	var XssecPassportStrategy$1 = class XssecPassportStrategy$1 {
 		/** @type {Service|Service[]} service(s) against which incoming JWTs are authenticated */
 		services;
+		/** @type {string|Symbol} the property on the req object where the SecurityContext is placed after authentication. */
+		reqProperty;
 		/**
 		* Creates a new XssecPassportStrategy that uses the provided service(s) to create security contexts for incoming requests.
 		* @param {Service|Service[]} services 
+		* @param {string|Symbol} [reqProperty="securityContext"] the property (Default: "securityContext") on the req object where the SecurityContext is placed after authentication.
 		*/
-		constructor(services) {
+		constructor(services, reqProperty = "securityContext") {
 			this.name = "JWT";
 			this.services = services;
+			this.reqProperty = reqProperty;
 		}
 		async authenticate(req, passportOptions = {}) {
 			try {
@@ -57060,7 +57437,7 @@ var require_XssecPassportStrategy = __commonJS({ "node_modules/.pnpm/@sap+xssec@
 					if (!hasScope) return this.fail("Token is missing required scope.", 403);
 				}
 				const passportUser = XssecPassportStrategy$1.#buildPassportUser(securityContext.token);
-				req.securityContext = securityContext;
+				req[this.reqProperty] = securityContext;
 				req.tokenInfo = securityContext.token;
 				return this.success(passportUser, securityContext);
 			} catch (error$1) {
@@ -57089,8 +57466,8 @@ var require_XssecPassportStrategy = __commonJS({ "node_modules/.pnpm/@sap+xssec@
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/v3/createService.js
-var require_createService = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/v3/createService.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/v3/createService.js
+var require_createService = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/v3/createService.js"(exports, module) {
 	const IdentityService$3 = require_IdentityService();
 	const XsuaaService$3 = require_XsuaaService();
 	const XsaService$2 = require_XsaService();
@@ -57106,8 +57483,8 @@ var require_createService = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/no
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/v3/createSecurityContextV3.js
-var require_createSecurityContextV3 = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/v3/createSecurityContextV3.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/v3/createSecurityContextV3.js
+var require_createSecurityContextV3 = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/v3/createSecurityContextV3.js"(exports, module) {
 	const createSecurityContext$3 = require_createSecurityContext();
 	const ConfigurationError = require_ConfigurationError();
 	const { getLogger: getLogger$1 } = require_logging();
@@ -57221,8 +57598,8 @@ var require_createSecurityContextV3 = __commonJS({ "node_modules/.pnpm/@sap+xsse
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/v3/requestsV3.js
-var require_requestsV3 = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/v3/requestsV3.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/v3/requestsV3.js
+var require_requestsV3 = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/v3/requestsV3.js"(exports, module) {
 	const IdentityService$1 = require_IdentityService();
 	const XsuaaService$1 = require_XsuaaService();
 	async function requestClientCredentialsToken(subdomain, config$2, additionalAttributes, zoneId, cb) {
@@ -57298,8 +57675,8 @@ var require_requestsV3 = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/v3/constantsV3.js
-var require_constantsV3 = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/v3/constantsV3.js"(exports) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/v3/constantsV3.js
+var require_constantsV3 = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/v3/constantsV3.js"(exports) {
 	Object.defineProperty(exports, "XSAPPNAMEPREFIX", {
 		value: "$XSAPPNAME.",
 		enumerable: true,
@@ -57399,8 +57776,8 @@ var require_constantsV3 = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/v3/XssecPassportStrategyV3.js
-var require_XssecPassportStrategyV3 = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/v3/XssecPassportStrategyV3.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/v3/XssecPassportStrategyV3.js
+var require_XssecPassportStrategyV3 = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/v3/XssecPassportStrategyV3.js"(exports, module) {
 	const createSecurityContext$2 = require_createSecurityContextV3();
 	const { getLogger } = require_logging();
 	const { FWD_CLIENT_CERT_HEADER } = require_constantsV3();
@@ -57487,8 +57864,8 @@ var require_XssecPassportStrategyV3 = __commonJS({ "node_modules/.pnpm/@sap+xsse
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/v3/index.js
-var require_v3 = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/v3/index.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/v3/index.js
+var require_v3 = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/v3/index.js"(exports, module) {
 	const createSecurityContext$1 = require_createSecurityContextV3();
 	const requests = require_requestsV3();
 	const constants$1 = require_constantsV3();
@@ -57504,8 +57881,8 @@ var require_v3 = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/util/Types.js
-var require_Types = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/util/Types.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/util/Types.js
+var require_Types = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/util/Types.js"(exports, module) {
 	/** @typedef {import('crypto').X509Certificate} X509Certificate */
 	/**
 	* @typedef {object} ServiceCredentials
@@ -57561,6 +57938,7 @@ var require_Types = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modul
 	* @property {X509Certificate} [clientCertificate] parsed client certificate which will be automatically created from clientCertificatePem
 	* @property {string} [correlationId] correlation id that will be sent along with external requests
 	* @property {Request} [req] request object from which the jwt and additional information, such as a correlation id and the forwarded client certificate, will be extracted if not provided directly
+	* @property {boolean} [skipValidation=false] if true, the SecurityContext is created without validating the token. Caution! This flag MUST NOT BE ENABLED, except for testing or when the token has already been validated before, e.g. in DwC contexts.
 	*/
 	/** 
 	* @typedef {object} TokenFetchOptions
@@ -57619,8 +57997,20 @@ var require_Types = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modul
 } });
 
 //#endregion
-//#region node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/index.js
-var require_src = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules/@sap/xssec/src/index.js"(exports, module) {
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/context/SecurityContextSymbol.js
+var require_SecurityContextSymbol = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/context/SecurityContextSymbol.js"(exports, module) {
+	/**
+	* The symbol which should be used as location on the req object for the SecurityContext after authentication.
+	* The middleware of IdentityServiceAuthProvider from @sap/ams expects to find it there to create an Authorization object 
+	* from the SecurityContext for privilege checks.
+	*/
+	const SECURITY_CONTEXT$1 = Symbol("XSSEC_SECURITY_CONTEXT");
+	module.exports = SECURITY_CONTEXT$1;
+} });
+
+//#endregion
+//#region node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/index.js
+var require_src = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.6.0/node_modules/@sap/xssec/src/index.js"(exports, module) {
 	const createSecurityContext = require_createSecurityContext();
 	const SecurityContext = require_SecurityContext();
 	const IdentityServiceSecurityContext = require_IdentityServiceSecurityContext();
@@ -57642,6 +58032,7 @@ var require_src = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules
 	const constants = require_constants();
 	const v3 = require_v3();
 	const Types = require_Types();
+	const SECURITY_CONTEXT = require_SecurityContextSymbol();
 	module.exports = {
 		createSecurityContext,
 		SecurityContext,
@@ -57663,10 +58054,17 @@ var require_src = __commonJS({ "node_modules/.pnpm/@sap+xssec@4.5.0/node_modules
 		errors,
 		constants,
 		v3,
-		Types
+		Types,
+		SECURITY_CONTEXT
 	};
 } });
-
+/**
+* @typedef {import("express").Request & { [SECURITY_CONTEXT]: SecurityContext }} AuthenticatedRequest
+* @typedef {import("express").Request & { [SECURITY_CONTEXT]: IdentityServiceSecurityContext }} IdentityServiceRequest
+* @typedef {import("express").Request & { [SECURITY_CONTEXT]: XsuaaSecurityContext }} XsuaaRequest
+* @typedef {import("express").Request & { [SECURITY_CONTEXT]: XsaSecurityContext }} XsaRequest
+* @typedef {import("express").Request & { [SECURITY_CONTEXT]: UaaSecurityContext }} UaaRequest
+*/
 //#endregion
 //#region node_modules/.pnpm/@sap-cloud-sdk+connectivity@4.0.2/node_modules/@sap-cloud-sdk/connectivity/dist/scp-cf/environment-accessor/xsuaa.js
 var require_xsuaa = __commonJS({ "node_modules/.pnpm/@sap-cloud-sdk+connectivity@4.0.2/node_modules/@sap-cloud-sdk/connectivity/dist/scp-cf/environment-accessor/xsuaa.js"(exports) {
@@ -58288,6 +58686,44 @@ var require_status = __commonJS({ "node_modules/.pnpm/opossum@8.4.0/node_modules
 	const SNAPSHOT_INTERVAL = Symbol("snapshot-interval");
 	const ROTATE_EVENT_NAME = Symbol("rotate-event-name");
 	const EventEmitter$1 = __require("events").EventEmitter;
+	/**
+	* Tracks execution status for a given {@link CircuitBreaker}.
+	* A Status instance is created for every {@link CircuitBreaker}
+	* and does not typically need to be created by a user.
+	*
+	* A Status instance will listen for all events on the {@link CircuitBreaker}
+	* and track them in a rolling statistical window. The window duration is
+	* determined by the `rollingCountTimeout` option provided to the
+	* {@link CircuitBreaker}. The window consists of an array of Objects,
+	* each representing the counts for a {@link CircuitBreaker}'s events.
+	*
+	* The array's length is determined by the {@link CircuitBreaker}'s
+	* `rollingCountBuckets` option. The duration of each slice of the window
+	* is determined by dividing the `rollingCountTimeout` by
+	* `rollingCountBuckets`.
+	*
+	* @class Status
+	* @extends EventEmitter
+	* @param {Object} options for the status window
+	* @param {Number} options.rollingCountBuckets number of buckets in the window
+	* @param {Number} options.rollingCountTimeout the duration of the window
+	* @param {Boolean} options.rollingPercentilesEnabled whether to calculate
+	* percentiles
+	* @param {Object} options.stats object of previous stats
+	* @example
+	* // Creates a 1 second window consisting of ten time slices,
+	* // each 100ms long.
+	* const circuit = circuitBreaker(fs.readFile,
+	*  { rollingCountBuckets: 10, rollingCountTimeout: 1000});
+	*
+	* // get the cumulative statistics for the last second
+	* circuit.status.stats;
+	*
+	* // get the array of 10, 1 second time slices for the last second
+	* circuit.status.window;
+	* @fires Status#snapshot
+	* @see CircuitBreaker#status
+	*/
 	var Status$1 = class extends EventEmitter$1 {
 		constructor(options) {
 			super();
@@ -58468,6 +58904,11 @@ var require_semaphore = __commonJS({ "node_modules/.pnpm/opossum@8.4.0/node_modu
 //#endregion
 //#region node_modules/.pnpm/opossum@8.4.0/node_modules/opossum/lib/cache.js
 var require_cache = __commonJS({ "node_modules/.pnpm/opossum@8.4.0/node_modules/opossum/lib/cache.js"(exports, module) {
+	/**
+	* Simple in-memory cache implementation
+	* @class MemoryCache
+	* @property {Map} cache Cache map
+	*/
 	var MemoryCache$1 = class {
 		constructor(maxEntries) {
 			this.cache = new Map();
@@ -58545,6 +58986,129 @@ var require_circuit = __commonJS({ "node_modules/.pnpm/opossum@8.4.0/node_module
 	const LAST_TIMER_AT = Symbol("last-timer-at");
 	const deprecation = `options.maxFailures is deprecated. \
 Please use options.errorThresholdPercentage`;
+	/**
+	* Constructs a {@link CircuitBreaker}.
+	*
+	* @class CircuitBreaker
+	* @extends EventEmitter
+	* @param {Function} action The action to fire for this {@link CircuitBreaker}
+	* @param {Object} options Options for the {@link CircuitBreaker}
+	* @param {Status} options.status A {@link Status} object that might
+	*   have pre-prime stats
+	* @param {Number} options.timeout The time in milliseconds that action should
+	* be allowed to execute before timing out. Timeout can be disabled by setting
+	* this to `false`. Default 10000 (10 seconds)
+	* @param {Number} options.maxFailures (Deprecated) The number of times the
+	* circuit can fail before opening. Default 10.
+	* @param {Number} options.resetTimeout The time in milliseconds to wait before
+	* setting the breaker to `halfOpen` state, and trying the action again.
+	* Default: 30000 (30 seconds)
+	* @param {Number} options.rollingCountTimeout Sets the duration of the
+	* statistical rolling window, in milliseconds. This is how long Opossum keeps
+	* metrics for the circuit breaker to use and for publishing. Default: 10000
+	* @param {Number} options.rollingCountBuckets Sets the number of buckets the
+	* rolling statistical window is divided into. So, if
+	* options.rollingCountTimeout is 10000, and options.rollingCountBuckets is 10,
+	* then the statistical window will be 1000/1 second snapshots in the
+	* statistical window. Default: 10
+	* @param {String} options.name the circuit name to use when reporting stats.
+	* Default: the name of the function this circuit controls.
+	* @param {boolean} options.rollingPercentilesEnabled This property indicates
+	* whether execution latencies should be tracked and calculated as percentiles.
+	* If they are disabled, all summary statistics (mean, percentiles) are
+	* returned as -1. Default: true
+	* @param {Number} options.capacity the number of concurrent requests allowed.
+	* If the number currently executing function calls is equal to
+	* options.capacity, further calls to `fire()` are rejected until at least one
+	* of the current requests completes. Default: `Number.MAX_SAFE_INTEGER`.
+	* @param {Number} options.errorThresholdPercentage the error percentage at
+	* which to open the circuit and start short-circuiting requests to fallback.
+	* Default: 50
+	* @param {boolean} options.enabled whether this circuit is enabled upon
+	* construction. Default: true
+	* @param {boolean} options.allowWarmUp determines whether to allow failures
+	* without opening the circuit during a brief warmup period (this is the
+	* `rollingCountTimeout` property). Default: false
+	* This can help in situations where no matter what your
+	* `errorThresholdPercentage` is, if the first execution times out or fails,
+	* the circuit immediately opens.
+	* @param {Number} options.volumeThreshold the minimum number of requests within
+	* the rolling statistical window that must exist before the circuit breaker
+	* can open. This is similar to `options.allowWarmUp` in that no matter how many
+	* failures there are, if the number of requests within the statistical window
+	* does not exceed this threshold, the circuit will remain closed. Default: 0
+	* @param {Function} options.errorFilter an optional function that will be
+	* called when the circuit's function fails (returns a rejected Promise). If
+	* this function returns truthy, the circuit's failPure statistics will not be
+	* incremented. This is useful, for example, when you don't want HTTP 404 to
+	* trip the circuit, but still want to handle it as a failure case.
+	* @param {boolean} options.cache whether the return value of the first
+	* successful execution of the circuit's function will be cached. Once a value
+	* has been cached that value will be returned for every subsequent execution:
+	* the cache can be cleared using `clearCache`. (The metrics `cacheHit` and
+	* `cacheMiss` reflect cache activity.) Default: false
+	* @param {Number} options.cacheTTL the time to live for the cache
+	* in milliseconds. Set 0 for infinity cache. Default: 0 (no TTL)
+	* @param {Number} options.cacheSize the max amount of entries in the internal
+	* cache. Only used when cacheTransport is not defined.
+	* Default: max size of JS map (2^24).
+	* @param {Function} options.cacheGetKey function that returns the key to use
+	* when caching the result of the circuit's fire.
+	* Better to use custom one, because `JSON.stringify` is not good
+	* from performance perspective.
+	* Default: `(...args) => JSON.stringify(args)`
+	* @param {CacheTransport} options.cacheTransport custom cache transport
+	* should implement `get`, `set` and `flush` methods.
+	* @param {boolean} options.coalesce  If true, this provides coalescing of
+	* requests to this breaker, in other words: the promise will be cached.
+	* Only one action (with same cache key) is executed at a time, and the other
+	* pending actions wait for the result. Performance will improve when rapidly
+	* firing the circuitbreaker with the same request, especially on a slower
+	* action (e.g. multiple end-users fetching same data from remote).
+	* Will use internal cache only. Can be used in combination with options.cache.
+	* The metrics `coalesceCacheHit` and `coalesceCacheMiss` are available.
+	* Default: false
+	* @param {Number} options.coalesceTTL the time to live for the coalescing
+	* in milliseconds. Set 0 for infinity cache. Default: same as options.timeout
+	* @param {Number} options.coalesceSize the max amount of entries in the
+	* coalescing cache. Default: max size of JS map (2^24).
+	* @param {string[]} options.coalesceResetOn when to reset the coalesce cache.
+	* Options: `error`, `success`, `timeout`. Default: not set, reset using TTL.
+	* @param {AbortController} options.abortController this allows Opossum to
+	* signal upon timeout and properly abort your on going requests instead of
+	* leaving it in the background
+	* @param {boolean} options.enableSnapshots whether to enable the rolling
+	* stats snapshots that opossum emits at the bucketInterval. Disable this
+	* as an optimization if you don't listen to the 'snapshot' event to reduce
+	* the number of timers opossum initiates.
+	* @param {EventEmitter} options.rotateBucketController if you have multiple
+	* breakers in your app, the number of timers across breakers can get costly.
+	* This option allows you to provide an EventEmitter that rotates the buckets
+	* so you can have one global timer in your app. Make sure that you are
+	* emitting a 'rotate' event from this EventEmitter
+	* @param {boolean} options.autoRenewAbortController Automatically recreates
+	* the instance of AbortController whenever the circuit transitions to
+	* 'halfOpen' or 'closed' state. This ensures that new requests are not
+	* impacted by previous signals that were triggered when the circuit was 'open'.
+	* Default: false
+	*
+	*
+	* @fires CircuitBreaker#halfOpen
+	* @fires CircuitBreaker#close
+	* @fires CircuitBreaker#open
+	* @fires CircuitBreaker#fire
+	* @fires CircuitBreaker#cacheHit
+	* @fires CircuitBreaker#cacheMiss
+	* @fires CircuitBreaker#coalesceCacheHit
+	* @fires CircuitBreaker#coalesceCacheMiss
+	* @fires CircuitBreaker#reject
+	* @fires CircuitBreaker#timeout
+	* @fires CircuitBreaker#success
+	* @fires CircuitBreaker#semaphoreLocked
+	* @fires CircuitBreaker#healthCheckFailed
+	* @fires CircuitBreaker#fallback
+	* @fires CircuitBreaker#failure
+	*/
 	var CircuitBreaker = class CircuitBreaker extends EventEmitter {
 		/**
 		* Returns true if the provided error was generated here. It will be false
@@ -60055,9 +60619,9 @@ var require_http_proxy_util = __commonJS({ "node_modules/.pnpm/@sap-cloud-sdk+co
 		if (split.find((s$1) => s$1.includes("*"))) logger$16.warn(`The no_proxy env contains a wildcard ${noProxyEnv}, which is currently not supported`);
 		return split;
 	}
-	function getPort(url$2) {
-		if (url$2.port) return parseInt(url$2.port);
-		return url$2.protocol === "https:" ? 443 : 80;
+	function getPort(url$3) {
+		if (url$3.port) return parseInt(url$3.port);
+		return url$3.protocol === "https:" ? 443 : 80;
 	}
 	function getOriginalProtocol(href) {
 		const test$1 = href.match(/^[\w.-]+:\/\//);
@@ -60071,10 +60635,10 @@ var require_http_proxy_util = __commonJS({ "node_modules/.pnpm/@sap-cloud-sdk+co
 		}
 		return href;
 	}
-	function validateUrl(url$2) {
-		if (url$2.protocol !== "http:" && url$2.protocol !== "https:") throw new Error(`Unsupported protocol "${url$2.protocol}".`);
-		if (url$2.protocol === "https:") logger$16.debug("Using protocol \"https:\" to connect to a proxy. This is unusual but possible.");
-		if (url$2.username && !url$2.password) throw new Error("Password missing.");
+	function validateUrl(url$3) {
+		if (url$3.protocol !== "http:" && url$3.protocol !== "https:") throw new Error(`Unsupported protocol "${url$3.protocol}".`);
+		if (url$3.protocol === "https:") logger$16.debug("Using protocol \"https:\" to connect to a proxy. This is unusual but possible.");
+		if (url$3.username && !url$3.password) throw new Error("Password missing.");
 	}
 	/**
 	* Parses the environment variable for the web proxy and extracts the values considering defaults like http for the protocol and 80 or 443 for the port.
@@ -60086,14 +60650,14 @@ var require_http_proxy_util = __commonJS({ "node_modules/.pnpm/@sap-cloud-sdk+co
 	function parseProxyEnv(proxyEnvValue) {
 		const href = sanitizeUrl(proxyEnvValue);
 		try {
-			const url$2 = new node_url_1.URL(href);
-			validateUrl(url$2);
+			const url$3 = new node_url_1.URL(href);
+			validateUrl(url$3);
 			const proxyConfig = {
-				host: url$2.hostname,
-				protocol: (0, protocol_1.getProtocol)(url$2.protocol),
-				port: getPort(url$2)
+				host: url$3.hostname,
+				protocol: (0, protocol_1.getProtocol)(url$3.protocol),
+				port: getPort(url$3)
 			};
-			if (url$2.username && url$2.password) proxyConfig.headers = { "Proxy-Authorization": (0, authorization_header_1$2.basicHeader)(decodeURIComponent(url$2.username), decodeURIComponent(url$2.password)) };
+			if (url$3.username && url$3.password) proxyConfig.headers = { "Proxy-Authorization": (0, authorization_header_1$2.basicHeader)(decodeURIComponent(url$3.username), decodeURIComponent(url$3.password)) };
 			if (proxyConfig) {
 				const loggableConfig = {
 					...proxyConfig,
@@ -60389,11 +60953,11 @@ var require_service_binding_to_destination = __commonJS({ "node_modules/.pnpm/@s
 			password: service.credentials.Password
 		};
 	}
-	function buildClientCredentialsDestination(token, url$2, name$2) {
+	function buildClientCredentialsDestination(token, url$3, name$2) {
 		const expirationTime = (0, jwt_1$9.decodeJwt)(token).exp;
 		const expiresIn = expirationTime ? Math.floor((expirationTime * 1e3 - Date.now()) / 1e3).toString(10) : void 0;
 		return {
-			url: url$2,
+			url: url$3,
 			name: name$2,
 			authentication: "OAuth2ClientCredentials",
 			authTokens: [{
@@ -60598,6 +61162,10 @@ var require_async_cache = __commonJS({ "node_modules/.pnpm/@sap-cloud-sdk+connec
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.AsyncCache = void 0;
 	const cache_1$1 = require_cache$1();
+	/**
+	* @internal
+	* Async wrapper around Cache<T>.
+	*/
 	var AsyncCache = class {
 		constructor(defaultValidityTime = 0) {
 			this.cache = new cache_1$1.Cache(defaultValidityTime);
@@ -60653,6 +61221,10 @@ var require_destination_cache = __commonJS({ "node_modules/.pnpm/@sap-cloud-sdk+
 		package: "connectivity",
 		messageContext: "destination-cache"
 	});
+	/**
+	* @internal
+	* This wrapper class wraps methods of {@link Cache} class as asynchronous methods.
+	*/
 	var DefaultDestinationCache = class extends async_cache_1$1.AsyncCache {
 		constructor(defaultValidityTime = 0) {
 			super(defaultValidityTime);
@@ -61488,6 +62060,9 @@ var require_destination_from_service = __commonJS({ "node_modules/.pnpm/@sap-clo
 		logger$5.debug("Attempting to retrieve destination from destination service.");
 		return DestinationFromServiceRetriever.getDestinationFromDestinationService(options);
 	}
+	/**
+	* @internal
+	*/
 	var DestinationFromServiceRetriever = class DestinationFromServiceRetriever {
 		static async getDestinationFromDestinationService(options) {
 			if ((0, identity_service_1$1.shouldExchangeToken)(options) && options.jwt) options.jwt = await (0, identity_service_1$1.exchangeToken)(options.jwt);
@@ -62896,6 +63471,10 @@ var require_openapi_request_builder = __commonJS({ "node_modules/.pnpm/@sap-clou
 	const internal_1 = require_internal$2();
 	const http_client_1 = require_dist$1();
 	const internal_2 = require_internal();
+	/**
+	* Request builder for OpenAPI requests.
+	* @typeParam ResponseT - Type of the response for the request.
+	*/
 	var OpenApiRequestBuilder = class {
 		/**
 		* Create an instance of `OpenApiRequestBuilder`.
@@ -63053,6 +63632,10 @@ var import_dist = __toESM(require_dist(), 1);
 
 //#endregion
 //#region src/generated/TMS_v2/files-api.ts
+/**
+* Representation of the 'FilesApi'.
+* This API is part of the 'TMS_v2' service.
+*/
 const FilesApi = {
 	_defaultBasePath: void 0,
 	fileUploadV2: (body) => new import_dist.OpenApiRequestBuilder("post", "/files/upload", { body }, FilesApi._defaultBasePath),
@@ -63061,6 +63644,10 @@ const FilesApi = {
 
 //#endregion
 //#region src/generated/TMS_v2/export-upload-api.ts
+/**
+* Representation of the 'ExportUploadApi'.
+* This API is part of the 'TMS_v2' service.
+*/
 const ExportUploadApi = {
 	_defaultBasePath: void 0,
 	nodeExportByNameV2: (body) => new import_dist.OpenApiRequestBuilder("post", "/nodes/export", { body }, ExportUploadApi._defaultBasePath),
