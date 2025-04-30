@@ -1,6 +1,6 @@
 {
   "name": "deploy-to-sap-btp-with-ctms",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Deploy to SAP BTP with Cloud Transport Management Service (CTMS)",
   "private": false,
   "author": "Mauricio Lauffer",
