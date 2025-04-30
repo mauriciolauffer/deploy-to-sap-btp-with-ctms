@@ -1,6 +1,7 @@
 name: "deploy-to-sap-btp-with-ctms"
 description: "GitHub Action to deploy application archives (MTAR files) to SAP BTP via SAP Cloud Transport Management Service (CTMS)"
 author: "Mauricio Lauffer"
+
 inputs:
   CTMS_TOKEN_SERVICE_URL:
     description: "Value of url (within the uaa section) from the service key of your CTMS instance."
@@ -32,6 +33,18 @@ inputs:
   CTMS_TR_USER_NAME:
     description: "Optional user name displayed in the Cloud Transport Management UI. If omitted, the authentication user may be shown."
     required: false
+
+outputs:
+  CTMS_NODE_ID:
+    description: "ID of Transport Node where content was put in"
+  CTMS_NODE_NAME:
+    description: "Name of Transport Node where content was put in"
+  CTMS_QUEUE_ID:
+    description: "ID of Import Queue of the Transport Node"
+
+branding:
+  icon: "truck"
+  color: "blue"
 
 runs:
   using: "node20"

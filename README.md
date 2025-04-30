@@ -26,6 +26,8 @@ Integrating SAP BTP deployments into your CI/CD pipelines can be complex. This a
 
 ## Inputs
 
+The following inputs are required to configure the deployment:
+
 | Input                    | Description                                                                                                            | Required |
 | ------------------------ | ---------------------------------------------------------------------------------------------------------------------- | -------- |
 | `CTMS_TOKEN_SERVICE_URL` | Value of `url` (within the `uaa` section) from the service key of your `CTMS` instance.                                | `true`   |
@@ -48,6 +50,16 @@ It's recommended to store sensitive information from your `CTMS` instance as Git
 - `CTMS_TR_USER_NAME` = `${{ secrets.CTMS_TR_USER_NAME_DEV }}`
 
 It is strongly recommended to use separate secrets (and potentially separate service keys) for different deployment environments (e.g., `CTMS_CLIENT_SECRET_DEV`, `CTMS_CLIENT_SECRET_QA`).
+
+## Outputs
+
+This action provides the following outputs after a successful deployment:
+
+| Name             | Description                                           |
+| ---------------- | ----------------------------------------------------- |
+| `CTMS_NODE_ID`   | ID of the Transport Node where the content was put.   |
+| `CTMS_NODE_NAME` | Name of the Transport Node where the content was put. |
+| `CTMS_QUEUE_ID`  | ID of the Import Queue of the Transport Node.         |
 
 ## Deployment Status
 
