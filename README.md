@@ -26,7 +26,7 @@ Integrating SAP BTP deployments into your CI/CD pipelines can be complex. This a
 
 ## Inputs
 
-The following inputs are required to configure the deployment:
+The following inputs are used to configure the deployment:
 
 | Input                    | Description                                                                                                            | Required |
 | ------------------------ | ---------------------------------------------------------------------------------------------------------------------- | -------- |
