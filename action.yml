@@ -1,5 +1,5 @@
-name: "cTMS"
-description: "GitHub Action to automate the deployment of application archives (MTAR files) to SAP BTP subaccounts by leveraging the SAP Cloud Transport Management Service (CTMS)."
+name: "deploy-to-sap-btp-with-ctms"
+description: "GitHub Action to deploy application archives (MTAR files) to SAP BTP via SAP Cloud Transport Management Service (CTMS)"
 author: "Mauricio Lauffer"
 inputs:
   CTMS_TOKEN_SERVICE_URL:
