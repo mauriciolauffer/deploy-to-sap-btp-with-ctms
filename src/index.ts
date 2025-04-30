@@ -43,6 +43,9 @@ async function run() {
     core.info(
       `File ${ctmsParams.filePath} uploaded to Queue ID ${queue.queueId}: ${queue.nodeName} (ID ${queue.nodeId})'`,
     );
+    core.setOutput("CTMS_NODE_ID", queue.nodeId);
+    core.setOutput("CTMS_NODE_NAME", queue.nodeName);
+    core.setOutput("CTMS_QUEUE_ID", queue.queueId);
   } catch (err) {
     core.setFailed(`Action failed with error - ${err}`);
   }
